@@ -1,0 +1,205 @@
+import 'package:flutter/material.dart';
+
+import '../../../../core/settings/app_settings.dart';
+
+class SettingsSheet extends StatefulWidget {
+  final AppSettings settings;
+  final ValueChanged<AppSettings> onSettingsChanged;
+  final VoidCallback onTestVoice;
+
+  const SettingsSheet({
+    super.key,
+    required this.settings,
+    required this.onSettingsChanged,
+    required this.onTestVoice,
+  });
+
+  @override
+  State<SettingsSheet> createState() => _SettingsSheetState();
+}
+
+class _SettingsSheetState extends State<SettingsSheet> {
+  late AppSettings _settings;
+
+  @override
+  void initState() {
+    super.initState();
+    _settings = widget.settings;
+  }
+
+  void _updateSettings(AppSettings newSettings) {
+    setState(() {
+      _settings = newSettings;
+    });
+
+    widget.onSettingsChanged(newSettings);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: FractionallySizedBox(
+        heightFactor: 0.82,
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(24, 18, 24, 18),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const _SettingsHeader(),
+                const SizedBox(height: 20),
+                _SpeechRateSetting(
+                  value: _settings.speechRate,
+                  onChanged: (value) {
+                    _updateSettings(_settings.copyWith(speechRate: value));
+                  },
+                  onTestVoice: widget.onTestVoice,
+                ),
+                const SizedBox(height: 18),
+                _CardSizeSetting(
+                  value: _settings.cardSize,
+                  onChanged: (value) {
+                    _updateSettings(_settings.copyWith(cardSize: value));
+                  },
+                ),
+                const SizedBox(height: 10),
+                SwitchListTile(
+                  contentPadding: EdgeInsets.zero,
+                  title: const Text(
+                    'Sonido al pulsar palabra',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                  ),
+                  subtitle: const Text(
+                    'Si está desactivado, solo hablará al pulsar el botón Hablar.',
+                  ),
+                  value: _settings.speakOnCardTap,
+                  onChanged: (value) {
+                    _updateSettings(_settings.copyWith(speakOnCardTap: value));
+                  },
+                ),
+                const SizedBox(height: 16),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text('Cerrar'),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _SettingsHeader extends StatelessWidget {
+  const _SettingsHeader();
+
+  @override
+  Widget build(BuildContext context) {
+    return const Row(
+      children: [
+        Icon(Icons.settings, size: 30),
+        SizedBox(width: 10),
+        Text(
+          'Ajustes',
+          style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+        ),
+      ],
+    );
+  }
+}
+
+class _SpeechRateSetting extends StatelessWidget {
+  final double value;
+  final ValueChanged<double> onChanged;
+  final VoidCallback onTestVoice;
+
+  const _SpeechRateSetting({
+    required this.value,
+    required this.onChanged,
+    required this.onTestVoice,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            const Expanded(
+              child: Text(
+                'Velocidad de voz',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+              ),
+            ),
+            Text(
+              value.toStringAsFixed(2),
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(width: 12),
+            OutlinedButton.icon(
+              onPressed: onTestVoice,
+              icon: const Icon(Icons.volume_up),
+              label: const Text('Probar'),
+            ),
+          ],
+        ),
+        Slider(
+          min: 0.35,
+          max: 0.65,
+          divisions: 6,
+          value: value,
+          label: value.toStringAsFixed(2),
+          onChanged: onChanged,
+        ),
+      ],
+    );
+  }
+}
+
+class _CardSizeSetting extends StatelessWidget {
+  final CardSize value;
+  final ValueChanged<CardSize> onChanged;
+
+  const _CardSizeSetting({required this.value, required this.onChanged});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          'Tamaño de cards',
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+        ),
+        const SizedBox(height: 8),
+        Wrap(
+          spacing: 8,
+          children: [
+            ChoiceChip(
+              label: const Text('Pequeñas'),
+              selected: value == CardSize.small,
+              onSelected: (_) => onChanged(CardSize.small),
+            ),
+            ChoiceChip(
+              label: const Text('Medianas'),
+              selected: value == CardSize.medium,
+              onSelected: (_) => onChanged(CardSize.medium),
+            ),
+            ChoiceChip(
+              label: const Text('Grandes'),
+              selected: value == CardSize.large,
+              onSelected: (_) => onChanged(CardSize.large),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+}

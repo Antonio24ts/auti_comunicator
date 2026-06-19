@@ -1,21 +1,24 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/settings/app_settings.dart';
 import '../../../../data/models/pictogram.dart';
-import 'package:flutter/foundation.dart';
 
 class PictogramCard extends StatelessWidget {
   final Pictogram pictogram;
   final VoidCallback onTap;
+  final CardSize cardSize;
 
   const PictogramCard({
     super.key,
     required this.pictogram,
     required this.onTap,
+    required this.cardSize,
   });
 
   @override
   Widget build(BuildContext context) {
     final hasImage = pictogram.imagePath.trim().isNotEmpty;
+    final displayText = _getDisplayText();
 
     return Material(
       color: _getBackgroundColor(),
@@ -25,7 +28,7 @@ class PictogramCard extends StatelessWidget {
         onTap: onTap,
         borderRadius: BorderRadius.circular(10),
         child: Padding(
-          padding: const EdgeInsets.all(6),
+          padding: EdgeInsets.all(_getCardPadding()),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -37,23 +40,28 @@ class PictogramCard extends StatelessWidget {
                       pictogram.imagePath,
                       fit: BoxFit.contain,
                       errorBuilder: (context, error, stackTrace) {
-                        debugPrint('ERROR cargando imagen: ${pictogram.imagePath}');
-                        debugPrint('Detalle: $error');
-
-                        return _FallbackIcon(pictogram: pictogram);
+                        return _FallbackIcon(
+                          pictogram: pictogram,
+                          cardSize: cardSize,
+                        );
                       },
                     ),
                   ),
                 )
               else if (!pictogram.isLetter)
-                Expanded(child: _FallbackIcon(pictogram: pictogram)),
+                Expanded(
+                  child: _FallbackIcon(
+                    pictogram: pictogram,
+                    cardSize: cardSize,
+                  ),
+                ),
               Text(
-                pictogram.text,
+                displayText,
                 textAlign: TextAlign.center,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
-                  fontSize: pictogram.isLetter ? 34 : 18,
+                  fontSize: _getTextSize(),
                   fontWeight: FontWeight.w800,
                 ),
               ),
@@ -62,6 +70,47 @@ class PictogramCard extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String _getDisplayText() {
+    if (!pictogram.isLetter) {
+      return pictogram.text;
+    }
+
+    return pictogram.text.toLowerCase();
+  }
+
+  double _getTextSize() {
+    if (pictogram.isLetter) {
+      switch (cardSize) {
+        case CardSize.small:
+          return 28;
+        case CardSize.medium:
+          return 34;
+        case CardSize.large:
+          return 40;
+      }
+    }
+
+    switch (cardSize) {
+      case CardSize.small:
+        return 15;
+      case CardSize.medium:
+        return 18;
+      case CardSize.large:
+        return 22;
+    }
+  }
+
+  double _getCardPadding() {
+    switch (cardSize) {
+      case CardSize.small:
+        return 4;
+      case CardSize.medium:
+        return 6;
+      case CardSize.large:
+        return 8;
+    }
   }
 
   Color _getBackgroundColor() {
@@ -83,12 +132,24 @@ class PictogramCard extends StatelessWidget {
 
 class _FallbackIcon extends StatelessWidget {
   final Pictogram pictogram;
+  final CardSize cardSize;
 
-  const _FallbackIcon({required this.pictogram});
+  const _FallbackIcon({required this.pictogram, required this.cardSize});
 
   @override
   Widget build(BuildContext context) {
-    return Icon(_getIcon(), size: pictogram.isLetter ? 24 : 40);
+    return Icon(_getIcon(), size: _getIconSize());
+  }
+
+  double _getIconSize() {
+    switch (cardSize) {
+      case CardSize.small:
+        return 32;
+      case CardSize.medium:
+        return 40;
+      case CardSize.large:
+        return 48;
+    }
   }
 
   IconData _getIcon() {

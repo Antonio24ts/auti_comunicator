@@ -10,6 +10,10 @@ import '../widgets/phrase_bar.dart';
 import '../widgets/pictogram_card.dart';
 import '../widgets/bottom_action_bar.dart';
 
+import '../../../../core/settings/app_settings.dart';
+import '../../../../core/settings/app_settings_service.dart';
+import '../widgets/settings_sheet.dart';
+
 class BoardScreen extends StatefulWidget {
   const BoardScreen({super.key});
 
@@ -20,8 +24,11 @@ class BoardScreen extends StatefulWidget {
 class _BoardScreenState extends State<BoardScreen> {
   final SpeechService _speechService = SpeechService();
   final PictogramRepository _repository = PictogramRepository();
+  final AppSettingsService _settingsService = AppSettingsService();
 
-  late final Future<void> _loadPictogramsFuture;
+  late final Future<void> _loadInitialDataFuture;
+
+  AppSettings _settings = AppSettings.defaults();
 
   final List<String> _selectedWords = [];
   final List<String> _categoryHistory = [];
@@ -32,50 +39,58 @@ class _BoardScreenState extends State<BoardScreen> {
   void initState() {
     super.initState();
 
-    _loadPictogramsFuture = _repository.load();
-    unawaited(_speechService.init());
+    _loadInitialDataFuture = _loadInitialData();
   }
 
   int _getCrossAxisCount(double width) {
     return 8;
   }
 
+  double _getChildAspectRatio() {
+    switch (_settings.cardSize) {
+      case CardSize.small:
+        return 1.55;
+      case CardSize.medium:
+        return 1.25;
+      case CardSize.large:
+        return 1.05;
+    }
+  }
+
+  Future<void> _loadInitialData() async {
+    await _repository.load();
+
+    final loadedSettings = await _settingsService.load();
+
+    _settings = loadedSettings;
+
+    await _speechService.init(speechRate: _settings.speechRate);
+  }
+
+  Future<void> _applySettings(AppSettings newSettings) async {
+    setState(() {
+      _settings = newSettings;
+    });
+
+    await _settingsService.save(newSettings);
+
+    await _speechService.setSpeechRate(newSettings.speechRate);
+  }
+
   Future<void> _openSettings() async {
     await showModalBottomSheet<void>(
       context: context,
       backgroundColor: Colors.white,
+      isScrollControlled: true,
       builder: (context) {
-        return SafeArea(
-          child: SizedBox(
-            height: 220,
-            child: Padding(
-              padding: const EdgeInsets.all(20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'Ajustes',
-                    style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(height: 16),
-                  const Text(
-                    'Aquí añadiremos opciones de la app más adelante.',
-                    style: TextStyle(fontSize: 18),
-                  ),
-                  const Spacer(),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: const Text('Cerrar'),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
+        return SettingsSheet(
+          settings: _settings,
+          onSettingsChanged: (newSettings) {
+            unawaited(_applySettings(newSettings));
+          },
+          onTestVoice: () {
+            unawaited(_speechService.speakPhrase('Esto es una prueba de voz'));
+          },
         );
       },
     );
@@ -103,18 +118,20 @@ class _BoardScreenState extends State<BoardScreen> {
   }
 
   void _addLetter(String letter) {
-    if (letter.trim().isEmpty) {
+    final letterToAdd = letter.trim().toLowerCase();
+
+    if (letterToAdd.isEmpty) {
       return;
     }
 
     setState(() {
       if (_selectedWords.isEmpty) {
-        _selectedWords.add(letter);
+        _selectedWords.add(letterToAdd);
         return;
       }
 
       final lastIndex = _selectedWords.length - 1;
-      _selectedWords[lastIndex] = '${_selectedWords[lastIndex]}$letter';
+      _selectedWords[lastIndex] = '${_selectedWords[lastIndex]}$letterToAdd';
     });
   }
 
@@ -210,7 +227,9 @@ class _BoardScreenState extends State<BoardScreen> {
       _selectedWords.add(word);
     });
 
-    _speechService.speakWord(word);
+    if (_settings.speakOnCardTap) {
+      unawaited(_speechService.speakWord(word));
+    }
   }
 
   void _deleteLastWord() {
@@ -247,7 +266,7 @@ class _BoardScreenState extends State<BoardScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: FutureBuilder<void>(
-        future: _loadPictogramsFuture,
+        future: _loadInitialDataFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState != ConnectionState.done) {
             return const Center(child: CircularProgressIndicator());
@@ -296,7 +315,7 @@ class _BoardScreenState extends State<BoardScreen> {
                           crossAxisCount: crossAxisCount,
                           mainAxisSpacing: 8,
                           crossAxisSpacing: 8,
-                          childAspectRatio: 1.45,
+                          childAspectRatio: _getChildAspectRatio(),
                         ),
                         itemBuilder: (context, index) {
                           final pictogram = pictograms[index];
@@ -304,6 +323,7 @@ class _BoardScreenState extends State<BoardScreen> {
                           return PictogramCard(
                             pictogram: pictogram,
                             onTap: () => _handlePictogramTap(pictogram),
+                            cardSize: _settings.cardSize,
                           );
                         },
                       );
