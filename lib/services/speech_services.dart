@@ -5,9 +5,9 @@ class SpeechService {
 
   bool _isInitialized = false;
   int _speakRequestId = 0;
-  double _speechRate = 0.50;
+  double _speechRate = 0.55;
 
-  Future<void> init({double speechRate = 0.50}) async {
+  Future<void> init({double speechRate = 0.55}) async {
     if (_isInitialized) {
       await setSpeechRate(speechRate);
       return;

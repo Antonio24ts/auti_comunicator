@@ -13,7 +13,7 @@ class AppSettings {
 
   factory AppSettings.defaults() {
     return const AppSettings(
-      speechRate: 0.50,
+      speechRate: 0.55,
       cardSize: CardSize.medium,
       speakOnCardTap: true,
     );
