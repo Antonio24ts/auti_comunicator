@@ -22,7 +22,11 @@ class PhraseBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final phrase = words.join(' ');
+    final phrase = words
+        .where((word) => word.trim().isNotEmpty)
+        .join(' ')
+        .trim();
+    final hasPhrase = phrase.isNotEmpty;
 
     return Container(
       height: 96,
@@ -40,7 +44,7 @@ class PhraseBar extends StatelessWidget {
           const SizedBox(width: 8),
           Expanded(
             child: InkWell(
-              onTap: words.isEmpty ? null : onSpeakPhrase,
+              onTap: hasPhrase ? onSpeakPhrase : null,
               borderRadius: BorderRadius.circular(8),
               child: Container(
                 height: double.infinity,
@@ -54,13 +58,11 @@ class PhraseBar extends StatelessWidget {
                 child: SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Text(
-                    phrase.isEmpty
-                        ? 'Pulsa palabras para formar una frase'
-                        : phrase,
+                    hasPhrase ? phrase : 'Pulsa palabras para formar una frase',
                     style: TextStyle(
                       fontSize: 26,
                       fontWeight: FontWeight.w600,
-                      color: phrase.isEmpty ? Colors.grey : Colors.black,
+                      color: hasPhrase ? Colors.black : Colors.grey,
                     ),
                   ),
                 ),
@@ -71,7 +73,7 @@ class PhraseBar extends StatelessWidget {
           _TopActionButton(
             label: 'Hablar',
             icon: Icons.record_voice_over,
-            onTap: words.isEmpty ? null : onSpeakPhrase,
+            onTap: hasPhrase ? onSpeakPhrase : null,
           ),
           const SizedBox(width: 8),
           _TopActionButton(

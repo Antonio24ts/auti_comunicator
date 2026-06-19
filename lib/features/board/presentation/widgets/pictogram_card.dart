@@ -14,11 +14,8 @@ class PictogramCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final backgroundColor = pictogram.isCategory
-        ? Colors.lightBlue.shade100
-        : Colors.white;
-
-    final icon = pictogram.isCategory ? Icons.add : Icons.chat_bubble_outline;
+    final backgroundColor = _getBackgroundColor();
+    final icon = _getIcon();
 
     return Material(
       color: backgroundColor,
@@ -32,16 +29,18 @@ class PictogramCard extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(icon, size: 32),
-              const SizedBox(height: 6),
+              if (!pictogram.isLetter) ...[
+                Icon(icon, size: 32),
+                const SizedBox(height: 6),
+              ],
               Text(
                 pictogram.text,
                 textAlign: TextAlign.center,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w700,
+                style: TextStyle(
+                  fontSize: pictogram.isLetter ? 28 : 18,
+                  fontWeight: FontWeight.w800,
                 ),
               ),
             ],
@@ -49,5 +48,41 @@ class PictogramCard extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Color _getBackgroundColor() {
+    if (pictogram.isCategory) {
+      return Colors.lightBlue.shade100;
+    }
+
+    if (pictogram.isLetter) {
+      return Colors.amber.shade100;
+    }
+
+    if (pictogram.isKeyboardAction) {
+      return Colors.orange.shade100;
+    }
+
+    return Colors.white;
+  }
+
+  IconData _getIcon() {
+    if (pictogram.isCategory) {
+      return Icons.add;
+    }
+
+    if (pictogram.isLetter) {
+      return Icons.keyboard;
+    }
+
+    if (pictogram.keyboardAction == KeyboardAction.space) {
+      return Icons.space_bar;
+    }
+
+    if (pictogram.keyboardAction == KeyboardAction.deleteLetter) {
+      return Icons.backspace;
+    }
+
+    return Icons.chat_bubble_outline;
   }
 }

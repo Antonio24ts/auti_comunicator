@@ -38,7 +38,90 @@ class _BoardScreenState extends State<BoardScreen> {
       return;
     }
 
+    if (pictogram.isLetter) {
+      _addLetter(pictogram.value ?? pictogram.text.toLowerCase());
+      return;
+    }
+
+    if (pictogram.isKeyboardAction) {
+      _handleKeyboardAction(pictogram);
+      return;
+    }
+
     _addWord(pictogram.text);
+  }
+
+  void _addLetter(String letter) {
+    if (letter.trim().isEmpty) {
+      return;
+    }
+
+    setState(() {
+      if (_selectedWords.isEmpty) {
+        _selectedWords.add(letter);
+        return;
+      }
+
+      final lastIndex = _selectedWords.length - 1;
+      _selectedWords[lastIndex] = '${_selectedWords[lastIndex]}$letter';
+    });
+  }
+
+  void _handleKeyboardAction(Pictogram pictogram) {
+    switch (pictogram.keyboardAction) {
+      case KeyboardAction.space:
+        _addSpace();
+        break;
+      case KeyboardAction.deleteLetter:
+        _deleteLastLetter();
+        break;
+      case null:
+        break;
+    }
+  }
+
+  void _addSpace() {
+    setState(() {
+      if (_selectedWords.isEmpty) {
+        return;
+      }
+
+      if (_selectedWords.last.trim().isEmpty) {
+        return;
+      }
+
+      _selectedWords.add('');
+    });
+  }
+
+  void _deleteLastLetter() {
+    if (_selectedWords.isEmpty) {
+      return;
+    }
+
+    setState(() {
+      final lastIndex = _selectedWords.length - 1;
+      final lastWord = _selectedWords[lastIndex];
+
+      if (lastWord.isEmpty) {
+        _selectedWords.removeLast();
+        return;
+      }
+
+      if (lastWord.length == 1) {
+        _selectedWords.removeLast();
+        return;
+      }
+
+      _selectedWords[lastIndex] = lastWord.substring(0, lastWord.length - 1);
+    });
+  }
+
+  String _getPhraseText() {
+    return _selectedWords
+        .where((word) => word.trim().isNotEmpty)
+        .join(' ')
+        .trim();
   }
 
   void _openCategory(Pictogram pictogram) {
@@ -100,11 +183,11 @@ class _BoardScreenState extends State<BoardScreen> {
   }
 
   Future<void> _speakPhrase() async {
-    if (_selectedWords.isEmpty) {
+    final phrase = _getPhraseText();
+
+    if (phrase.isEmpty) {
       return;
     }
-
-    final phrase = _selectedWords.join(' ');
 
     await _speechService.speakPhrase(phrase);
   }

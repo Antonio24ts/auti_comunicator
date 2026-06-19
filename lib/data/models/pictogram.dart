@@ -1,4 +1,6 @@
-enum PictogramType { word, category }
+enum PictogramType { word, category, letter, keyboardAction }
+
+enum KeyboardAction { space, deleteLetter }
 
 class Pictogram {
   final String id;
@@ -7,6 +9,8 @@ class Pictogram {
   final String categoryId;
   final PictogramType type;
   final String? targetCategoryId;
+  final String? value;
+  final KeyboardAction? keyboardAction;
 
   const Pictogram({
     required this.id,
@@ -15,8 +19,12 @@ class Pictogram {
     required this.categoryId,
     required this.type,
     this.targetCategoryId,
+    this.value,
+    this.keyboardAction,
   });
 
   bool get isCategory => type == PictogramType.category;
   bool get isWord => type == PictogramType.word;
+  bool get isLetter => type == PictogramType.letter;
+  bool get isKeyboardAction => type == PictogramType.keyboardAction;
 }
