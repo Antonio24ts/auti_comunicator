@@ -2,6 +2,8 @@ enum PictogramType { word, category, letter, keyboardAction }
 
 enum KeyboardAction { space, deleteLetter }
 
+enum CategoryOpenMode { zone, fullBoard }
+
 class Pictogram {
   final String id;
   final String text;
@@ -11,6 +13,7 @@ class Pictogram {
   final String? targetCategoryId;
   final String? value;
   final KeyboardAction? keyboardAction;
+  final CategoryOpenMode categoryOpenMode;
 
   const Pictogram({
     required this.id,
@@ -21,6 +24,7 @@ class Pictogram {
     this.targetCategoryId,
     this.value,
     this.keyboardAction,
+    this.categoryOpenMode = CategoryOpenMode.zone,
   });
 
   factory Pictogram.fromJson(Map<String, dynamic> json) {
@@ -33,7 +37,22 @@ class Pictogram {
       targetCategoryId: json['targetCategoryId'] as String?,
       value: json['value'] as String?,
       keyboardAction: _parseKeyboardAction(json['keyboardAction'] as String?),
+      categoryOpenMode: _parseCategoryOpenMode(
+        json['categoryOpenMode'] as String?,
+      ),
     );
+  }
+
+  static CategoryOpenMode _parseCategoryOpenMode(String? value) {
+    switch (value) {
+      case null:
+      case 'zone':
+        return CategoryOpenMode.zone;
+      case 'fullBoard':
+        return CategoryOpenMode.fullBoard;
+      default:
+        throw ArgumentError('Modo de apertura no válido: $value');
+    }
   }
 
   static PictogramType _parseType(String value) {

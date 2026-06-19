@@ -5,7 +5,9 @@ import 'package:flutter/services.dart';
 import '../models/pictogram.dart';
 
 class PictogramRepository {
-  static const String homeCategoryId = 'home';
+  static const String homeMainCategoryId = 'home_main';
+  static const String homeCenterCategoryId = 'home_center';
+  static const String homeRightCategoryId = 'home_right';
   static const String _pictogramsAssetPath = 'assets/data/pictograms.json';
 
   final List<Pictogram> _pictograms = [];

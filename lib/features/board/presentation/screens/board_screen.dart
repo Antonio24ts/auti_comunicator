@@ -7,12 +7,15 @@ import '../../../../data/models/pictogram.dart';
 import '../../../../data/repositories/pictogram_repository.dart';
 import '../../../../services/speech_services.dart';
 import '../widgets/phrase_bar.dart';
-import '../widgets/pictogram_card.dart';
 import '../widgets/bottom_action_bar.dart';
+
+import '../widgets/zone_panel.dart';
 
 import '../../../../core/settings/app_settings.dart';
 import '../../../../core/settings/app_settings_service.dart';
 import '../widgets/settings_sheet.dart';
+
+enum BoardZone { main, center, right }
 
 class BoardScreen extends StatefulWidget {
   const BoardScreen({super.key});
@@ -31,19 +34,29 @@ class _BoardScreenState extends State<BoardScreen> {
   AppSettings _settings = AppSettings.defaults();
 
   final List<String> _selectedWords = [];
-  final List<String> _categoryHistory = [];
 
-  String _currentCategoryId = PictogramRepository.homeCategoryId;
+  final Map<BoardZone, String> _currentCategoryByZone = {
+    BoardZone.main: PictogramRepository.homeMainCategoryId,
+    BoardZone.center: PictogramRepository.homeCenterCategoryId,
+    BoardZone.right: PictogramRepository.homeRightCategoryId,
+  };
+
+  final Map<BoardZone, List<String>> _categoryHistoryByZone = {
+    BoardZone.main: [],
+    BoardZone.center: [],
+    BoardZone.right: [],
+  };
+
+  String? _fullBoardCategoryId;
+  final List<String> _fullBoardHistory = [];
+
+  BoardZone _lastActiveZone = BoardZone.main;
 
   @override
   void initState() {
     super.initState();
 
     _loadInitialDataFuture = _loadInitialData();
-  }
-
-  int _getCrossAxisCount(double width) {
-    return 8;
   }
 
   double _getChildAspectRatio() {
@@ -65,6 +78,16 @@ class _BoardScreenState extends State<BoardScreen> {
     _settings = loadedSettings;
 
     await _speechService.init(speechRate: _settings.speechRate);
+  }
+
+  List<Pictogram> _getPictogramsForZone(BoardZone zone) {
+    final categoryId = _currentCategoryByZone[zone];
+
+    if (categoryId == null) {
+      return [];
+    }
+
+    return _repository.getPictogramsByCategory(categoryId);
   }
 
   Future<void> _applySettings(AppSettings newSettings) async {
@@ -98,9 +121,9 @@ class _BoardScreenState extends State<BoardScreen> {
     await SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
   }
 
-  void _handlePictogramTap(Pictogram pictogram) {
+  void _handlePictogramTap(Pictogram pictogram, BoardZone zone) {
     if (pictogram.isCategory) {
-      _openCategory(pictogram);
+      _openCategory(pictogram, zone);
       return;
     }
 
@@ -192,34 +215,112 @@ class _BoardScreenState extends State<BoardScreen> {
         .trim();
   }
 
-  void _openCategory(Pictogram pictogram) {
+  void _openCategory(Pictogram pictogram, BoardZone zone) {
     final targetCategoryId = pictogram.targetCategoryId;
 
     if (targetCategoryId == null || targetCategoryId.isEmpty) {
       return;
     }
 
+    if (pictogram.categoryOpenMode == CategoryOpenMode.fullBoard) {
+      setState(() {
+        if (_fullBoardCategoryId != null) {
+          _fullBoardHistory.add(_fullBoardCategoryId!);
+        }
+
+        _fullBoardCategoryId = targetCategoryId;
+        _lastActiveZone = zone;
+      });
+
+      return;
+    }
+
+    final currentCategoryId = _currentCategoryByZone[zone];
+
+    if (currentCategoryId == null) {
+      return;
+    }
+
     setState(() {
-      _categoryHistory.add(_currentCategoryId);
-      _currentCategoryId = targetCategoryId;
+      _categoryHistoryByZone[zone]?.add(currentCategoryId);
+      _currentCategoryByZone[zone] = targetCategoryId;
+      _lastActiveZone = zone;
     });
   }
 
   void _goHome() {
     setState(() {
-      _currentCategoryId = PictogramRepository.homeCategoryId;
-      _categoryHistory.clear();
+      _currentCategoryByZone[BoardZone.main] =
+          PictogramRepository.homeMainCategoryId;
+      _currentCategoryByZone[BoardZone.center] =
+          PictogramRepository.homeCenterCategoryId;
+      _currentCategoryByZone[BoardZone.right] =
+          PictogramRepository.homeRightCategoryId;
+
+      _categoryHistoryByZone[BoardZone.main]?.clear();
+      _categoryHistoryByZone[BoardZone.center]?.clear();
+      _categoryHistoryByZone[BoardZone.right]?.clear();
+
+      _fullBoardCategoryId = null;
+      _fullBoardHistory.clear();
+
+      _lastActiveZone = BoardZone.main;
     });
   }
 
   void _goBack() {
-    if (_categoryHistory.isEmpty) {
+    if (_fullBoardCategoryId != null) {
+      setState(() {
+        if (_fullBoardHistory.isNotEmpty) {
+          _fullBoardCategoryId = _fullBoardHistory.removeLast();
+        } else {
+          _fullBoardCategoryId = null;
+        }
+      });
+
+      return;
+    }
+
+    final zone = _getZoneToGoBack();
+
+    if (zone == null) {
+      return;
+    }
+
+    final history = _categoryHistoryByZone[zone];
+
+    if (history == null || history.isEmpty) {
       return;
     }
 
     setState(() {
-      _currentCategoryId = _categoryHistory.removeLast();
+      _currentCategoryByZone[zone] = history.removeLast();
+      _lastActiveZone = zone;
     });
+  }
+
+  BoardZone? _getZoneToGoBack() {
+    final lastHistory = _categoryHistoryByZone[_lastActiveZone];
+
+    if (lastHistory != null && lastHistory.isNotEmpty) {
+      return _lastActiveZone;
+    }
+
+    for (final entry in _categoryHistoryByZone.entries) {
+      if (entry.value.isNotEmpty) {
+        return entry.key;
+      }
+    }
+
+    return null;
+  }
+
+  bool _canGoBack() {
+    if (_fullBoardCategoryId != null) {
+      return true;
+    }
+
+    return _categoryHistoryByZone.values.any((history) => history.isNotEmpty);
   }
 
   void _addWord(String word) {
@@ -262,6 +363,75 @@ class _BoardScreenState extends State<BoardScreen> {
     await _speechService.speakPhrase(phrase);
   }
 
+  Widget _buildZoneLayout() {
+    final aspectRatio = _getChildAspectRatio();
+
+    return Row(
+      children: [
+        Expanded(
+          flex: 5,
+          child: ZonePanel(
+            pictograms: _getPictogramsForZone(BoardZone.main),
+            crossAxisCount: 5,
+            childAspectRatio: aspectRatio,
+            cardSize: _settings.cardSize,
+            onPictogramTap: (pictogram) {
+              _handlePictogramTap(pictogram, BoardZone.main);
+            },
+          ),
+        ),
+        const SizedBox(width: 8),
+        Expanded(
+          flex: 1,
+          child: ZonePanel(
+            pictograms: _getPictogramsForZone(BoardZone.center),
+            crossAxisCount: 1,
+            childAspectRatio: aspectRatio,
+            cardSize: _settings.cardSize,
+            onPictogramTap: (pictogram) {
+              _handlePictogramTap(pictogram, BoardZone.center);
+            },
+          ),
+        ),
+        const SizedBox(width: 8),
+        Expanded(
+          flex: 2,
+          child: ZonePanel(
+            pictograms: _getPictogramsForZone(BoardZone.right),
+            crossAxisCount: 2,
+            childAspectRatio: aspectRatio,
+            cardSize: _settings.cardSize,
+            onPictogramTap: (pictogram) {
+              _handlePictogramTap(pictogram, BoardZone.right);
+            },
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildFullBoardLayout() {
+    final categoryId = _fullBoardCategoryId;
+
+    if (categoryId == null) {
+      return const SizedBox.shrink();
+    }
+
+    final pictograms = _repository.getPictogramsByCategory(categoryId);
+
+    final isAlphabet = categoryId == 'alfabeto';
+
+    return ZonePanel(
+      pictograms: pictograms,
+      crossAxisCount: 8,
+      childAspectRatio: isAlphabet ? 1.45 : _getChildAspectRatio(),
+      cardSize: _settings.cardSize,
+      onPictogramTap: (pictogram) {
+        _handlePictogramTap(pictogram, _lastActiveZone);
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -285,10 +455,6 @@ class _BoardScreenState extends State<BoardScreen> {
             );
           }
 
-          final pictograms = _repository.getPictogramsByCategory(
-            _currentCategoryId,
-          );
-
           return Column(
             children: [
               PhraseBar(
@@ -298,37 +464,14 @@ class _BoardScreenState extends State<BoardScreen> {
                 onDeleteLast: _deleteLastWord,
                 onClearAll: _clearAllWords,
                 onSpeakPhrase: _speakPhrase,
-                canGoBack: _categoryHistory.isNotEmpty,
+                canGoBack: _canGoBack(),
               ),
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: LayoutBuilder(
-                    builder: (context, constraints) {
-                      final crossAxisCount = _getCrossAxisCount(
-                        constraints.maxWidth,
-                      );
-
-                      return GridView.builder(
-                        itemCount: pictograms.length,
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: crossAxisCount,
-                          mainAxisSpacing: 8,
-                          crossAxisSpacing: 8,
-                          childAspectRatio: _getChildAspectRatio(),
-                        ),
-                        itemBuilder: (context, index) {
-                          final pictogram = pictograms[index];
-
-                          return PictogramCard(
-                            pictogram: pictogram,
-                            onTap: () => _handlePictogramTap(pictogram),
-                            cardSize: _settings.cardSize,
-                          );
-                        },
-                      );
-                    },
-                  ),
+                  padding: const EdgeInsets.all(6),
+                  child: _fullBoardCategoryId == null
+                      ? _buildZoneLayout()
+                      : _buildFullBoardLayout(),
                 ),
               ),
               BottomActionBar(onSettingsTap: _openSettings),

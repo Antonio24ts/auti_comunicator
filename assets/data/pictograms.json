@@ -1,72 +1,179 @@
 [
   {
-    "id": "quien",
-    "text": "¿Quién?",
+    "id": "home_quiero",
+    "text": "Quiero",
     "imagePath": "",
-    "categoryId": "home",
-    "type": "category",
-    "targetCategoryId": "personas"
-  },
-  {
-    "id": "que",
-    "text": "¿Qué?",
-    "imagePath": "",
-    "categoryId": "home",
-    "type": "category",
-    "targetCategoryId": "cosas"
-  },
-  {
-    "id": "saludos",
-    "text": "Saludos",
-    "imagePath": "assets/images/categories/saludo.png",
-    "categoryId": "home",
-    "type": "category",
-    "targetCategoryId": "saludos"
-  },
-  {
-    "id": "necesidades",
-    "text": "Necesidades",
-    "imagePath": "",
-    "categoryId": "home",
-    "type": "category",
-    "targetCategoryId": "necesidades"
-  },
-  {
-    "id": "acciones",
-    "text": "Acciones",
-    "imagePath": "",
-    "categoryId": "home",
-    "type": "category",
-    "targetCategoryId": "acciones"
-  },
-  {
-    "id": "si",
-    "text": "Sí",
-    "imagePath": "",
-    "categoryId": "home",
+    "categoryId": "home_main",
     "type": "word"
   },
   {
-    "id": "no",
-    "text": "No",
+    "id": "home_necesito",
+    "text": "Necesito",
     "imagePath": "",
-    "categoryId": "home",
+    "categoryId": "home_main",
     "type": "word"
   },
   {
-    "id": "ayuda",
+    "id": "home_mas",
+    "text": "Más",
+    "imagePath": "",
+    "categoryId": "home_main",
+    "type": "category",
+    "targetCategoryId": "mas_categorias"
+  },
+  {
+    "id": "home_ayuda",
     "text": "Ayuda",
     "imagePath": "",
     "categoryId": "home",
     "type": "word"
   },
   {
+    "id": "home_si",
+    "text": "Sí",
+    "imagePath": "",
+    "categoryId": "home_right",
+    "type": "word"
+  },
+  {
+    "id": "home_no",
+    "text": "No",
+    "imagePath": "",
+    "categoryId": "home_right",
+    "type": "word"
+  },
+  {
+    "id": "mas_dolor",
+    "text": "Dolor",
+    "imagePath": "",
+    "categoryId": "mas_categorias",
+    "type": "word"
+  },
+  {
+    "id": "mas_bano",
+    "text": "Baño",
+    "imagePath": "",
+    "categoryId": "mas_categorias",
+    "type": "word"
+  },
+  {
     "id": "alfabeto",
     "text": "Alfabeto",
     "imagePath": "",
+    "categoryId": "home_center",
+    "type": "category",
+    "targetCategoryId": "alfabeto",
+    "categoryOpenMode": "fullBoard"
+  },
+  {
+    "id": "mas_bano",
+    "text": "Personas",
+    "imagePath": "",
+    "categoryId": "home_main",
+    "type": "category",
+    "targetCategoryId": "personas"
+  },
+  {
+    "id": "mas_verbos",
+    "text": "Verbos",
+    "imagePath": "",
+    "categoryId": "mas_categorias",
+    "type": "category",
+    "targetCategoryId": "verbos",
+    "categoryOpenMode": "fullBoard"
+  },
+  {
+    "id": "preguntas",
+    "text": "Preguntas",
+    "imagePath": "",
+    "categoryId": "home_main",
+    "type": "category",
+    "targetCategoryId": "preguntas"
+  },
+  {
+    "id": "mas_emociones",
+    "text": "Emociones",
+    "imagePath": "",
+    "categoryId": "mas_categorias",
+    "type": "category",
+    "targetCategoryId": "emociones"
+  },
+  {
+    "id": "mas_comida",
+    "text": "Comida",
+    "imagePath": "",
+    "categoryId": "mas_categorias",
+    "type": "category",
+    "targetCategoryId": "comida",
+    "categoryOpenMode": "fullBoard"
+  },
+  {
+    "id": "mas_bebida",
+    "text": "Bebida",
+    "imagePath": "",
     "categoryId": "home",
     "type": "category",
-    "targetCategoryId": "alfabeto"
+    "targetCategoryId": "bebida",
+    "categoryOpenMode": "fullBoard"
+  },
+  {
+    "id": "mas_casa",
+    "text": "Casa",
+    "imagePath": "",
+    "categoryId": "mas_categorias",
+    "type": "category",
+    "targetCategoryId": "casa"
+  },
+  {
+    "id": "mas_colegio",
+    "text": "Colegio",
+    "imagePath": "",
+    "categoryId": "mas_categorias",
+    "type": "category",
+    "targetCategoryId": "colegio"
+  },
+  {
+    "id": "mas_salud",
+    "text": "Salud",
+    "imagePath": "",
+    "categoryId": "mas_categorias",
+    "type": "category",
+    "targetCategoryId": "salud",
+    "categoryOpenMode": "fullBoard"
+  },
+  {
+    "id": "mas_lugares",
+    "text": "Lugares",
+    "imagePath": "",
+    "categoryId": "mas_categorias",
+    "type": "category",
+    "targetCategoryId": "lugares"
+  },
+  {
+    "id": "mas_objetos",
+    "text": "Objetos",
+    "imagePath": "",
+    "categoryId": "mas_categorias",
+    "type": "category",
+    "targetCategoryId": "objetos",
+    "categoryOpenMode": "fullBoard"
+  },
+  {
+    "id": "mas_trabajo",
+    "text": "Trabajo",
+    "imagePath": "",
+    "categoryId": "mas_categorias",
+    "type": "category",
+    "targetCategoryId": "trabajo",
+    "categoryOpenMode": "fullBoard"
+  },
+  {
+    "id": "saludos",
+    "text": "Saludos",
+    "imagePath": "",
+    "categoryId": "home_right",
+    "type": "category",
+    "targetCategoryId": "saludos"
   },
 
   {
@@ -508,5 +615,957 @@
     "categoryId": "alfabeto",
     "type": "keyboardAction",
     "keyboardAction": "deleteLetter"
+  },
+  {
+    "id": "verbo_ser",
+    "text": "Ser",
+    "imagePath": "",
+    "categoryId": "verbos",
+    "type": "word"
+  },
+  {
+    "id": "verbo_estar",
+    "text": "Estar",
+    "imagePath": "",
+    "categoryId": "verbos",
+    "type": "word"
+  },
+  {
+    "id": "verbo_tener",
+    "text": "Tener",
+    "imagePath": "",
+    "categoryId": "verbos",
+    "type": "word"
+  },
+  {
+    "id": "verbo_querer",
+    "text": "Querer",
+    "imagePath": "",
+    "categoryId": "verbos",
+    "type": "word"
+  },
+  {
+    "id": "verbo_necesitar",
+    "text": "Necesitar",
+    "imagePath": "",
+    "categoryId": "verbos",
+    "type": "word"
+  },
+  {
+    "id": "verbo_poder",
+    "text": "Poder",
+    "imagePath": "",
+    "categoryId": "verbos",
+    "type": "word"
+  },
+  {
+    "id": "verbo_ir",
+    "text": "Ir",
+    "imagePath": "",
+    "categoryId": "verbos",
+    "type": "word"
+  },
+  {
+    "id": "verbo_venir",
+    "text": "Venir",
+    "imagePath": "",
+    "categoryId": "verbos",
+    "type": "word"
+  },
+  {
+    "id": "verbo_dar",
+    "text": "Dar",
+    "imagePath": "",
+    "categoryId": "verbos",
+    "type": "word"
+  },
+  {
+    "id": "verbo_hacer",
+    "text": "Hacer",
+    "imagePath": "",
+    "categoryId": "verbos",
+    "type": "word"
+  },
+  {
+    "id": "verbo_ver",
+    "text": "Ver",
+    "imagePath": "",
+    "categoryId": "verbos",
+    "type": "word"
+  },
+  {
+    "id": "verbo_escuchar",
+    "text": "Escuchar",
+    "imagePath": "",
+    "categoryId": "verbos",
+    "type": "word"
+  },
+  {
+    "id": "verbo_abrir",
+    "text": "Abrir",
+    "imagePath": "",
+    "categoryId": "verbos",
+    "type": "word"
+  },
+  {
+    "id": "verbo_cerrar",
+    "text": "Cerrar",
+    "imagePath": "",
+    "categoryId": "verbos",
+    "type": "word"
+  },
+  {
+    "id": "verbo_jugar",
+    "text": "Jugar",
+    "imagePath": "",
+    "categoryId": "verbos",
+    "type": "word"
+  },
+  {
+    "id": "verbo_estudiar",
+    "text": "Estudiar",
+    "imagePath": "",
+    "categoryId": "verbos",
+    "type": "word"
+  },
+  {
+    "id": "verbo_trabajar",
+    "text": "Trabajar",
+    "imagePath": "",
+    "categoryId": "verbos",
+    "type": "word"
+  },
+  {
+    "id": "verbo_esperar",
+    "text": "Esperar",
+    "imagePath": "",
+    "categoryId": "verbos",
+    "type": "word"
+  },
+  {
+    "id": "verbo_ayudar",
+    "text": "Ayudar",
+    "imagePath": "",
+    "categoryId": "verbos",
+    "type": "word"
+  },
+  {
+    "id": "verbo_parar",
+    "text": "Parar",
+    "imagePath": "",
+    "categoryId": "verbos",
+    "type": "word"
+  },
+  {
+    "id": "pregunta_que",
+    "text": "¿Qué?",
+    "imagePath": "",
+    "categoryId": "preguntas",
+    "type": "word"
+  },
+  {
+    "id": "pregunta_quien",
+    "text": "¿Quién?",
+    "imagePath": "",
+    "categoryId": "preguntas",
+    "type": "word"
+  },
+  {
+    "id": "pregunta_donde",
+    "text": "¿Dónde?",
+    "imagePath": "",
+    "categoryId": "preguntas",
+    "type": "word"
+  },
+  {
+    "id": "pregunta_cuando",
+    "text": "¿Cuándo?",
+    "imagePath": "",
+    "categoryId": "preguntas",
+    "type": "word"
+  },
+  {
+    "id": "pregunta_por_que",
+    "text": "¿Por qué?",
+    "imagePath": "",
+    "categoryId": "preguntas",
+    "type": "word"
+  },
+  {
+    "id": "pregunta_como",
+    "text": "¿Cómo?",
+    "imagePath": "",
+    "categoryId": "preguntas",
+    "type": "word"
+  },
+  {
+    "id": "pregunta_cuanto",
+    "text": "¿Cuánto?",
+    "imagePath": "",
+    "categoryId": "preguntas",
+    "type": "word"
+  },
+  {
+    "id": "pregunta_puedo",
+    "text": "¿Puedo?",
+    "imagePath": "",
+    "categoryId": "preguntas",
+    "type": "word"
+  },
+  {
+    "id": "pregunta_me_ayudas",
+    "text": "¿Me ayudas?",
+    "imagePath": "",
+    "categoryId": "preguntas",
+    "type": "word"
+  },
+  {
+    "id": "pregunta_que_pasa",
+    "text": "¿Qué pasa?",
+    "imagePath": "",
+    "categoryId": "preguntas",
+    "type": "word"
+  },
+  {
+    "id": "pregunta_que_hacemos",
+    "text": "¿Qué hacemos?",
+    "imagePath": "",
+    "categoryId": "preguntas",
+    "type": "word"
+  },
+  {
+    "id": "pregunta_donde_esta",
+    "text": "¿Dónde está?",
+    "imagePath": "",
+    "categoryId": "preguntas",
+    "type": "word"
+  },
+  {
+    "id": "emocion_contento",
+    "text": "Contento",
+    "imagePath": "",
+    "categoryId": "emociones",
+    "type": "word"
+  },
+  {
+    "id": "emocion_triste",
+    "text": "Triste",
+    "imagePath": "",
+    "categoryId": "emociones",
+    "type": "word"
+  },
+  {
+    "id": "emocion_enfadado",
+    "text": "Enfadado",
+    "imagePath": "",
+    "categoryId": "emociones",
+    "type": "word"
+  },
+  {
+    "id": "emocion_nervioso",
+    "text": "Nervioso",
+    "imagePath": "",
+    "categoryId": "emociones",
+    "type": "word"
+  },
+  {
+    "id": "emocion_asustado",
+    "text": "Asustado",
+    "imagePath": "",
+    "categoryId": "emociones",
+    "type": "word"
+  },
+  {
+    "id": "emocion_cansado",
+    "text": "Cansado",
+    "imagePath": "",
+    "categoryId": "emociones",
+    "type": "word"
+  },
+  {
+    "id": "emocion_bien",
+    "text": "Bien",
+    "imagePath": "",
+    "categoryId": "emociones",
+    "type": "word"
+  },
+  {
+    "id": "emocion_mal",
+    "text": "Mal",
+    "imagePath": "",
+    "categoryId": "emociones",
+    "type": "word"
+  },
+  {
+    "id": "emocion_me_gusta",
+    "text": "Me gusta",
+    "imagePath": "",
+    "categoryId": "emociones",
+    "type": "word"
+  },
+  {
+    "id": "emocion_no_me_gusta",
+    "text": "No me gusta",
+    "imagePath": "",
+    "categoryId": "emociones",
+    "type": "word"
+  },
+  {
+    "id": "emocion_quiero_descansar",
+    "text": "Quiero descansar",
+    "imagePath": "",
+    "categoryId": "emociones",
+    "type": "word"
+  },
+  {
+    "id": "emocion_necesito_calma",
+    "text": "Necesito calma",
+    "imagePath": "",
+    "categoryId": "emociones",
+    "type": "word"
+  },
+  {
+    "id": "comida_comer",
+    "text": "Comer",
+    "imagePath": "",
+    "categoryId": "comida",
+    "type": "word"
+  },
+  {
+    "id": "comida_pan",
+    "text": "Pan",
+    "imagePath": "",
+    "categoryId": "comida",
+    "type": "word"
+  },
+  {
+    "id": "comida_arroz",
+    "text": "Arroz",
+    "imagePath": "",
+    "categoryId": "comida",
+    "type": "word"
+  },
+  {
+    "id": "comida_pasta",
+    "text": "Pasta",
+    "imagePath": "",
+    "categoryId": "comida",
+    "type": "word"
+  },
+  {
+    "id": "comida_pollo",
+    "text": "Pollo",
+    "imagePath": "",
+    "categoryId": "comida",
+    "type": "word"
+  },
+  {
+    "id": "comida_pescado",
+    "text": "Pescado",
+    "imagePath": "",
+    "categoryId": "comida",
+    "type": "word"
+  },
+  {
+    "id": "comida_fruta",
+    "text": "Fruta",
+    "imagePath": "",
+    "categoryId": "comida",
+    "type": "word"
+  },
+  {
+    "id": "comida_yogur",
+    "text": "Yogur",
+    "imagePath": "",
+    "categoryId": "comida",
+    "type": "word"
+  },
+  {
+    "id": "comida_galleta",
+    "text": "Galleta",
+    "imagePath": "",
+    "categoryId": "comida",
+    "type": "word"
+  },
+  {
+    "id": "comida_bocadillo",
+    "text": "Bocadillo",
+    "imagePath": "",
+    "categoryId": "comida",
+    "type": "word"
+  },
+  {
+    "id": "comida_mas",
+    "text": "Más",
+    "imagePath": "",
+    "categoryId": "comida",
+    "type": "word"
+  },
+  {
+    "id": "comida_terminado",
+    "text": "Terminado",
+    "imagePath": "",
+    "categoryId": "comida",
+    "type": "word"
+  },
+  {
+    "id": "bebida_beber",
+    "text": "Beber",
+    "imagePath": "",
+    "categoryId": "bebida",
+    "type": "word"
+  },
+  {
+    "id": "bebida_agua",
+    "text": "Agua",
+    "imagePath": "",
+    "categoryId": "bebida",
+    "type": "word"
+  },
+  {
+    "id": "bebida_leche",
+    "text": "Leche",
+    "imagePath": "",
+    "categoryId": "bebida",
+    "type": "word"
+  },
+  {
+    "id": "bebida_zumo",
+    "text": "Zumo",
+    "imagePath": "",
+    "categoryId": "bebida",
+    "type": "word"
+  },
+  {
+    "id": "bebida_batido",
+    "text": "Batido",
+    "imagePath": "",
+    "categoryId": "bebida",
+    "type": "word"
+  },
+  {
+    "id": "bebida_caliente",
+    "text": "Caliente",
+    "imagePath": "",
+    "categoryId": "bebida",
+    "type": "word"
+  },
+  {
+    "id": "bebida_frio",
+    "text": "Frío",
+    "imagePath": "",
+    "categoryId": "bebida",
+    "type": "word"
+  },
+  {
+    "id": "bebida_mas",
+    "text": "Más",
+    "imagePath": "",
+    "categoryId": "bebida",
+    "type": "word"
+  },
+  {
+    "id": "salud_me_duele",
+    "text": "Me duele",
+    "imagePath": "",
+    "categoryId": "salud",
+    "type": "word"
+  },
+  {
+    "id": "salud_cabeza",
+    "text": "Cabeza",
+    "imagePath": "",
+    "categoryId": "salud",
+    "type": "word"
+  },
+  {
+    "id": "salud_barriga",
+    "text": "Barriga",
+    "imagePath": "",
+    "categoryId": "salud",
+    "type": "word"
+  },
+  {
+    "id": "salud_boca",
+    "text": "Boca",
+    "imagePath": "",
+    "categoryId": "salud",
+    "type": "word"
+  },
+  {
+    "id": "salud_garganta",
+    "text": "Garganta",
+    "imagePath": "",
+    "categoryId": "salud",
+    "type": "word"
+  },
+  {
+    "id": "salud_mano",
+    "text": "Mano",
+    "imagePath": "",
+    "categoryId": "salud",
+    "type": "word"
+  },
+  {
+    "id": "salud_pie",
+    "text": "Pie",
+    "imagePath": "",
+    "categoryId": "salud",
+    "type": "word"
+  },
+  {
+    "id": "salud_mareado",
+    "text": "Mareado",
+    "imagePath": "",
+    "categoryId": "salud",
+    "type": "word"
+  },
+  {
+    "id": "salud_enfermo",
+    "text": "Enfermo",
+    "imagePath": "",
+    "categoryId": "salud",
+    "type": "word"
+  },
+  {
+    "id": "salud_medico",
+    "text": "Médico",
+    "imagePath": "",
+    "categoryId": "salud",
+    "type": "word"
+  },
+  {
+    "id": "salud_medicina",
+    "text": "Medicina",
+    "imagePath": "",
+    "categoryId": "salud",
+    "type": "word"
+  },
+  {
+    "id": "salud_descansar",
+    "text": "Descansar",
+    "imagePath": "",
+    "categoryId": "salud",
+    "type": "word"
+  },
+  {
+    "id": "casa_habitacion",
+    "text": "Habitación",
+    "imagePath": "",
+    "categoryId": "casa",
+    "type": "word"
+  },
+  {
+    "id": "casa_cocina",
+    "text": "Cocina",
+    "imagePath": "",
+    "categoryId": "casa",
+    "type": "word"
+  },
+  {
+    "id": "casa_bano",
+    "text": "Baño",
+    "imagePath": "",
+    "categoryId": "casa",
+    "type": "word"
+  },
+  {
+    "id": "casa_salon",
+    "text": "Salón",
+    "imagePath": "",
+    "categoryId": "casa",
+    "type": "word"
+  },
+  {
+    "id": "casa_cama",
+    "text": "Cama",
+    "imagePath": "",
+    "categoryId": "casa",
+    "type": "word"
+  },
+  {
+    "id": "casa_ducha",
+    "text": "Ducha",
+    "imagePath": "",
+    "categoryId": "casa",
+    "type": "word"
+  },
+  {
+    "id": "casa_luz",
+    "text": "Luz",
+    "imagePath": "",
+    "categoryId": "casa",
+    "type": "word"
+  },
+  {
+    "id": "casa_puerta",
+    "text": "Puerta",
+    "imagePath": "",
+    "categoryId": "casa",
+    "type": "word"
+  },
+  {
+    "id": "casa_abrir",
+    "text": "Abrir",
+    "imagePath": "",
+    "categoryId": "casa",
+    "type": "word"
+  },
+  {
+    "id": "casa_cerrar",
+    "text": "Cerrar",
+    "imagePath": "",
+    "categoryId": "casa",
+    "type": "word"
+  },
+  {
+    "id": "colegio_profesor",
+    "text": "Profesor",
+    "imagePath": "",
+    "categoryId": "colegio",
+    "type": "word"
+  },
+  {
+    "id": "colegio_clase",
+    "text": "Clase",
+    "imagePath": "",
+    "categoryId": "colegio",
+    "type": "word"
+  },
+  {
+    "id": "colegio_recreo",
+    "text": "Recreo",
+    "imagePath": "",
+    "categoryId": "colegio",
+    "type": "word"
+  },
+  {
+    "id": "colegio_tarea",
+    "text": "Tarea",
+    "imagePath": "",
+    "categoryId": "colegio",
+    "type": "word"
+  },
+  {
+    "id": "colegio_libro",
+    "text": "Libro",
+    "imagePath": "",
+    "categoryId": "colegio",
+    "type": "word"
+  },
+  {
+    "id": "colegio_lapiz",
+    "text": "Lápiz",
+    "imagePath": "",
+    "categoryId": "colegio",
+    "type": "word"
+  },
+  {
+    "id": "colegio_mochila",
+    "text": "Mochila",
+    "imagePath": "",
+    "categoryId": "colegio",
+    "type": "word"
+  },
+  {
+    "id": "colegio_companero",
+    "text": "Compañero",
+    "imagePath": "",
+    "categoryId": "colegio",
+    "type": "word"
+  },
+  {
+    "id": "colegio_no_entiendo",
+    "text": "No entiendo",
+    "imagePath": "",
+    "categoryId": "colegio",
+    "type": "word"
+  },
+  {
+    "id": "colegio_he_terminado",
+    "text": "He terminado",
+    "imagePath": "",
+    "categoryId": "colegio",
+    "type": "word"
+  },
+  {
+    "id": "colegio_necesito_ayuda",
+    "text": "Necesito ayuda",
+    "imagePath": "",
+    "categoryId": "colegio",
+    "type": "word"
+  },
+  {
+    "id": "colegio_quiero_descansar",
+    "text": "Quiero descansar",
+    "imagePath": "",
+    "categoryId": "colegio",
+    "type": "word"
+  },
+  {
+    "id": "trabajo_trabajar",
+    "text": "Trabajar",
+    "imagePath": "",
+    "categoryId": "trabajo",
+    "type": "word"
+  },
+  {
+    "id": "trabajo_descanso",
+    "text": "Descanso",
+    "imagePath": "",
+    "categoryId": "trabajo",
+    "type": "word"
+  },
+  {
+    "id": "trabajo_jefe",
+    "text": "Jefe",
+    "imagePath": "",
+    "categoryId": "trabajo",
+    "type": "word"
+  },
+  {
+    "id": "trabajo_companero",
+    "text": "Compañero",
+    "imagePath": "",
+    "categoryId": "trabajo",
+    "type": "word"
+  },
+  {
+    "id": "trabajo_reunion",
+    "text": "Reunión",
+    "imagePath": "",
+    "categoryId": "trabajo",
+    "type": "word"
+  },
+  {
+    "id": "trabajo_tarea",
+    "text": "Tarea",
+    "imagePath": "",
+    "categoryId": "trabajo",
+    "type": "word"
+  },
+  {
+    "id": "trabajo_ayuda",
+    "text": "Ayuda",
+    "imagePath": "",
+    "categoryId": "trabajo",
+    "type": "word"
+  },
+  {
+    "id": "trabajo_no_entiendo",
+    "text": "No entiendo",
+    "imagePath": "",
+    "categoryId": "trabajo",
+    "type": "word"
+  },
+  {
+    "id": "trabajo_he_terminado",
+    "text": "He terminado",
+    "imagePath": "",
+    "categoryId": "trabajo",
+    "type": "word"
+  },
+  {
+    "id": "trabajo_necesito_descanso",
+    "text": "Necesito descanso",
+    "imagePath": "",
+    "categoryId": "trabajo",
+    "type": "word"
+  },
+  {
+    "id": "lugar_casa",
+    "text": "Casa",
+    "imagePath": "",
+    "categoryId": "lugares",
+    "type": "word"
+  },
+  {
+    "id": "lugar_colegio",
+    "text": "Colegio",
+    "imagePath": "",
+    "categoryId": "lugares",
+    "type": "word"
+  },
+  {
+    "id": "lugar_trabajo",
+    "text": "Trabajo",
+    "imagePath": "",
+    "categoryId": "lugares",
+    "type": "word"
+  },
+  {
+    "id": "lugar_parque",
+    "text": "Parque",
+    "imagePath": "",
+    "categoryId": "lugares",
+    "type": "word"
+  },
+  {
+    "id": "lugar_tienda",
+    "text": "Tienda",
+    "imagePath": "",
+    "categoryId": "lugares",
+    "type": "word"
+  },
+  {
+    "id": "lugar_medico",
+    "text": "Médico",
+    "imagePath": "",
+    "categoryId": "lugares",
+    "type": "word"
+  },
+  {
+    "id": "lugar_bano",
+    "text": "Baño",
+    "imagePath": "",
+    "categoryId": "lugares",
+    "type": "word"
+  },
+  {
+    "id": "lugar_calle",
+    "text": "Calle",
+    "imagePath": "",
+    "categoryId": "lugares",
+    "type": "word"
+  },
+  {
+    "id": "lugar_coche",
+    "text": "Coche",
+    "imagePath": "",
+    "categoryId": "lugares",
+    "type": "word"
+  },
+  {
+    "id": "lugar_autobus",
+    "text": "Autobús",
+    "imagePath": "",
+    "categoryId": "lugares",
+    "type": "word"
+  },
+  {
+    "id": "objeto_tablet",
+    "text": "Tablet",
+    "imagePath": "",
+    "categoryId": "objetos",
+    "type": "word"
+  },
+  {
+    "id": "objeto_telefono",
+    "text": "Teléfono",
+    "imagePath": "",
+    "categoryId": "objetos",
+    "type": "word"
+  },
+  {
+    "id": "objeto_juguete",
+    "text": "Juguete",
+    "imagePath": "",
+    "categoryId": "objetos",
+    "type": "word"
+  },
+  {
+    "id": "objeto_pelota",
+    "text": "Pelota",
+    "imagePath": "",
+    "categoryId": "objetos",
+    "type": "word"
+  },
+  {
+    "id": "objeto_mando",
+    "text": "Mando",
+    "imagePath": "",
+    "categoryId": "objetos",
+    "type": "word"
+  },
+  {
+    "id": "objeto_llaves",
+    "text": "Llaves",
+    "imagePath": "",
+    "categoryId": "objetos",
+    "type": "word"
+  },
+  {
+    "id": "objeto_ropa",
+    "text": "Ropa",
+    "imagePath": "",
+    "categoryId": "objetos",
+    "type": "word"
+  },
+  {
+    "id": "objeto_zapatos",
+    "text": "Zapatos",
+    "imagePath": "",
+    "categoryId": "objetos",
+    "type": "word"
+  },
+  {
+    "id": "objeto_mochila",
+    "text": "Mochila",
+    "imagePath": "",
+    "categoryId": "objetos",
+    "type": "word"
+  },
+  {
+    "id": "objeto_dinero",
+    "text": "Dinero",
+    "imagePath": "",
+    "categoryId": "objetos",
+    "type": "word"
+  },
+  {
+    "id": "persona_abuelo",
+    "text": "Abuelo",
+    "imagePath": "",
+    "categoryId": "personas",
+    "type": "word"
+  },
+  {
+    "id": "persona_abuela",
+    "text": "Abuela",
+    "imagePath": "",
+    "categoryId": "personas",
+    "type": "word"
+  },
+  {
+    "id": "persona_hermano",
+    "text": "Hermano",
+    "imagePath": "",
+    "categoryId": "personas",
+    "type": "word"
+  },
+  {
+    "id": "persona_hermana",
+    "text": "Hermana",
+    "imagePath": "",
+    "categoryId": "personas",
+    "type": "word"
+  },
+  {
+    "id": "persona_medico",
+    "text": "Médico",
+    "imagePath": "",
+    "categoryId": "personas",
+    "type": "word"
+  },
+  {
+    "id": "persona_profesor",
+    "text": "Profesor",
+    "imagePath": "",
+    "categoryId": "personas",
+    "type": "word"
+  },
+  {
+    "id": "persona_cuidador",
+    "text": "Cuidador",
+    "imagePath": "",
+    "categoryId": "personas",
+    "type": "word"
+  },
+  {
+    "id": "persona_amigo",
+    "text": "Amigo",
+    "imagePath": "",
+    "categoryId": "personas",
+    "type": "word"
   }
 ]
