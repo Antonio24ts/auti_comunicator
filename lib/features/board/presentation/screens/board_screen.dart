@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'dart:async';
 
 import '../../../../data/models/pictogram.dart';
 import '../../../../data/repositories/pictogram_repository.dart';
@@ -27,7 +28,7 @@ class _BoardScreenState extends State<BoardScreen> {
   @override
   void initState() {
     super.initState();
-    _speechService.init();
+    unawaited(_speechService.init());
   }
 
   int _getCrossAxisCount(double width) {
@@ -204,7 +205,7 @@ class _BoardScreenState extends State<BoardScreen> {
       _selectedWords.add(word);
     });
 
-    _speechService.speak(word);
+    _speechService.speakWord(word);
   }
 
   void _deleteLastWord() {

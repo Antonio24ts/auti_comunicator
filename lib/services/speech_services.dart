@@ -1,9 +1,12 @@
+import 'dart:async';
+
 import 'package:flutter_tts/flutter_tts.dart';
 
 class SpeechService {
   final FlutterTts _flutterTts = FlutterTts();
 
   bool _isInitialized = false;
+  int _speakRequestId = 0;
 
   Future<void> init() async {
     if (_isInitialized) {
@@ -11,18 +14,17 @@ class SpeechService {
     }
 
     await _flutterTts.setLanguage('es-ES');
-    await _flutterTts.setSpeechRate(0.45);
+    await _flutterTts.setSpeechRate(0.50);
     await _flutterTts.setPitch(1.0);
     await _flutterTts.setVolume(1.0);
 
-    // Importante:
-    // false = no bloquea esperando a que termine cada palabra.
+    // No queremos bloquear la app esperando a que termine cada palabra.
     await _flutterTts.awaitSpeakCompletion(false);
 
     _isInitialized = true;
   }
 
-  Future<void> speak(String text) async {
+  Future<void> speakWord(String text) async {
     final cleanText = text.trim();
 
     if (cleanText.isEmpty) {
@@ -33,11 +35,14 @@ class SpeechService {
       await init();
     }
 
-    // Corta la palabra anterior si el usuario pulsa otra rápido.
+    final currentRequestId = ++_speakRequestId;
+
     await _flutterTts.stop();
 
-    // Pequeña pausa para evitar que algunos dispositivos ignoren el nuevo speak.
-    await Future.delayed(const Duration(milliseconds: 40));
+    // Evita que una pulsación antigua hable después de una nueva.
+    if (currentRequestId != _speakRequestId) {
+      return;
+    }
 
     await _flutterTts.speak(cleanText);
   }
@@ -53,13 +58,22 @@ class SpeechService {
       await init();
     }
 
+    final currentRequestId = ++_speakRequestId;
+
     await _flutterTts.stop();
-    await Future.delayed(const Duration(milliseconds: 40));
+
+    // Para frases completas sí dejamos un micro-respiro al motor.
+    await Future.delayed(const Duration(milliseconds: 20));
+
+    if (currentRequestId != _speakRequestId) {
+      return;
+    }
 
     await _flutterTts.speak(cleanText);
   }
 
   Future<void> stop() async {
+    _speakRequestId++;
     await _flutterTts.stop();
   }
 }
