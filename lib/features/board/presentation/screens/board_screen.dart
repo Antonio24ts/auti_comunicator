@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../data/models/pictogram.dart';
 import '../../../../data/repositories/pictogram_repository.dart';
 import '../../../../services/speech_services.dart';
 import '../widgets/phrase_bar.dart';
@@ -14,7 +15,12 @@ class BoardScreen extends StatefulWidget {
 
 class _BoardScreenState extends State<BoardScreen> {
   final SpeechService _speechService = SpeechService();
+  final PictogramRepository _repository = PictogramRepository();
+
   final List<String> _selectedWords = [];
+  final List<String> _categoryHistory = [];
+
+  String _currentCategoryId = PictogramRepository.homeCategoryId;
 
   @override
   void initState() {
@@ -23,27 +29,56 @@ class _BoardScreenState extends State<BoardScreen> {
   }
 
   int _getCrossAxisCount(double width) {
-    if (width >= 1000) {
-      return 5;
-    }
-
-    if (width >= 700) {
-      return 4;
-    }
-
-    if (width >= 500) {
-      return 3;
-    }
-
-    return 2;
+    return 8;
   }
 
-  void _addWord(String word) {
+  void _handlePictogramTap(Pictogram pictogram) {
+    if (pictogram.isCategory) {
+      _openCategory(pictogram);
+      return;
+    }
+
+    _addWord(pictogram.text);
+  }
+
+  void _openCategory(Pictogram pictogram) {
+    final targetCategoryId = pictogram.targetCategoryId;
+
+    if (targetCategoryId == null || targetCategoryId.isEmpty) {
+      return;
+    }
+
+    setState(() {
+      _categoryHistory.add(_currentCategoryId);
+      _currentCategoryId = targetCategoryId;
+    });
+  }
+
+  void _goHome() {
+    setState(() {
+      _currentCategoryId = PictogramRepository.homeCategoryId;
+      _categoryHistory.clear();
+    });
+  }
+
+  void _goBack() {
+    if (_categoryHistory.isEmpty) {
+      return;
+    }
+
+    setState(() {
+      _currentCategoryId = _categoryHistory.removeLast();
+    });
+  }
+
+  Future<void> _addWord(String word) async {
     setState(() {
       _selectedWords.add(word);
     });
 
-    _speechService.speak(word);
+    debugPrint('[BOARD] Palabra pulsada: $word');
+
+    await _speechService.speak(word);
   }
 
   void _deleteLastWord() {
@@ -56,18 +91,32 @@ class _BoardScreenState extends State<BoardScreen> {
     });
   }
 
-  void _speakPhrase() {
+  void _clearAllWords() {
     if (_selectedWords.isEmpty) {
       return;
     }
 
+    setState(() {
+      _selectedWords.clear();
+    });
+  }
+
+  Future<void> _speakPhrase() async {
+    if (_selectedWords.isEmpty) {
+      debugPrint('[BOARD] No hay frase para hablar');
+      return;
+    }
+
     final phrase = _selectedWords.join(' ');
-    _speechService.speak(phrase);
+
+    debugPrint('[BOARD] Hablando frase completa: $phrase');
+
+    await _speechService.speak(phrase);
   }
 
   @override
   Widget build(BuildContext context) {
-    final pictograms = PictogramRepository().getDefaultPictograms();
+    final pictograms = _repository.getPictogramsByCategory(_currentCategoryId);
 
     return Scaffold(
       body: SafeArea(
@@ -75,39 +124,41 @@ class _BoardScreenState extends State<BoardScreen> {
           children: [
             PhraseBar(
               words: _selectedWords,
+              onHome: _goHome,
+              onBack: _goBack,
               onDeleteLast: _deleteLastWord,
+              onClearAll: _clearAllWords,
               onSpeakPhrase: _speakPhrase,
+              canGoBack: _categoryHistory.isNotEmpty,
             ),
             Expanded(
-              child: LayoutBuilder(
-                builder: (context, constraints) {
-                  final crossAxisCount = _getCrossAxisCount(
-                    constraints.maxWidth,
-                  );
+              child: Padding(
+                padding: const EdgeInsets.all(8),
+                child: LayoutBuilder(
+                  builder: (context, constraints) {
+                    final crossAxisCount = _getCrossAxisCount(
+                      constraints.maxWidth,
+                    );
 
-                  return Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: GridView.builder(
+                    return GridView.builder(
                       itemCount: pictograms.length,
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: crossAxisCount,
-                        mainAxisSpacing: 16,
-                        crossAxisSpacing: 16,
-                        childAspectRatio: 1.4,
+                        mainAxisSpacing: 8,
+                        crossAxisSpacing: 8,
+                        childAspectRatio: 1.05,
                       ),
                       itemBuilder: (context, index) {
                         final pictogram = pictograms[index];
 
                         return PictogramCard(
                           pictogram: pictogram,
-                          onTap: () {
-                            _addWord(pictogram.text);
-                          },
+                          onTap: () => _handlePictogramTap(pictogram),
                         );
                       },
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               ),
             ),
           ],
