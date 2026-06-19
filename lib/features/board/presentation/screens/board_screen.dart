@@ -250,9 +250,7 @@ class _BoardScreenState extends State<BoardScreen> {
         future: _loadPictogramsFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState != ConnectionState.done) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
+            return const Center(child: CircularProgressIndicator());
           }
 
           if (snapshot.hasError) {
@@ -262,10 +260,7 @@ class _BoardScreenState extends State<BoardScreen> {
                 child: Text(
                   'Error cargando pictogramas:\n${snapshot.error}',
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontSize: 20,
-                    color: Colors.red,
-                  ),
+                  style: const TextStyle(fontSize: 20, color: Colors.red),
                 ),
               ),
             );
@@ -316,9 +311,7 @@ class _BoardScreenState extends State<BoardScreen> {
                   ),
                 ),
               ),
-              BottomActionBar(
-                onSettingsTap: _openSettings,
-              ),
+              BottomActionBar(onSettingsTap: _openSettings),
             ],
           );
         },

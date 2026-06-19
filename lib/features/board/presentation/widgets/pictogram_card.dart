@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../data/models/pictogram.dart';
+import 'package:flutter/foundation.dart';
 
 class PictogramCard extends StatelessWidget {
   final Pictogram pictogram;
@@ -14,11 +15,10 @@ class PictogramCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final backgroundColor = _getBackgroundColor();
-    final icon = _getIcon();
+    final hasImage = pictogram.imagePath.trim().isNotEmpty;
 
     return Material(
-      color: backgroundColor,
+      color: _getBackgroundColor(),
       elevation: 2,
       borderRadius: BorderRadius.circular(10),
       child: InkWell(
@@ -29,17 +29,31 @@ class PictogramCard extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              if (!pictogram.isLetter) ...[
-                Icon(icon, size: 32),
-                const SizedBox(height: 6),
-              ],
+              if (hasImage)
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 4),
+                    child: Image.asset(
+                      pictogram.imagePath,
+                      fit: BoxFit.contain,
+                      errorBuilder: (context, error, stackTrace) {
+                        debugPrint('ERROR cargando imagen: ${pictogram.imagePath}');
+                        debugPrint('Detalle: $error');
+
+                        return _FallbackIcon(pictogram: pictogram);
+                      },
+                    ),
+                  ),
+                )
+              else if (!pictogram.isLetter)
+                Expanded(child: _FallbackIcon(pictogram: pictogram)),
               Text(
                 pictogram.text,
                 textAlign: TextAlign.center,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
-                  fontSize: pictogram.isLetter ? 28 : 18,
+                  fontSize: pictogram.isLetter ? 34 : 18,
                   fontWeight: FontWeight.w800,
                 ),
               ),
@@ -65,10 +79,21 @@ class PictogramCard extends StatelessWidget {
 
     return Colors.white;
   }
+}
+
+class _FallbackIcon extends StatelessWidget {
+  final Pictogram pictogram;
+
+  const _FallbackIcon({required this.pictogram});
+
+  @override
+  Widget build(BuildContext context) {
+    return Icon(_getIcon(), size: pictogram.isLetter ? 24 : 40);
+  }
 
   IconData _getIcon() {
     if (pictogram.isCategory) {
-      return Icons.add;
+      return Icons.folder;
     }
 
     if (pictogram.isLetter) {

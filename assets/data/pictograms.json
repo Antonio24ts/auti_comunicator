@@ -18,7 +18,7 @@
   {
     "id": "saludos",
     "text": "Saludos",
-    "imagePath": "",
+    "imagePath": "assets/images/categories/saludo.png",
     "categoryId": "home",
     "type": "category",
     "targetCategoryId": "saludos"
@@ -115,14 +115,14 @@
   {
     "id": "hola",
     "text": "Hola",
-    "imagePath": "",
+    "imagePath": "assets/images/saludos/hola.png",
     "categoryId": "saludos",
     "type": "word"
   },
   {
     "id": "adios",
     "text": "Adiós",
-    "imagePath": "",
+    "imagePath": "assets/images/saludos/adios.png",
     "categoryId": "saludos",
     "type": "word"
   },
