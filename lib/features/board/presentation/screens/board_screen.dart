@@ -71,14 +71,12 @@ class _BoardScreenState extends State<BoardScreen> {
     });
   }
 
-  Future<void> _addWord(String word) async {
+  void _addWord(String word) {
     setState(() {
       _selectedWords.add(word);
     });
 
-    debugPrint('[BOARD] Palabra pulsada: $word');
-
-    await _speechService.speak(word);
+    _speechService.speak(word);
   }
 
   void _deleteLastWord() {
@@ -103,15 +101,12 @@ class _BoardScreenState extends State<BoardScreen> {
 
   Future<void> _speakPhrase() async {
     if (_selectedWords.isEmpty) {
-      debugPrint('[BOARD] No hay frase para hablar');
       return;
     }
 
     final phrase = _selectedWords.join(' ');
 
-    debugPrint('[BOARD] Hablando frase completa: $phrase');
-
-    await _speechService.speak(phrase);
+    await _speechService.speakPhrase(phrase);
   }
 
   @override

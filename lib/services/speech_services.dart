@@ -14,7 +14,10 @@ class SpeechService {
     await _flutterTts.setSpeechRate(0.45);
     await _flutterTts.setPitch(1.0);
     await _flutterTts.setVolume(1.0);
-    await _flutterTts.awaitSpeakCompletion(true);
+
+    // Importante:
+    // false = no bloquea esperando a que termine cada palabra.
+    await _flutterTts.awaitSpeakCompletion(false);
 
     _isInitialized = true;
   }
@@ -29,6 +32,29 @@ class SpeechService {
     if (!_isInitialized) {
       await init();
     }
+
+    // Corta la palabra anterior si el usuario pulsa otra rápido.
+    await _flutterTts.stop();
+
+    // Pequeña pausa para evitar que algunos dispositivos ignoren el nuevo speak.
+    await Future.delayed(const Duration(milliseconds: 40));
+
+    await _flutterTts.speak(cleanText);
+  }
+
+  Future<void> speakPhrase(String text) async {
+    final cleanText = text.trim();
+
+    if (cleanText.isEmpty) {
+      return;
+    }
+
+    if (!_isInitialized) {
+      await init();
+    }
+
+    await _flutterTts.stop();
+    await Future.delayed(const Duration(milliseconds: 40));
 
     await _flutterTts.speak(cleanText);
   }
