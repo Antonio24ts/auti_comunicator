@@ -1,6 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'dart:async';
 
 import '../../../../data/models/pictogram.dart';
 import '../../../../data/repositories/pictogram_repository.dart';
@@ -20,6 +21,8 @@ class _BoardScreenState extends State<BoardScreen> {
   final SpeechService _speechService = SpeechService();
   final PictogramRepository _repository = PictogramRepository();
 
+  late final Future<void> _loadPictogramsFuture;
+
   final List<String> _selectedWords = [];
   final List<String> _categoryHistory = [];
 
@@ -28,6 +31,8 @@ class _BoardScreenState extends State<BoardScreen> {
   @override
   void initState() {
     super.initState();
+
+    _loadPictogramsFuture = _repository.load();
     unawaited(_speechService.init());
   }
 
@@ -240,52 +245,83 @@ class _BoardScreenState extends State<BoardScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final pictograms = _repository.getPictogramsByCategory(_currentCategoryId);
-
     return Scaffold(
-      body: Column(
-        children: [
-          PhraseBar(
-            words: _selectedWords,
-            onHome: _goHome,
-            onBack: _goBack,
-            onDeleteLast: _deleteLastWord,
-            onClearAll: _clearAllWords,
-            onSpeakPhrase: _speakPhrase,
-            canGoBack: _categoryHistory.isNotEmpty,
-          ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(8),
-              child: LayoutBuilder(
-                builder: (context, constraints) {
-                  final crossAxisCount = _getCrossAxisCount(
-                    constraints.maxWidth,
-                  );
+      body: FutureBuilder<void>(
+        future: _loadPictogramsFuture,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState != ConnectionState.done) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
 
-                  return GridView.builder(
-                    itemCount: pictograms.length,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: crossAxisCount,
-                      mainAxisSpacing: 8,
-                      crossAxisSpacing: 8,
-                      childAspectRatio: 1.45,
-                    ),
-                    itemBuilder: (context, index) {
-                      final pictogram = pictograms[index];
+          if (snapshot.hasError) {
+            return Center(
+              child: Padding(
+                padding: const EdgeInsets.all(24),
+                child: Text(
+                  'Error cargando pictogramas:\n${snapshot.error}',
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontSize: 20,
+                    color: Colors.red,
+                  ),
+                ),
+              ),
+            );
+          }
 
-                      return PictogramCard(
-                        pictogram: pictogram,
-                        onTap: () => _handlePictogramTap(pictogram),
+          final pictograms = _repository.getPictogramsByCategory(
+            _currentCategoryId,
+          );
+
+          return Column(
+            children: [
+              PhraseBar(
+                words: _selectedWords,
+                onHome: _goHome,
+                onBack: _goBack,
+                onDeleteLast: _deleteLastWord,
+                onClearAll: _clearAllWords,
+                onSpeakPhrase: _speakPhrase,
+                canGoBack: _categoryHistory.isNotEmpty,
+              ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: LayoutBuilder(
+                    builder: (context, constraints) {
+                      final crossAxisCount = _getCrossAxisCount(
+                        constraints.maxWidth,
+                      );
+
+                      return GridView.builder(
+                        itemCount: pictograms.length,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: crossAxisCount,
+                          mainAxisSpacing: 8,
+                          crossAxisSpacing: 8,
+                          childAspectRatio: 1.45,
+                        ),
+                        itemBuilder: (context, index) {
+                          final pictogram = pictograms[index];
+
+                          return PictogramCard(
+                            pictogram: pictogram,
+                            onTap: () => _handlePictogramTap(pictogram),
+                          );
+                        },
                       );
                     },
-                  );
-                },
+                  ),
+                ),
               ),
-            ),
-          ),
-          BottomActionBar(onSettingsTap: _openSettings),
-        ],
+              BottomActionBar(
+                onSettingsTap: _openSettings,
+              ),
+            ],
+          );
+        },
       ),
     );
   }

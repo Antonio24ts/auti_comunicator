@@ -1,0 +1,512 @@
+[
+  {
+    "id": "quien",
+    "text": "¿Quién?",
+    "imagePath": "",
+    "categoryId": "home",
+    "type": "category",
+    "targetCategoryId": "personas"
+  },
+  {
+    "id": "que",
+    "text": "¿Qué?",
+    "imagePath": "",
+    "categoryId": "home",
+    "type": "category",
+    "targetCategoryId": "cosas"
+  },
+  {
+    "id": "saludos",
+    "text": "Saludos",
+    "imagePath": "",
+    "categoryId": "home",
+    "type": "category",
+    "targetCategoryId": "saludos"
+  },
+  {
+    "id": "necesidades",
+    "text": "Necesidades",
+    "imagePath": "",
+    "categoryId": "home",
+    "type": "category",
+    "targetCategoryId": "necesidades"
+  },
+  {
+    "id": "acciones",
+    "text": "Acciones",
+    "imagePath": "",
+    "categoryId": "home",
+    "type": "category",
+    "targetCategoryId": "acciones"
+  },
+  {
+    "id": "si",
+    "text": "Sí",
+    "imagePath": "",
+    "categoryId": "home",
+    "type": "word"
+  },
+  {
+    "id": "no",
+    "text": "No",
+    "imagePath": "",
+    "categoryId": "home",
+    "type": "word"
+  },
+  {
+    "id": "ayuda",
+    "text": "Ayuda",
+    "imagePath": "",
+    "categoryId": "home",
+    "type": "word"
+  },
+  {
+    "id": "alfabeto",
+    "text": "Alfabeto",
+    "imagePath": "",
+    "categoryId": "home",
+    "type": "category",
+    "targetCategoryId": "alfabeto"
+  },
+
+  {
+    "id": "yo",
+    "text": "Yo",
+    "imagePath": "",
+    "categoryId": "personas",
+    "type": "word"
+  },
+  {
+    "id": "tu",
+    "text": "Tú",
+    "imagePath": "",
+    "categoryId": "personas",
+    "type": "word"
+  },
+  {
+    "id": "mama",
+    "text": "Mamá",
+    "imagePath": "",
+    "categoryId": "personas",
+    "type": "word"
+  },
+  {
+    "id": "papa",
+    "text": "Papá",
+    "imagePath": "",
+    "categoryId": "personas",
+    "type": "word"
+  },
+  {
+    "id": "profesor",
+    "text": "Profesor",
+    "imagePath": "",
+    "categoryId": "personas",
+    "type": "word"
+  },
+  {
+    "id": "amigo",
+    "text": "Amigo",
+    "imagePath": "",
+    "categoryId": "personas",
+    "type": "word"
+  },
+
+  {
+    "id": "hola",
+    "text": "Hola",
+    "imagePath": "",
+    "categoryId": "saludos",
+    "type": "word"
+  },
+  {
+    "id": "adios",
+    "text": "Adiós",
+    "imagePath": "",
+    "categoryId": "saludos",
+    "type": "word"
+  },
+  {
+    "id": "buenos_dias",
+    "text": "Buenos días",
+    "imagePath": "",
+    "categoryId": "saludos",
+    "type": "word"
+  },
+  {
+    "id": "buenas_tardes",
+    "text": "Buenas tardes",
+    "imagePath": "",
+    "categoryId": "saludos",
+    "type": "word"
+  },
+  {
+    "id": "buenas_noches",
+    "text": "Buenas noches",
+    "imagePath": "",
+    "categoryId": "saludos",
+    "type": "word"
+  },
+  {
+    "id": "por_favor",
+    "text": "Por favor",
+    "imagePath": "",
+    "categoryId": "saludos",
+    "type": "word"
+  },
+  {
+    "id": "gracias",
+    "text": "Gracias",
+    "imagePath": "",
+    "categoryId": "saludos",
+    "type": "word"
+  },
+
+  {
+    "id": "quiero",
+    "text": "Quiero",
+    "imagePath": "",
+    "categoryId": "necesidades",
+    "type": "word"
+  },
+  {
+    "id": "agua",
+    "text": "Agua",
+    "imagePath": "",
+    "categoryId": "necesidades",
+    "type": "word"
+  },
+  {
+    "id": "comer",
+    "text": "Comer",
+    "imagePath": "",
+    "categoryId": "necesidades",
+    "type": "word"
+  },
+  {
+    "id": "bano",
+    "text": "Baño",
+    "imagePath": "",
+    "categoryId": "necesidades",
+    "type": "word"
+  },
+  {
+    "id": "dormir",
+    "text": "Dormir",
+    "imagePath": "",
+    "categoryId": "necesidades",
+    "type": "word"
+  },
+  {
+    "id": "descansar",
+    "text": "Descansar",
+    "imagePath": "",
+    "categoryId": "necesidades",
+    "type": "word"
+  },
+
+  {
+    "id": "ir",
+    "text": "Ir",
+    "imagePath": "",
+    "categoryId": "acciones",
+    "type": "word"
+  },
+  {
+    "id": "venir",
+    "text": "Venir",
+    "imagePath": "",
+    "categoryId": "acciones",
+    "type": "word"
+  },
+  {
+    "id": "dar",
+    "text": "Dar",
+    "imagePath": "",
+    "categoryId": "acciones",
+    "type": "word"
+  },
+  {
+    "id": "hacer",
+    "text": "Hacer",
+    "imagePath": "",
+    "categoryId": "acciones",
+    "type": "word"
+  },
+  {
+    "id": "ver",
+    "text": "Ver",
+    "imagePath": "",
+    "categoryId": "acciones",
+    "type": "word"
+  },
+  {
+    "id": "escuchar",
+    "text": "Escuchar",
+    "imagePath": "",
+    "categoryId": "acciones",
+    "type": "word"
+  },
+
+  {
+    "id": "juguete",
+    "text": "Juguete",
+    "imagePath": "",
+    "categoryId": "cosas",
+    "type": "word"
+  },
+  {
+    "id": "pelota",
+    "text": "Pelota",
+    "imagePath": "",
+    "categoryId": "cosas",
+    "type": "word"
+  },
+  {
+    "id": "telefono",
+    "text": "Teléfono",
+    "imagePath": "",
+    "categoryId": "cosas",
+    "type": "word"
+  },
+  {
+    "id": "tablet",
+    "text": "Tablet",
+    "imagePath": "",
+    "categoryId": "cosas",
+    "type": "word"
+  },
+
+  {
+    "id": "letter_a",
+    "text": "A",
+    "imagePath": "",
+    "categoryId": "alfabeto",
+    "type": "letter",
+    "value": "a"
+  },
+  {
+    "id": "letter_b",
+    "text": "B",
+    "imagePath": "",
+    "categoryId": "alfabeto",
+    "type": "letter",
+    "value": "b"
+  },
+  {
+    "id": "letter_c",
+    "text": "C",
+    "imagePath": "",
+    "categoryId": "alfabeto",
+    "type": "letter",
+    "value": "c"
+  },
+  {
+    "id": "letter_d",
+    "text": "D",
+    "imagePath": "",
+    "categoryId": "alfabeto",
+    "type": "letter",
+    "value": "d"
+  },
+  {
+    "id": "letter_e",
+    "text": "E",
+    "imagePath": "",
+    "categoryId": "alfabeto",
+    "type": "letter",
+    "value": "e"
+  },
+  {
+    "id": "letter_f",
+    "text": "F",
+    "imagePath": "",
+    "categoryId": "alfabeto",
+    "type": "letter",
+    "value": "f"
+  },
+  {
+    "id": "letter_g",
+    "text": "G",
+    "imagePath": "",
+    "categoryId": "alfabeto",
+    "type": "letter",
+    "value": "g"
+  },
+  {
+    "id": "letter_h",
+    "text": "H",
+    "imagePath": "",
+    "categoryId": "alfabeto",
+    "type": "letter",
+    "value": "h"
+  },
+  {
+    "id": "letter_i",
+    "text": "I",
+    "imagePath": "",
+    "categoryId": "alfabeto",
+    "type": "letter",
+    "value": "i"
+  },
+  {
+    "id": "letter_j",
+    "text": "J",
+    "imagePath": "",
+    "categoryId": "alfabeto",
+    "type": "letter",
+    "value": "j"
+  },
+  {
+    "id": "letter_k",
+    "text": "K",
+    "imagePath": "",
+    "categoryId": "alfabeto",
+    "type": "letter",
+    "value": "k"
+  },
+  {
+    "id": "letter_l",
+    "text": "L",
+    "imagePath": "",
+    "categoryId": "alfabeto",
+    "type": "letter",
+    "value": "l"
+  },
+  {
+    "id": "letter_m",
+    "text": "M",
+    "imagePath": "",
+    "categoryId": "alfabeto",
+    "type": "letter",
+    "value": "m"
+  },
+  {
+    "id": "letter_n",
+    "text": "N",
+    "imagePath": "",
+    "categoryId": "alfabeto",
+    "type": "letter",
+    "value": "n"
+  },
+  {
+    "id": "letter_n_tilde",
+    "text": "Ñ",
+    "imagePath": "",
+    "categoryId": "alfabeto",
+    "type": "letter",
+    "value": "ñ"
+  },
+  {
+    "id": "letter_o",
+    "text": "O",
+    "imagePath": "",
+    "categoryId": "alfabeto",
+    "type": "letter",
+    "value": "o"
+  },
+  {
+    "id": "letter_p",
+    "text": "P",
+    "imagePath": "",
+    "categoryId": "alfabeto",
+    "type": "letter",
+    "value": "p"
+  },
+  {
+    "id": "letter_q",
+    "text": "Q",
+    "imagePath": "",
+    "categoryId": "alfabeto",
+    "type": "letter",
+    "value": "q"
+  },
+  {
+    "id": "letter_r",
+    "text": "R",
+    "imagePath": "",
+    "categoryId": "alfabeto",
+    "type": "letter",
+    "value": "r"
+  },
+  {
+    "id": "letter_s",
+    "text": "S",
+    "imagePath": "",
+    "categoryId": "alfabeto",
+    "type": "letter",
+    "value": "s"
+  },
+  {
+    "id": "letter_t",
+    "text": "T",
+    "imagePath": "",
+    "categoryId": "alfabeto",
+    "type": "letter",
+    "value": "t"
+  },
+  {
+    "id": "letter_u",
+    "text": "U",
+    "imagePath": "",
+    "categoryId": "alfabeto",
+    "type": "letter",
+    "value": "u"
+  },
+  {
+    "id": "letter_v",
+    "text": "V",
+    "imagePath": "",
+    "categoryId": "alfabeto",
+    "type": "letter",
+    "value": "v"
+  },
+  {
+    "id": "letter_w",
+    "text": "W",
+    "imagePath": "",
+    "categoryId": "alfabeto",
+    "type": "letter",
+    "value": "w"
+  },
+  {
+    "id": "letter_x",
+    "text": "X",
+    "imagePath": "",
+    "categoryId": "alfabeto",
+    "type": "letter",
+    "value": "x"
+  },
+  {
+    "id": "letter_y",
+    "text": "Y",
+    "imagePath": "",
+    "categoryId": "alfabeto",
+    "type": "letter",
+    "value": "y"
+  },
+  {
+    "id": "letter_z",
+    "text": "Z",
+    "imagePath": "",
+    "categoryId": "alfabeto",
+    "type": "letter",
+    "value": "z"
+  },
+  {
+    "id": "keyboard_space",
+    "text": "Espacio",
+    "imagePath": "",
+    "categoryId": "alfabeto",
+    "type": "keyboardAction",
+    "keyboardAction": "space"
+  },
+  {
+    "id": "keyboard_delete",
+    "text": "Borrar letra",
+    "imagePath": "",
+    "categoryId": "alfabeto",
+    "type": "keyboardAction",
+    "keyboardAction": "deleteLetter"
+  }
+]
