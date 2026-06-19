@@ -41,9 +41,7 @@ class _BoardScreenState extends State<BoardScreen> {
     final pictograms = PictogramRepository().getDefaultPictograms();
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Tablero'),
-      ),
+      appBar: AppBar(title: const Text('Tablero')),
       body: LayoutBuilder(
         builder: (context, constraints) {
           final crossAxisCount = _getCrossAxisCount(constraints.maxWidth);
