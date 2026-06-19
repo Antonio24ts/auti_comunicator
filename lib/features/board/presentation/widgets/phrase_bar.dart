@@ -30,7 +30,7 @@ class PhraseBar extends StatelessWidget {
 
     return Container(
       height: 96,
-      padding: const EdgeInsets.all(8),
+      padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
       color: Colors.grey.shade200,
       child: Row(
         children: [

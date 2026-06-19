@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../../../data/models/pictogram.dart';
 import '../../../../data/repositories/pictogram_repository.dart';
 import '../../../../services/speech_services.dart';
 import '../widgets/phrase_bar.dart';
 import '../widgets/pictogram_card.dart';
+import '../widgets/bottom_action_bar.dart';
 
 class BoardScreen extends StatefulWidget {
   const BoardScreen({super.key});
@@ -30,6 +32,49 @@ class _BoardScreenState extends State<BoardScreen> {
 
   int _getCrossAxisCount(double width) {
     return 8;
+  }
+
+  Future<void> _openSettings() async {
+    await showModalBottomSheet<void>(
+      context: context,
+      backgroundColor: Colors.white,
+      builder: (context) {
+        return SafeArea(
+          child: SizedBox(
+            height: 220,
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Ajustes',
+                    style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 16),
+                  const Text(
+                    'Aquí añadiremos opciones de la app más adelante.',
+                    style: TextStyle(fontSize: 18),
+                  ),
+                  const Spacer(),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: const Text('Cerrar'),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+
+    await SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
   }
 
   void _handlePictogramTap(Pictogram pictogram) {
@@ -197,50 +242,49 @@ class _BoardScreenState extends State<BoardScreen> {
     final pictograms = _repository.getPictogramsByCategory(_currentCategoryId);
 
     return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: [
-            PhraseBar(
-              words: _selectedWords,
-              onHome: _goHome,
-              onBack: _goBack,
-              onDeleteLast: _deleteLastWord,
-              onClearAll: _clearAllWords,
-              onSpeakPhrase: _speakPhrase,
-              canGoBack: _categoryHistory.isNotEmpty,
-            ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(8),
-                child: LayoutBuilder(
-                  builder: (context, constraints) {
-                    final crossAxisCount = _getCrossAxisCount(
-                      constraints.maxWidth,
-                    );
+      body: Column(
+        children: [
+          PhraseBar(
+            words: _selectedWords,
+            onHome: _goHome,
+            onBack: _goBack,
+            onDeleteLast: _deleteLastWord,
+            onClearAll: _clearAllWords,
+            onSpeakPhrase: _speakPhrase,
+            canGoBack: _categoryHistory.isNotEmpty,
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(8),
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  final crossAxisCount = _getCrossAxisCount(
+                    constraints.maxWidth,
+                  );
 
-                    return GridView.builder(
-                      itemCount: pictograms.length,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: crossAxisCount,
-                        mainAxisSpacing: 8,
-                        crossAxisSpacing: 8,
-                        childAspectRatio: 1.05,
-                      ),
-                      itemBuilder: (context, index) {
-                        final pictogram = pictograms[index];
+                  return GridView.builder(
+                    itemCount: pictograms.length,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: crossAxisCount,
+                      mainAxisSpacing: 8,
+                      crossAxisSpacing: 8,
+                      childAspectRatio: 1.45,
+                    ),
+                    itemBuilder: (context, index) {
+                      final pictogram = pictograms[index];
 
-                        return PictogramCard(
-                          pictogram: pictogram,
-                          onTap: () => _handlePictogramTap(pictogram),
-                        );
-                      },
-                    );
-                  },
-                ),
+                      return PictogramCard(
+                        pictogram: pictogram,
+                        onTap: () => _handlePictogramTap(pictogram),
+                      );
+                    },
+                  );
+                },
               ),
             ),
-          ],
-        ),
+          ),
+          BottomActionBar(onSettingsTap: _openSettings),
+        ],
       ),
     );
   }
