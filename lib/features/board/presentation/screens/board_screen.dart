@@ -1,10 +1,24 @@
 import 'package:flutter/material.dart';
 
 import '../../../../data/repositories/pictogram_repository.dart';
+import '../../../../services/speech_services.dart';
 import '../widgets/pictogram_card.dart';
 
-class BoardScreen extends StatelessWidget {
+class BoardScreen extends StatefulWidget {
   const BoardScreen({super.key});
+
+  @override
+  State<BoardScreen> createState() => _BoardScreenState();
+}
+
+class _BoardScreenState extends State<BoardScreen> {
+  final SpeechService _speechService = SpeechService();
+
+  @override
+  void initState() {
+    super.initState();
+    _speechService.init();
+  }
 
   int _getCrossAxisCount(double width) {
     if (width >= 1000) {
@@ -50,7 +64,7 @@ class BoardScreen extends StatelessWidget {
                 return PictogramCard(
                   pictogram: pictogram,
                   onTap: () {
-                    debugPrint('Pulsado: ${pictogram.text}');
+                    _speechService.speak(pictogram.text);
                   },
                 );
               },
