@@ -1,36 +1,42 @@
 import 'package:flutter/material.dart';
 
+import '../../domain/phrase_item.dart';
+
 class PhraseBar extends StatelessWidget {
-  final List<String> words;
+  final List<PhraseItem> items;
   final VoidCallback onHome;
   final VoidCallback onBack;
   final VoidCallback onDeleteLast;
   final VoidCallback onClearAll;
   final VoidCallback onSpeakPhrase;
+  final ValueChanged<int> onDeleteItemAt;
   final bool canGoBack;
 
   const PhraseBar({
     super.key,
-    required this.words,
+    required this.items,
     required this.onHome,
     required this.onBack,
     required this.onDeleteLast,
     required this.onClearAll,
     required this.onSpeakPhrase,
+    required this.onDeleteItemAt,
     required this.canGoBack,
   });
 
   @override
   Widget build(BuildContext context) {
-    final phrase = words
-        .where((word) => word.trim().isNotEmpty)
-        .join(' ')
-        .trim();
-    final hasPhrase = phrase.isNotEmpty;
+    final visibleItems = items
+        .asMap()
+        .entries
+        .where((entry) => entry.value.text.trim().isNotEmpty)
+        .toList();
+
+    final hasPhrase = visibleItems.isNotEmpty;
 
     return Container(
-      height: 96,
-      padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
+      height: 104,
+      padding: const EdgeInsets.all(8),
       color: Colors.grey.shade200,
       child: Row(
         children: [
@@ -45,27 +51,29 @@ class PhraseBar extends StatelessWidget {
           Expanded(
             child: InkWell(
               onTap: hasPhrase ? onSpeakPhrase : null,
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(10),
               child: Container(
                 height: double.infinity,
-                padding: const EdgeInsets.symmetric(horizontal: 16),
+                padding: const EdgeInsets.symmetric(horizontal: 8),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   border: Border.all(color: Colors.grey.shade400, width: 1.5),
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(10),
                 ),
                 alignment: Alignment.centerLeft,
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Text(
-                    hasPhrase ? phrase : 'Pulsa palabras para formar una frase',
-                    style: TextStyle(
-                      fontSize: 26,
-                      fontWeight: FontWeight.w600,
-                      color: hasPhrase ? Colors.black : Colors.grey,
-                    ),
-                  ),
-                ),
+                child: hasPhrase
+                    ? _PhraseItemList(
+                        items: visibleItems,
+                        onDeleteItemAt: onDeleteItemAt,
+                      )
+                    : const Text(
+                        'Pulsa palabras para formar una frase',
+                        style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.grey,
+                        ),
+                      ),
               ),
             ),
           ),
@@ -79,15 +87,122 @@ class PhraseBar extends StatelessWidget {
           _TopActionButton(
             label: 'Borrar',
             icon: Icons.backspace,
-            onTap: words.isEmpty ? null : onDeleteLast,
+            onTap: hasPhrase ? onDeleteLast : null,
           ),
           const SizedBox(width: 8),
           _TopActionButton(
             label: 'Limpiar',
             icon: Icons.delete,
-            onTap: words.isEmpty ? null : onClearAll,
+            onTap: hasPhrase ? onClearAll : null,
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _PhraseItemList extends StatelessWidget {
+  final List<MapEntry<int, PhraseItem>> items;
+  final ValueChanged<int> onDeleteItemAt;
+
+  const _PhraseItemList({required this.items, required this.onDeleteItemAt});
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: [
+          for (final entry in items) ...[
+            _MiniPhraseCard(
+              item: entry.value,
+              onTap: () => onDeleteItemAt(entry.key),
+            ),
+            const SizedBox(width: 8),
+          ],
+        ],
+      ),
+    );
+  }
+}
+
+class _MiniPhraseCard extends StatelessWidget {
+  final PhraseItem item;
+  final VoidCallback onTap;
+
+  const _MiniPhraseCard({required this.item, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    final hasImage = item.imagePath.trim().isNotEmpty;
+
+    return SizedBox(
+      width: 86,
+      height: 78,
+      child: Material(
+        color: item.isTypedText ? Colors.amber.shade100 : Colors.white,
+        borderRadius: BorderRadius.circular(10),
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(10),
+          child: Container(
+            padding: const EdgeInsets.all(5),
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: item.isTypedText
+                    ? Colors.orange.shade300
+                    : Colors.blueGrey.shade200,
+                width: 1.5,
+              ),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Column(
+              children: [
+                Expanded(
+                  child: hasImage
+                      ? Image.asset(
+                          item.imagePath,
+                          fit: BoxFit.contain,
+                          errorBuilder: (context, error, stackTrace) {
+                            return _MiniFallbackIcon(
+                              isTypedText: item.isTypedText,
+                            );
+                          },
+                        )
+                      : _MiniFallbackIcon(isTypedText: item.isTypedText),
+                ),
+                const SizedBox(height: 3),
+                Text(
+                  item.text,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _MiniFallbackIcon extends StatelessWidget {
+  final bool isTypedText;
+
+  const _MiniFallbackIcon({required this.isTypedText});
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Icon(
+        isTypedText ? Icons.keyboard : Icons.image_not_supported_outlined,
+        size: 24,
+        color: Colors.blueGrey,
       ),
     );
   }

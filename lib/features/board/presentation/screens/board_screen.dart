@@ -8,6 +8,7 @@ import '../../../../data/repositories/pictogram_repository.dart';
 import '../../../../services/speech_services.dart';
 import '../widgets/phrase_bar.dart';
 import '../widgets/bottom_action_bar.dart';
+import '../../domain/phrase_item.dart';
 
 import '../widgets/zone_panel.dart';
 
@@ -33,7 +34,7 @@ class _BoardScreenState extends State<BoardScreen> {
 
   AppSettings _settings = AppSettings.defaults();
 
-  final List<String> _selectedWords = [];
+  final List<PhraseItem> _phraseItems = [];
 
   final Map<BoardZone, String> _currentCategoryByZone = {
     BoardZone.main: PictogramRepository.homeMainCategoryId,
@@ -137,7 +138,7 @@ class _BoardScreenState extends State<BoardScreen> {
       return;
     }
 
-    _addWord(pictogram.text);
+    _addPictogramToPhrase(pictogram);
   }
 
   void _addLetter(String letter) {
@@ -148,13 +149,17 @@ class _BoardScreenState extends State<BoardScreen> {
     }
 
     setState(() {
-      if (_selectedWords.isEmpty) {
-        _selectedWords.add(letterToAdd);
+      if (_phraseItems.isEmpty || !_phraseItems.last.isTypedText) {
+        _phraseItems.add(PhraseItem(text: letterToAdd, isTypedText: true));
         return;
       }
 
-      final lastIndex = _selectedWords.length - 1;
-      _selectedWords[lastIndex] = '${_selectedWords[lastIndex]}$letterToAdd';
+      final lastIndex = _phraseItems.length - 1;
+      final lastItem = _phraseItems[lastIndex];
+
+      _phraseItems[lastIndex] = lastItem.copyWith(
+        text: '${lastItem.text}$letterToAdd',
+      );
     });
   }
 
@@ -172,45 +177,53 @@ class _BoardScreenState extends State<BoardScreen> {
   }
 
   void _addSpace() {
-    setState(() {
-      if (_selectedWords.isEmpty) {
-        return;
-      }
-
-      if (_selectedWords.last.trim().isEmpty) {
-        return;
-      }
-
-      _selectedWords.add('');
-    });
-  }
-
-  void _deleteLastLetter() {
-    if (_selectedWords.isEmpty) {
+    if (_phraseItems.isEmpty) {
       return;
     }
 
     setState(() {
-      final lastIndex = _selectedWords.length - 1;
-      final lastWord = _selectedWords[lastIndex];
+      if (_phraseItems.last.isTypedText &&
+          _phraseItems.last.text.trim().isNotEmpty) {
+        _phraseItems.add(const PhraseItem(text: '', isTypedText: true));
+      }
+    });
+  }
 
-      if (lastWord.isEmpty) {
-        _selectedWords.removeLast();
+  void _deleteLastLetter() {
+    if (_phraseItems.isEmpty) {
+      return;
+    }
+
+    final lastIndex = _phraseItems.length - 1;
+    final lastItem = _phraseItems[lastIndex];
+
+    if (!lastItem.isTypedText) {
+      return;
+    }
+
+    setState(() {
+      final currentText = lastItem.text;
+
+      if (currentText.isEmpty) {
+        _phraseItems.removeAt(lastIndex);
         return;
       }
 
-      if (lastWord.length == 1) {
-        _selectedWords.removeLast();
+      final newText = currentText.substring(0, currentText.length - 1);
+
+      if (newText.isEmpty) {
+        _phraseItems.removeAt(lastIndex);
         return;
       }
 
-      _selectedWords[lastIndex] = lastWord.substring(0, lastWord.length - 1);
+      _phraseItems[lastIndex] = lastItem.copyWith(text: newText);
     });
   }
 
   String _getPhraseText() {
-    return _selectedWords
-        .where((word) => word.trim().isNotEmpty)
+    return _phraseItems
+        .map((item) => item.text.trim())
+        .where((text) => text.isNotEmpty)
         .join(' ')
         .trim();
   }
@@ -323,33 +336,51 @@ class _BoardScreenState extends State<BoardScreen> {
     return _categoryHistoryByZone.values.any((history) => history.isNotEmpty);
   }
 
-  void _addWord(String word) {
+  void _addPictogramToPhrase(Pictogram pictogram) {
+    final cleanText = pictogram.text.trim();
+
+    if (cleanText.isEmpty) {
+      return;
+    }
+
     setState(() {
-      _selectedWords.add(word);
+      _phraseItems.add(
+        PhraseItem(text: cleanText, imagePath: pictogram.imagePath),
+      );
     });
 
     if (_settings.speakOnCardTap) {
-      unawaited(_speechService.speakWord(word));
+      unawaited(_speechService.speakWord(cleanText));
     }
   }
 
   void _deleteLastWord() {
-    if (_selectedWords.isEmpty) {
+    if (_phraseItems.isEmpty) {
       return;
     }
 
     setState(() {
-      _selectedWords.removeLast();
+      _phraseItems.removeLast();
+    });
+  }
+
+  void _deletePhraseItemAt(int index) {
+    if (index < 0 || index >= _phraseItems.length) {
+      return;
+    }
+
+    setState(() {
+      _phraseItems.removeAt(index);
     });
   }
 
   void _clearAllWords() {
-    if (_selectedWords.isEmpty) {
+    if (_phraseItems.isEmpty) {
       return;
     }
 
     setState(() {
-      _selectedWords.clear();
+      _phraseItems.clear();
     });
   }
 
@@ -458,12 +489,13 @@ class _BoardScreenState extends State<BoardScreen> {
           return Column(
             children: [
               PhraseBar(
-                words: _selectedWords,
+                items: _phraseItems,
                 onHome: _goHome,
                 onBack: _goBack,
                 onDeleteLast: _deleteLastWord,
                 onClearAll: _clearAllWords,
                 onSpeakPhrase: _speakPhrase,
+                onDeleteItemAt: _deletePhraseItemAt,
                 canGoBack: _canGoBack(),
               ),
               Expanded(
