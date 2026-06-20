@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/settings/app_settings.dart';
+import '../../../board/presentation/widgets/child_name_dialog.dart';
+
 import 'credits_sheet.dart';
 
 class SettingsSheet extends StatefulWidget {
@@ -36,6 +38,31 @@ class _SettingsSheetState extends State<SettingsSheet> {
     widget.onSettingsChanged(newSettings);
   }
 
+  Future<void> _openChildNameEditor() async {
+    final result = await showDialog<String>(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) {
+        return ChildNameDialog(
+          initialName: _settings.childName,
+          canCancel: true,
+        );
+      },
+    );
+
+    if (!mounted) {
+      return;
+    }
+
+    final name = result?.trim();
+
+    if (name == null || name.isEmpty) {
+      return;
+    }
+
+    _updateSettings(_settings.copyWith(childName: name));
+  }
+
   Future<void> _openCredits() async {
     await showModalBottomSheet<void>(
       context: context,
@@ -57,6 +84,7 @@ class _SettingsSheetState extends State<SettingsSheet> {
             padding: const EdgeInsets.fromLTRB(24, 18, 24, 18),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+
               children: [
                 const _SettingsHeader(),
                 const SizedBox(height: 20),
@@ -66,6 +94,10 @@ class _SettingsSheetState extends State<SettingsSheet> {
                     _updateSettings(_settings.copyWith(speechRate: value));
                   },
                   onTestVoice: widget.onTestVoice,
+                ),
+                _ChildNameSetting(
+                  childName: _settings.childName,
+                  onTap: _openChildNameEditor,
                 ),
                 const SizedBox(height: 18),
                 _CardSizeSetting(
@@ -305,6 +337,59 @@ class _CardSizeSetting extends StatelessWidget {
           ],
         ),
       ],
+    );
+  }
+}
+
+class _ChildNameSetting extends StatelessWidget {
+  final String childName;
+  final VoidCallback onTap;
+
+  const _ChildNameSetting({required this.childName, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    final cleanName = childName.trim();
+
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(12),
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+        decoration: BoxDecoration(
+          color: Colors.blueGrey.shade50,
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(color: Colors.blueGrey.shade200, width: 1.4),
+        ),
+        child: Row(
+          children: [
+            Icon(Icons.child_care, size: 30, color: Colors.blueGrey.shade700),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Nombre del niño/a',
+                    style: TextStyle(fontSize: 17, fontWeight: FontWeight.w900),
+                  ),
+                  const SizedBox(height: 3),
+                  Text(
+                    cleanName.isEmpty ? 'Sin nombre' : cleanName,
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.blueGrey.shade700,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const Icon(Icons.edit),
+          ],
+        ),
+      ),
     );
   }
 }

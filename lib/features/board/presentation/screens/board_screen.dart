@@ -10,6 +10,7 @@ import '../widgets/phrase_bar.dart';
 import '../widgets/bottom_action_bar.dart';
 import '../../domain/phrase_item.dart';
 import '../../../../services/ambient_music_services.dart';
+import '../widgets/child_name_dialog.dart';
 
 import '../widgets/zone_panel.dart';
 
@@ -31,6 +32,8 @@ class _BoardScreenState extends State<BoardScreen> {
   final PictogramRepository _repository = PictogramRepository();
   final AppSettingsService _settingsService = AppSettingsService();
   final AmbientMusicService _ambientMusicService = AmbientMusicService();
+
+  bool _hasShownStartupNameDialog = false;
 
   late final Future<void> _loadInitialDataFuture;
 
@@ -60,6 +63,49 @@ class _BoardScreenState extends State<BoardScreen> {
     super.initState();
 
     _loadInitialDataFuture = _loadInitialData();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      unawaited(_showChildNameDialogOnStartup());
+    });
+  }
+
+  Future<void> _showChildNameDialogOnStartup() async {
+    await _loadInitialDataFuture;
+
+    if (!mounted || _hasShownStartupNameDialog) {
+      return;
+    }
+
+    _hasShownStartupNameDialog = true;
+
+    await _openChildNameDialog();
+  }
+
+  Future<void> _openChildNameDialog() async {
+    final result = await showDialog<String>(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) {
+        return ChildNameDialog(
+          initialName: _settings.childName,
+          canCancel: false,
+        );
+      },
+    );
+
+    if (!mounted) {
+      return;
+    }
+
+    final name = result?.trim();
+
+    if (name == null || name.isEmpty) {
+      return;
+    }
+
+    final newSettings = _settings.copyWith(childName: name);
+
+    await _applySettings(newSettings);
   }
 
   @override
@@ -526,7 +572,10 @@ class _BoardScreenState extends State<BoardScreen> {
                       : _buildFullBoardLayout(),
                 ),
               ),
-              BottomActionBar(onSettingsLongPressCompleted: _openSettings),
+              BottomActionBar(
+                onSettingsLongPressCompleted: _openSettings,
+                childName: _settings.childName,
+              ),
             ],
           );
         },

@@ -6,6 +6,7 @@ class AppSettings {
   final bool speakOnCardTap;
   final bool ambientMusicEnabled;
   final double ambientMusicVolume;
+  final String childName;
 
   const AppSettings({
     required this.speechRate,
@@ -13,6 +14,7 @@ class AppSettings {
     required this.speakOnCardTap,
     required this.ambientMusicEnabled,
     required this.ambientMusicVolume,
+    required this.childName,
   });
 
   factory AppSettings.defaults() {
@@ -22,6 +24,7 @@ class AppSettings {
       speakOnCardTap: true,
       ambientMusicEnabled: false,
       ambientMusicVolume: 0.12,
+      childName: '',
     );
   }
 
@@ -31,6 +34,7 @@ class AppSettings {
     bool? speakOnCardTap,
     bool? ambientMusicEnabled,
     double? ambientMusicVolume,
+    String? childName,
   }) {
     return AppSettings(
       speechRate: speechRate ?? this.speechRate,
@@ -38,6 +42,7 @@ class AppSettings {
       speakOnCardTap: speakOnCardTap ?? this.speakOnCardTap,
       ambientMusicEnabled: ambientMusicEnabled ?? this.ambientMusicEnabled,
       ambientMusicVolume: ambientMusicVolume ?? this.ambientMusicVolume,
+      childName: childName ?? this.childName,
     );
   }
 }

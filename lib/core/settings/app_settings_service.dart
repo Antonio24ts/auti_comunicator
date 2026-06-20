@@ -8,6 +8,7 @@ class AppSettingsService {
   static const String _speakOnCardTapKey = 'speakOnCardTap';
   static const String _ambientMusicEnabledKey = 'ambientMusicEnabled';
   static const String _ambientMusicVolumeKey = 'ambientMusicVolume';
+  static const String _childNameKey = 'childName';
 
   Future<AppSettings> load() async {
     final prefs = await SharedPreferences.getInstance();
@@ -31,12 +32,16 @@ class AppSettingsService {
         prefs.getDouble(_ambientMusicVolumeKey) ??
         defaultSettings.ambientMusicVolume;
 
+    final childName =
+        prefs.getString(_childNameKey)?.trim() ?? defaultSettings.childName;
+
     return AppSettings(
       speechRate: speechRate,
       cardSize: cardSize,
       speakOnCardTap: speakOnCardTap,
       ambientMusicEnabled: ambientMusicEnabled,
       ambientMusicVolume: ambientMusicVolume,
+      childName: childName,
     );
   }
 
@@ -48,6 +53,7 @@ class AppSettingsService {
     await prefs.setBool(_speakOnCardTapKey, settings.speakOnCardTap);
     await prefs.setBool(_ambientMusicEnabledKey, settings.ambientMusicEnabled);
     await prefs.setDouble(_ambientMusicVolumeKey, settings.ambientMusicVolume);
+    await prefs.setString(_childNameKey, settings.childName.trim());
   }
 
   CardSize? _parseCardSize(String? value) {

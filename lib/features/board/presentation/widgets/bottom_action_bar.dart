@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 
 class BottomActionBar extends StatefulWidget {
   final VoidCallback onSettingsLongPressCompleted;
+  final String childName;
 
   const BottomActionBar({
     super.key,
     required this.onSettingsLongPressCompleted,
+    required this.childName,
   });
 
   @override
@@ -63,16 +65,24 @@ class _BottomActionBarState extends State<BottomActionBar> {
 
   @override
   Widget build(BuildContext context) {
+    final cleanChildName = widget.childName.trim();
+
+    final title = cleanChildName.isEmpty
+        ? 'Comunicador · Mantén ⚙ 3s para ajustes'
+        : 'Hola, $cleanChildName · Comunicador · Mantén ⚙ 3s para ajustes';
+
     return Container(
-      height: 52,
-      padding: const EdgeInsets.symmetric(horizontal: 13),
+      height: 54,
+      padding: const EdgeInsets.symmetric(horizontal: 14),
       color: Colors.black,
       child: Row(
         children: [
-          const Expanded(
+          Expanded(
             child: Text(
-              'Comunicador · Mantén ⚙ 3s para ajustes',
-              style: TextStyle(
+              title,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(
                 color: Colors.white,
                 fontSize: 12,
                 fontWeight: FontWeight.w800,
