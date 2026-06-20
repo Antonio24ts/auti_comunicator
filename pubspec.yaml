@@ -65,9 +65,17 @@ flutter:
     - assets/images/categories/
     - assets/images/personas/
     - assets/images/saludos/
-    - assets/images/necesidades/
-    - assets/images/acciones/
-    - assets/images/cosas/
+    - assets/images/verbos/
+    - assets/images/preguntas/
+    - assets/images/emociones/
+    - assets/images/comidas/
+    - assets/images/bebidas/
+    - assets/images/casa/
+    - assets/images/colegio/
+    - assets/images/salud/
+    - assets/images/lugares/
+    - assets/images/objetos/
+    - assets/images/trabajo/
     - assets/audio/
 
   # To add assets to your application, add an assets section, like this:
