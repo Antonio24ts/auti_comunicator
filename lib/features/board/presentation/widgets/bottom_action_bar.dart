@@ -15,7 +15,7 @@ class BottomActionBar extends StatefulWidget {
 }
 
 class _BottomActionBarState extends State<BottomActionBar> {
-  static const Duration _requiredHoldDuration = Duration(seconds: 4);
+  static const Duration _requiredHoldDuration = Duration(seconds: 3);
 
   Timer? _holdTimer;
   bool _isHoldingSettings = false;
@@ -71,7 +71,7 @@ class _BottomActionBarState extends State<BottomActionBar> {
         children: [
           const Expanded(
             child: Text(
-              'Comunicador · Mantén ⚙ 4s para ajustes',
+              'Comunicador · Mantén ⚙ 3s para ajustes',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 12,

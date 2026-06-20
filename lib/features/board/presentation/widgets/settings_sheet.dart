@@ -51,7 +51,7 @@ class _SettingsSheetState extends State<SettingsSheet> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: FractionallySizedBox(
-        heightFactor: 0.82,
+        heightFactor: 0.92,
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.fromLTRB(24, 18, 24, 18),
@@ -89,6 +89,21 @@ class _SettingsSheetState extends State<SettingsSheet> {
                     _updateSettings(_settings.copyWith(speakOnCardTap: value));
                   },
                 ),
+                const SizedBox(height: 12),
+                _MusicSetting(
+                  enabled: _settings.ambientMusicEnabled,
+                  volume: _settings.ambientMusicVolume,
+                  onEnabledChanged: (value) {
+                    _updateSettings(
+                      _settings.copyWith(ambientMusicEnabled: value),
+                    );
+                  },
+                  onVolumeChanged: (value) {
+                    _updateSettings(
+                      _settings.copyWith(ambientMusicVolume: value),
+                    );
+                  },
+                ),
                 const SizedBox(height: 10),
                 SizedBox(
                   width: double.infinity,
@@ -113,6 +128,75 @@ class _SettingsSheetState extends State<SettingsSheet> {
           ),
         ),
       ),
+    );
+  }
+}
+
+class _MusicSetting extends StatelessWidget {
+  final bool enabled;
+  final double volume;
+  final ValueChanged<bool> onEnabledChanged;
+  final ValueChanged<double> onVolumeChanged;
+
+  const _MusicSetting({
+    required this.enabled,
+    required this.volume,
+    required this.onEnabledChanged,
+    required this.onVolumeChanged,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final percentage = (volume * 100).round();
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SwitchListTile(
+          contentPadding: EdgeInsets.zero,
+          title: const Text(
+            'Música relajante',
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+          ),
+          subtitle: const Text(
+            'Reproduce música suave en bucle mientras se usa la app.',
+          ),
+          value: enabled,
+          onChanged: onEnabledChanged,
+        ),
+        Row(
+          children: [
+            const SizedBox(
+              width: 92,
+              child: Text(
+                'Volumen',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+              ),
+            ),
+            Expanded(
+              child: Slider(
+                value: volume,
+                min: 0.0,
+                max: 0.50,
+                divisions: 10,
+                label: '$percentage%',
+                onChanged: enabled ? onVolumeChanged : null,
+              ),
+            ),
+            SizedBox(
+              width: 48,
+              child: Text(
+                '$percentage%',
+                textAlign: TextAlign.right,
+                style: const TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }

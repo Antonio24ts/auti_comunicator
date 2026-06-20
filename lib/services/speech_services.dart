@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 
 class SpeechService {
@@ -5,9 +6,19 @@ class SpeechService {
 
   bool _isInitialized = false;
   int _speakRequestId = 0;
-  double _speechRate = 0.55;
+  double _speechRate = 0.50;
 
-  Future<void> init({double speechRate = 0.55}) async {
+  VoidCallback? _onSpeechStart;
+  VoidCallback? _onSpeechEnd;
+
+  Future<void> init({
+    double speechRate = 0.50,
+    VoidCallback? onSpeechStart,
+    VoidCallback? onSpeechEnd,
+  }) async {
+    _onSpeechStart = onSpeechStart;
+    _onSpeechEnd = onSpeechEnd;
+
     if (_isInitialized) {
       await setSpeechRate(speechRate);
       return;
@@ -21,6 +32,18 @@ class SpeechService {
     await _flutterTts.setVolume(1.0);
 
     await _flutterTts.awaitSpeakCompletion(false);
+
+    _flutterTts.setCompletionHandler(() {
+      _onSpeechEnd?.call();
+    });
+
+    _flutterTts.setCancelHandler(() {
+      _onSpeechEnd?.call();
+    });
+
+    _flutterTts.setErrorHandler((message) {
+      _onSpeechEnd?.call();
+    });
 
     _isInitialized = true;
   }
@@ -54,6 +77,8 @@ class SpeechService {
       return;
     }
 
+    _onSpeechStart?.call();
+
     await _flutterTts.speak(cleanText);
   }
 
@@ -77,11 +102,14 @@ class SpeechService {
       return;
     }
 
+    _onSpeechStart?.call();
+
     await _flutterTts.speak(cleanText);
   }
 
   Future<void> stop() async {
     _speakRequestId++;
     await _flutterTts.stop();
+    _onSpeechEnd?.call();
   }
 }

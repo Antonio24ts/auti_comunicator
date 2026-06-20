@@ -9,6 +9,7 @@ import '../../../../services/speech_services.dart';
 import '../widgets/phrase_bar.dart';
 import '../widgets/bottom_action_bar.dart';
 import '../../domain/phrase_item.dart';
+import '../../../../services/ambient_music_services.dart';
 
 import '../widgets/zone_panel.dart';
 
@@ -29,6 +30,7 @@ class _BoardScreenState extends State<BoardScreen> {
   final SpeechService _speechService = SpeechService();
   final PictogramRepository _repository = PictogramRepository();
   final AppSettingsService _settingsService = AppSettingsService();
+  final AmbientMusicService _ambientMusicService = AmbientMusicService();
 
   late final Future<void> _loadInitialDataFuture;
 
@@ -60,6 +62,13 @@ class _BoardScreenState extends State<BoardScreen> {
     _loadInitialDataFuture = _loadInitialData();
   }
 
+  @override
+  void dispose() {
+    unawaited(_speechService.stop());
+    unawaited(_ambientMusicService.dispose());
+    super.dispose();
+  }
+
   double _getChildAspectRatio() {
     switch (_settings.cardSize) {
       case CardSize.small:
@@ -78,7 +87,17 @@ class _BoardScreenState extends State<BoardScreen> {
 
     _settings = loadedSettings;
 
-    await _speechService.init(speechRate: _settings.speechRate);
+    await _ambientMusicService.init(_settings);
+
+    await _speechService.init(
+      speechRate: _settings.speechRate,
+      onSpeechStart: () {
+        unawaited(_ambientMusicService.pauseForSpeech());
+      },
+      onSpeechEnd: () {
+        unawaited(_ambientMusicService.resumeAfterSpeech());
+      },
+    );
   }
 
   List<Pictogram> _getPictogramsForZone(BoardZone zone) {
@@ -99,6 +118,7 @@ class _BoardScreenState extends State<BoardScreen> {
     await _settingsService.save(newSettings);
 
     await _speechService.setSpeechRate(newSettings.speechRate);
+    await _ambientMusicService.applySettings(newSettings);
   }
 
   Future<void> _openSettings() async {
