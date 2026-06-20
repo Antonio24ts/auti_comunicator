@@ -228,26 +228,21 @@ List<String> _findUnusedImages({
     return [];
   }
 
-  final imageExtensions = {
-    '.png',
-    '.jpg',
-    '.jpeg',
-    '.webp',
-    '.gif',
-  };
+  final imageExtensions = {'.png', '.jpg', '.jpeg', '.webp', '.gif'};
 
-  final allImages = root
-      .listSync(recursive: true)
-      .whereType<File>()
-      .map((file) => file.path.replaceAll('\\', '/'))
-      .where((path) {
-        final lowerPath = path.toLowerCase();
+  final allImages =
+      root
+          .listSync(recursive: true)
+          .whereType<File>()
+          .map((file) => file.path.replaceAll('\\', '/'))
+          .where((path) {
+            final lowerPath = path.toLowerCase();
 
-        return imageExtensions.any(lowerPath.endsWith);
-      })
-      .where((path) => !path.contains('/audio/'))
-      .toList()
-    ..sort();
+            return imageExtensions.any(lowerPath.endsWith);
+          })
+          .where((path) => !path.contains('/audio/'))
+          .toList()
+        ..sort();
 
   return allImages.where((path) => !usedImagePaths.contains(path)).toList();
 }

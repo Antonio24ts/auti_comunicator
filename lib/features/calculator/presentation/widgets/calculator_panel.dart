@@ -48,7 +48,7 @@ class CalculatorPanel extends StatelessWidget {
                 ),
                 const SizedBox(height: 6),
                 SizedBox(
-                  height: 70,
+                  height: 80,
                   width: double.infinity,
                   child: _CalculatorButton(
                     label: '=',

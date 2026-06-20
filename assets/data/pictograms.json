@@ -150,7 +150,7 @@
   {
     "id": "mas_colegio",
     "text": "Colegio",
-    "imagePath": "assets/images/categories/colegio-png",
+    "imagePath": "assets/images/categories/colegio1.png",
     "categoryId": "home_main",
     "type": "category",
     "targetCategoryId": "colegio"
@@ -166,7 +166,7 @@
   {
     "id": "mas_lugares",
     "text": "Lugares",
-    "imagePath": "assets/images/categories/lugares,png",
+    "imagePath": "assets/images/categories/lugares.png",
     "categoryId": "mas_categorias",
     "type": "category",
     "targetCategoryId": "lugares"
@@ -835,14 +835,7 @@
   {
     "id": "pregunta_me_ayudas",
     "text": "¿Me ayudas?",
-    "imagePath": "",
-    "categoryId": "preguntas",
-    "type": "word"
-  },
-  {
-    "id": "pregunta_que_pasa",
-    "text": "¿Qué pasa?",
-    "imagePath": "",
+    "imagePath": "assets/images/preguntas/meayudas.png",
     "categoryId": "preguntas",
     "type": "word"
   },
@@ -1015,20 +1008,6 @@
     "type": "word"
   },
   {
-    "id": "comida_mas",
-    "text": "Más",
-    "imagePath": "",
-    "categoryId": "comida",
-    "type": "word"
-  },
-  {
-    "id": "comida_terminado",
-    "text": "Terminado",
-    "imagePath": "",
-    "categoryId": "comida",
-    "type": "word"
-  },
-  {
     "id": "bebida_beber",
     "text": "Beber",
     "imagePath": "assets/images/bebida/beber.png",
@@ -1073,14 +1052,7 @@
   {
     "id": "bebida_frio",
     "text": "Frío",
-    "imagePath": "frio",
-    "categoryId": "bebida",
-    "type": "word"
-  },
-  {
-    "id": "bebida_mas",
-    "text": "Más",
-    "imagePath": "",
+    "imagePath": "assets/images/bebida/frio.png",
     "categoryId": "bebida",
     "type": "word"
   },
