@@ -155,6 +155,12 @@ PictogramStyle _categoryStyle(String categoryId) {
         borderColor: Colors.lightGreen.shade300,
         accentColor: Colors.green.shade600,
       );
+    case 'calculadora':
+      return PictogramStyle(
+        backgroundColor: Colors.blue.shade50,
+        borderColor: Colors.blue.shade300,
+        accentColor: Colors.blue.shade700,
+      );
 
     default:
       return PictogramStyle(

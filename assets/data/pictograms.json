@@ -66,6 +66,15 @@
     "categoryOpenMode": "fullBoard"
   },
   {
+    "id": "home_calculadora",
+    "text": "Calculadora",
+    "imagePath": "",
+    "categoryId": "home_center",
+    "type": "category",
+    "targetCategoryId": "calculadora",
+    "categoryOpenMode": "fullBoard"
+  },
+  {
     "id": "mas_bano",
     "text": "Personas",
     "imagePath": "",

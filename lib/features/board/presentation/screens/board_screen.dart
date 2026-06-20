@@ -11,6 +11,8 @@ import '../widgets/bottom_action_bar.dart';
 import '../../domain/phrase_item.dart';
 import '../../../../services/ambient_music_services.dart';
 import '../widgets/child_name_dialog.dart';
+import '../../../calculator/domain/simple_calculator_engine.dart';
+import '../../../calculator/presentation/widgets/calculator_panel.dart';
 
 import '../widgets/zone_panel.dart';
 
@@ -53,6 +55,8 @@ class _BoardScreenState extends State<BoardScreen> {
     BoardZone.right: [],
   };
 
+  String _calculatorExpression = '';
+  String _calculatorResult = '';
   String? _fullBoardCategoryId;
   final List<String> _fullBoardHistory = [];
 
@@ -67,6 +71,136 @@ class _BoardScreenState extends State<BoardScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       unawaited(_showChildNameDialogOnStartup());
     });
+  }
+
+  void _handleCalculatorKey(String key) {
+    String? resultToSpeak;
+
+    setState(() {
+      if (key == 'C') {
+        _calculatorExpression = '';
+        _calculatorResult = '';
+        return;
+      }
+
+      if (key == '⌫') {
+        if (_calculatorExpression.isNotEmpty) {
+          _calculatorExpression = _calculatorExpression.substring(
+            0,
+            _calculatorExpression.length - 1,
+          );
+        }
+
+        _calculatorResult = '';
+        return;
+      }
+
+      if (key == '=') {
+        _calculateResult();
+
+        if (_calculatorResult.trim().isNotEmpty) {
+          resultToSpeak = _calculatorResult;
+        }
+
+        return;
+      }
+
+      if (_isCalculatorDigit(key)) {
+        _appendCalculatorDigit(key);
+        return;
+      }
+
+      if (_isCalculatorOperator(key)) {
+        _appendCalculatorOperator(key);
+        return;
+      }
+    });
+
+    if (resultToSpeak != null) {
+      unawaited(
+        _speechService.speakPhrase(
+          resultToSpeak == 'Error' ||
+                  resultToSpeak!.toLowerCase().contains('no se puede')
+              ? resultToSpeak!
+              : '$resultToSpeak',
+        ),
+      );
+    }
+  }
+
+  void _appendCalculatorDigit(String digit) {
+    if (_calculatorExpression.length >= 18) {
+      return;
+    }
+
+    if (_calculatorResult.isNotEmpty) {
+      _calculatorExpression = '';
+      _calculatorResult = '';
+    }
+
+    _calculatorExpression += digit;
+  }
+
+  void _appendCalculatorOperator(String operator) {
+    if (_calculatorExpression.isEmpty) {
+      return;
+    }
+
+    if (_calculatorResult.isNotEmpty) {
+      _calculatorExpression = _calculatorResult;
+      _calculatorResult = '';
+    }
+
+    final lastCharacter =
+        _calculatorExpression[_calculatorExpression.length - 1];
+
+    if (_isCalculatorOperator(lastCharacter)) {
+      _calculatorExpression = _calculatorExpression.substring(
+        0,
+        _calculatorExpression.length - 1,
+      );
+
+      _calculatorExpression += operator;
+      return;
+    }
+
+    if (_calculatorExpression.length >= 18) {
+      return;
+    }
+
+    _calculatorExpression += operator;
+  }
+
+  void _calculateResult() {
+    if (_calculatorExpression.isEmpty) {
+      return;
+    }
+
+    final lastCharacter =
+        _calculatorExpression[_calculatorExpression.length - 1];
+
+    if (_isCalculatorOperator(lastCharacter)) {
+      _calculatorResult = 'Error';
+      return;
+    }
+
+    try {
+      _calculatorResult = SimpleCalculatorEngine.evaluate(
+        _calculatorExpression,
+      );
+    } on FormatException catch (error) {
+      _calculatorResult = error.message;
+    } catch (_) {
+      _calculatorResult = 'Error';
+    }
+  }
+
+  bool _isCalculatorDigit(String value) {
+    return RegExp(r'^[0-9]$').hasMatch(value);
+  }
+
+  bool _isCalculatorOperator(String value) {
+    return value == '+' || value == '-' || value == '×' || value == '÷';
   }
 
   Future<void> _showChildNameDialogOnStartup() async {
@@ -123,6 +257,21 @@ class _BoardScreenState extends State<BoardScreen> {
         return 1.25;
       case CardSize.large:
         return 1.05;
+    }
+  }
+
+  double _getFullBoardChildAspectRatio(String categoryId) {
+    if (categoryId == 'alfabeto') {
+      return 1.55;
+    }
+
+    switch (_settings.cardSize) {
+      case CardSize.small:
+        return 1.65;
+      case CardSize.medium:
+        return 1.45;
+      case CardSize.large:
+        return 1.25;
     }
   }
 
@@ -309,6 +458,11 @@ class _BoardScreenState extends State<BoardScreen> {
 
         _fullBoardCategoryId = targetCategoryId;
         _lastActiveZone = zone;
+
+        if (targetCategoryId == 'calculadora') {
+          _calculatorExpression = '';
+          _calculatorResult = '';
+        }
       });
 
       return;
@@ -514,14 +668,20 @@ class _BoardScreenState extends State<BoardScreen> {
       return const SizedBox.shrink();
     }
 
-    final pictograms = _repository.getPictogramsByCategory(categoryId);
+    if (categoryId == 'calculadora') {
+      return CalculatorPanel(
+        expression: _calculatorExpression,
+        result: _calculatorResult,
+        onKeyPressed: _handleCalculatorKey,
+      );
+    }
 
-    final isAlphabet = categoryId == 'alfabeto';
+    final pictograms = _repository.getPictogramsByCategory(categoryId);
 
     return ZonePanel(
       pictograms: pictograms,
       crossAxisCount: 8,
-      childAspectRatio: isAlphabet ? 1.45 : _getChildAspectRatio(),
+      childAspectRatio: _getFullBoardChildAspectRatio(categoryId),
       cardSize: _settings.cardSize,
       onPictogramTap: (pictogram) {
         _handlePictogramTap(pictogram, _lastActiveZone);
