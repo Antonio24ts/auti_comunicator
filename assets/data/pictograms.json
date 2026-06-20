@@ -82,7 +82,7 @@
     "categoryOpenMode": "fullBoard"
   },
   {
-    "id": "mas_bano",
+    "id": "mas_personas",
     "text": "Personas",
     "imagePath": "assets/images/personas.png",
     "categoryId": "home_main",
