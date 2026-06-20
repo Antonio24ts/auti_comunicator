@@ -83,12 +83,22 @@
     "categoryOpenMode": "fullBoard"
   },
   {
-    "id": "preguntas",
+    "id": "mas_preguntas",
     "text": "Preguntas",
+    "imagePath": "",
+    "categoryId": "mas_categorias",
+    "type": "category",
+    "targetCategoryId": "preguntas",
+    "categoryOpenMode": "fullBoard"
+  },
+  {
+    "id": "home_frases",
+    "text": "Frases",
     "imagePath": "",
     "categoryId": "home_main",
     "type": "category",
-    "targetCategoryId": "preguntas"
+    "targetCategoryId": "frases_rapidas",
+    "categoryOpenMode": "fullBoard"
   },
   {
     "id": "mas_emociones",
@@ -1566,6 +1576,174 @@
     "text": "Amigo",
     "imagePath": "",
     "categoryId": "personas",
+    "type": "word"
+  },
+  {
+    "id": "frase_quiero_agua",
+    "text": "Quiero agua",
+    "imagePath": "",
+    "categoryId": "frases_rapidas",
+    "type": "word"
+  },
+  {
+    "id": "frase_necesito_ayuda",
+    "text": "Necesito ayuda",
+    "imagePath": "",
+    "categoryId": "frases_rapidas",
+    "type": "word"
+  },
+  {
+    "id": "frase_quiero_ir_bano",
+    "text": "Quiero ir al baño",
+    "imagePath": "",
+    "categoryId": "frases_rapidas",
+    "type": "word"
+  },
+  {
+    "id": "frase_me_duele",
+    "text": "Me duele",
+    "imagePath": "",
+    "categoryId": "frases_rapidas",
+    "type": "word"
+  },
+  {
+    "id": "frase_tengo_hambre",
+    "text": "Tengo hambre",
+    "imagePath": "",
+    "categoryId": "frases_rapidas",
+    "type": "word"
+  },
+  {
+    "id": "frase_tengo_sed",
+    "text": "Tengo sed",
+    "imagePath": "",
+    "categoryId": "frases_rapidas",
+    "type": "word"
+  },
+  {
+    "id": "frase_estoy_cansado",
+    "text": "Estoy cansado",
+    "imagePath": "",
+    "categoryId": "frases_rapidas",
+    "type": "word"
+  },
+  {
+    "id": "frase_necesito_descansar",
+    "text": "Necesito descansar",
+    "imagePath": "",
+    "categoryId": "frases_rapidas",
+    "type": "word"
+  },
+  {
+    "id": "frase_necesito_calma",
+    "text": "Necesito calma",
+    "imagePath": "",
+    "categoryId": "frases_rapidas",
+    "type": "word"
+  },
+  {
+    "id": "frase_estoy_nervioso",
+    "text": "Estoy nervioso",
+    "imagePath": "",
+    "categoryId": "frases_rapidas",
+    "type": "word"
+  },
+  {
+    "id": "frase_estoy_triste",
+    "text": "Estoy triste",
+    "imagePath": "",
+    "categoryId": "frases_rapidas",
+    "type": "word"
+  },
+  {
+    "id": "frase_estoy_contento",
+    "text": "Estoy contento",
+    "imagePath": "",
+    "categoryId": "frases_rapidas",
+    "type": "word"
+  },
+  {
+    "id": "frase_no_entiendo",
+    "text": "No entiendo",
+    "imagePath": "",
+    "categoryId": "frases_rapidas",
+    "type": "word"
+  },
+  {
+    "id": "frase_puedes_repetir",
+    "text": "¿Puedes repetir?",
+    "imagePath": "",
+    "categoryId": "frases_rapidas",
+    "type": "word"
+  },
+  {
+    "id": "frase_no_puedo",
+    "text": "No puedo",
+    "imagePath": "",
+    "categoryId": "frases_rapidas",
+    "type": "word"
+  },
+  {
+    "id": "frase_quiero_parar",
+    "text": "Quiero parar",
+    "imagePath": "",
+    "categoryId": "frases_rapidas",
+    "type": "word"
+  },
+  {
+    "id": "frase_no_me_gusta",
+    "text": "No me gusta",
+    "imagePath": "",
+    "categoryId": "frases_rapidas",
+    "type": "word"
+  },
+  {
+    "id": "frase_me_gusta",
+    "text": "Me gusta",
+    "imagePath": "",
+    "categoryId": "frases_rapidas",
+    "type": "word"
+  },
+  {
+    "id": "frase_quiero_estar_solo",
+    "text": "Quiero estar solo",
+    "imagePath": "",
+    "categoryId": "frases_rapidas",
+    "type": "word"
+  },
+  {
+    "id": "frase_quiero_ir_casa",
+    "text": "Quiero ir a casa",
+    "imagePath": "",
+    "categoryId": "frases_rapidas",
+    "type": "word"
+  },
+  {
+    "id": "frase_he_terminado",
+    "text": "He terminado",
+    "imagePath": "",
+    "categoryId": "frases_rapidas",
+    "type": "word"
+  },
+  {
+    "id": "frase_quiero_jugar",
+    "text": "Quiero jugar",
+    "imagePath": "",
+    "categoryId": "frases_rapidas",
+    "type": "word"
+  },
+  {
+    "id": "frase_gracias",
+    "text": "Gracias",
+    "imagePath": "",
+    "categoryId": "frases_rapidas",
+    "type": "word"
+  },
+  {
+    "id": "frase_por_favor",
+    "text": "Por favor",
+    "imagePath": "",
+    "categoryId": "frases_rapidas",
     "type": "word"
   }
 ]
