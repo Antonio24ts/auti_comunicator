@@ -111,7 +111,7 @@
     "id": "mas_bebida",
     "text": "Bebida",
     "imagePath": "",
-    "categoryId": "home",
+    "categoryId": "mas_categorias",
     "type": "category",
     "targetCategoryId": "bebida",
     "categoryOpenMode": "fullBoard"
@@ -170,7 +170,7 @@
   {
     "id": "saludos",
     "text": "Saludos",
-    "imagePath": "",
+    "imagePath": "assets/images/categories/saludo.png",
     "categoryId": "home_right",
     "type": "category",
     "targetCategoryId": "saludos"

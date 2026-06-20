@@ -24,7 +24,7 @@ class ZonePanel extends StatelessWidget {
   Widget build(BuildContext context) {
     return GridView.builder(
       itemCount: pictograms.length,
-      padding: EdgeInsets.zero,
+      padding: const EdgeInsets.all(4),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: crossAxisCount,
         mainAxisSpacing: 8,

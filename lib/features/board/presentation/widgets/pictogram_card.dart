@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/settings/app_settings.dart';
 import '../../../../data/models/pictogram.dart';
+import '../styles/pictogram_style.dart';
 
-class PictogramCard extends StatelessWidget {
+class PictogramCard extends StatefulWidget {
   final Pictogram pictogram;
   final VoidCallback onTap;
   final CardSize cardSize;
@@ -16,56 +17,86 @@ class PictogramCard extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    final hasImage = pictogram.imagePath.trim().isNotEmpty;
-    final displayText = _getDisplayText();
+  State<PictogramCard> createState() => _PictogramCardState();
+}
 
-    return Material(
-      color: _getBackgroundColor(),
-      elevation: 2,
-      borderRadius: BorderRadius.circular(10),
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(10),
-        child: Padding(
-          padding: EdgeInsets.all(_getCardPadding()),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              if (hasImage)
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.only(bottom: 4),
-                    child: Image.asset(
-                      pictogram.imagePath,
-                      fit: BoxFit.contain,
-                      errorBuilder: (context, error, stackTrace) {
-                        return _FallbackIcon(
-                          pictogram: pictogram,
-                          cardSize: cardSize,
-                        );
-                      },
-                    ),
-                  ),
-                )
-              else if (!pictogram.isLetter)
-                Expanded(
-                  child: _FallbackIcon(
-                    pictogram: pictogram,
-                    cardSize: cardSize,
-                  ),
-                ),
-              Text(
-                displayText,
-                textAlign: TextAlign.center,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(
-                  fontSize: _getTextSize(),
-                  fontWeight: FontWeight.w800,
-                ),
+class _PictogramCardState extends State<PictogramCard> {
+  bool _isPressed = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final style = getPictogramStyle(widget.pictogram);
+
+    return Listener(
+      onPointerDown: (_) {
+        setState(() {
+          _isPressed = true;
+        });
+      },
+      onPointerUp: (_) {
+        setState(() {
+          _isPressed = false;
+        });
+      },
+      onPointerCancel: (_) {
+        setState(() {
+          _isPressed = false;
+        });
+      },
+      child: AnimatedScale(
+        scale: _isPressed ? 1.035 : 1.0,
+        duration: const Duration(milliseconds: 90),
+        curve: Curves.easeOut,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 120),
+          curve: Curves.easeOut,
+          decoration: BoxDecoration(
+            color: style.backgroundColor,
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(
+              color: _isPressed ? style.accentColor : style.borderColor,
+              width: _isPressed ? 2.4 : 1.6,
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: _isPressed ? 0.16 : 0.08),
+                blurRadius: _isPressed ? 10 : 5,
+                offset: Offset(0, _isPressed ? 4 : 2),
               ),
             ],
+          ),
+          child: Material(
+            color: Colors.transparent,
+            borderRadius: BorderRadius.circular(16),
+            child: InkWell(
+              onTap: widget.onTap,
+              borderRadius: BorderRadius.circular(16),
+              splashColor: style.accentColor.withValues(alpha: 0.12),
+              highlightColor: style.accentColor.withValues(alpha: 0.08),
+              child: Padding(
+                padding: EdgeInsets.all(_getPadding()),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: _CardVisual(
+                        pictogram: widget.pictogram,
+                        style: style,
+                        iconSize: _getIconSize(),
+                        letterFontSize: _getLetterFontSize(),
+                      ),
+                    ),
+                    const SizedBox(height: 6),
+                    _CardText(
+                      text: _getDisplayText(),
+                      fontSize: _getTextFontSize(),
+                      isCategory: widget.pictogram.isCategory,
+                      accentColor: style.accentColor,
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ),
         ),
       ),
@@ -73,102 +104,202 @@ class PictogramCard extends StatelessWidget {
   }
 
   String _getDisplayText() {
-    if (!pictogram.isLetter) {
-      return pictogram.text;
+    if (!widget.pictogram.isLetter) {
+      return widget.pictogram.text;
     }
 
-    return pictogram.text.toLowerCase();
+    return widget.pictogram.text.toLowerCase();
   }
 
-  double _getTextSize() {
-    if (pictogram.isLetter) {
-      switch (cardSize) {
-        case CardSize.small:
-          return 28;
-        case CardSize.medium:
-          return 34;
-        case CardSize.large:
-          return 40;
-      }
-    }
-
-    switch (cardSize) {
+  double _getPadding() {
+    switch (widget.cardSize) {
       case CardSize.small:
-        return 15;
+        return 5;
       case CardSize.medium:
-        return 18;
+        return 7;
       case CardSize.large:
-        return 22;
+        return 9;
     }
   }
 
-  double _getCardPadding() {
-    switch (cardSize) {
+  double _getTextFontSize() {
+    switch (widget.cardSize) {
       case CardSize.small:
-        return 4;
+        return 14;
       case CardSize.medium:
-        return 6;
+        return 17;
       case CardSize.large:
-        return 8;
+        return 20;
     }
   }
 
-  Color _getBackgroundColor() {
-    if (pictogram.isCategory) {
-      return Colors.lightBlue.shade100;
+  double _getLetterFontSize() {
+    switch (widget.cardSize) {
+      case CardSize.small:
+        return 28;
+      case CardSize.medium:
+        return 36;
+      case CardSize.large:
+        return 44;
     }
+  }
 
+  double _getIconSize() {
+    switch (widget.cardSize) {
+      case CardSize.small:
+        return 30;
+      case CardSize.medium:
+        return 40;
+      case CardSize.large:
+        return 50;
+    }
+  }
+}
+
+class _CardVisual extends StatelessWidget {
+  final Pictogram pictogram;
+  final PictogramStyle style;
+  final double iconSize;
+  final double letterFontSize;
+
+  const _CardVisual({
+    required this.pictogram,
+    required this.style,
+    required this.iconSize,
+    required this.letterFontSize,
+  });
+
+  @override
+  Widget build(BuildContext context) {
     if (pictogram.isLetter) {
-      return Colors.amber.shade100;
+      return Center(
+        child: Text(
+          pictogram.text.toLowerCase(),
+          style: TextStyle(
+            fontSize: letterFontSize,
+            fontWeight: FontWeight.w900,
+            color: Colors.black87,
+          ),
+        ),
+      );
     }
 
-    if (pictogram.isKeyboardAction) {
-      return Colors.orange.shade100;
+    if (pictogram.imagePath.trim().isNotEmpty) {
+      return Stack(
+        children: [
+          Center(
+            child: Image.asset(
+              pictogram.imagePath,
+              fit: BoxFit.contain,
+              errorBuilder: (context, error, stackTrace) {
+                return _FallbackIcon(
+                  pictogram: pictogram,
+                  style: style,
+                  iconSize: iconSize,
+                );
+              },
+            ),
+          ),
+          if (pictogram.isCategory)
+            Positioned(
+              right: 0,
+              top: 0,
+              child: _CategoryBadge(color: style.accentColor),
+            ),
+        ],
+      );
     }
 
-    return Colors.white;
+    return _FallbackIcon(
+      pictogram: pictogram,
+      style: style,
+      iconSize: iconSize,
+    );
   }
 }
 
 class _FallbackIcon extends StatelessWidget {
   final Pictogram pictogram;
-  final CardSize cardSize;
+  final PictogramStyle style;
+  final double iconSize;
 
-  const _FallbackIcon({required this.pictogram, required this.cardSize});
+  const _FallbackIcon({
+    required this.pictogram,
+    required this.style,
+    required this.iconSize,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Icon(_getIcon(), size: _getIconSize());
-  }
+    IconData icon;
 
-  double _getIconSize() {
-    switch (cardSize) {
-      case CardSize.small:
-        return 32;
-      case CardSize.medium:
-        return 40;
-      case CardSize.large:
-        return 48;
-    }
-  }
-
-  IconData _getIcon() {
     if (pictogram.isCategory) {
-      return Icons.folder;
+      icon = Icons.folder_rounded;
+    } else if (pictogram.isKeyboardAction) {
+      icon = Icons.keyboard_alt_outlined;
+    } else {
+      icon = Icons.image_outlined;
     }
 
-    if (pictogram.isLetter) {
-      return Icons.keyboard;
-    }
+    return Center(
+      child: Icon(icon, size: iconSize, color: style.accentColor),
+    );
+  }
+}
 
-    if (pictogram.keyboardAction == KeyboardAction.space) {
-      return Icons.space_bar;
-    }
+class _CategoryBadge extends StatelessWidget {
+  final Color color;
 
-    if (pictogram.keyboardAction == KeyboardAction.deleteLetter) {
-      return Icons.backspace;
-    }
+  const _CategoryBadge({required this.color});
 
-    return Icons.chat_bubble_outline;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 25,
+      height: 25,
+      decoration: BoxDecoration(
+        color: color.withValues(alpha: 0.92),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: const Icon(Icons.folder_rounded, color: Colors.white, size: 17),
+    );
+  }
+}
+
+class _CardText extends StatelessWidget {
+  final String text;
+  final double fontSize;
+  final bool isCategory;
+  final Color accentColor;
+
+  const _CardText({
+    required this.text,
+    required this.fontSize,
+    required this.isCategory,
+    required this.accentColor,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 3),
+      decoration: BoxDecoration(
+        color: Colors.white.withValues(alpha: 0.74),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Text(
+        text,
+        maxLines: 2,
+        overflow: TextOverflow.ellipsis,
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          fontSize: fontSize,
+          height: 1.05,
+          fontWeight: isCategory ? FontWeight.w900 : FontWeight.w800,
+          color: Colors.black87,
+        ),
+      ),
+    );
   }
 }

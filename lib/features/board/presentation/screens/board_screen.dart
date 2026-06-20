@@ -63,7 +63,7 @@ class _BoardScreenState extends State<BoardScreen> {
   double _getChildAspectRatio() {
     switch (_settings.cardSize) {
       case CardSize.small:
-        return 1.55;
+        return 1.50;
       case CardSize.medium:
         return 1.25;
       case CardSize.large:
