@@ -1,22 +1,15 @@
 [
   {
-    "id": "home_quiero",
-    "text": "Quiero",
-    "imagePath": "",
-    "categoryId": "home_main",
-    "type": "word"
-  },
-  {
-    "id": "home_necesito",
-    "text": "Necesito",
-    "imagePath": "",
+    "id": "colegio_no_entiendo",
+    "text": "No entiendo",
+    "imagePath": "assets/images/colegio/noentiendo.png",
     "categoryId": "home_main",
     "type": "word"
   },
   {
     "id": "home_mas",
     "text": "Más",
-    "imagePath": "",
+    "imagePath": "assets/images/Mas.png",
     "categoryId": "home_main",
     "type": "category",
     "targetCategoryId": "mas_categorias"
@@ -24,42 +17,56 @@
   {
     "id": "home_ayuda",
     "text": "Ayuda",
-    "imagePath": "",
+    "imagePath": "assets/images/casa/Ayuda.png",
     "categoryId": "home",
     "type": "word"
   },
   {
     "id": "home_si",
     "text": "Sí",
-    "imagePath": "",
+    "imagePath": "assets/images/si.png",
     "categoryId": "home_right",
     "type": "word"
   },
   {
     "id": "home_no",
     "text": "No",
-    "imagePath": "",
+    "imagePath": "assets/images/no.png",
+    "categoryId": "home_right",
+    "type": "word"
+  },
+  {
+    "id": "home_quiero",
+    "text": "Quiero",
+    "imagePath": "assets/images/Quiero.png",
+    "categoryId": "home_right",
+    "type": "word"
+  },
+  {
+    "id": "home_necesito",
+    "text": "Necesito",
+    "imagePath": "assets/images/Necesito.png",
     "categoryId": "home_right",
     "type": "word"
   },
   {
     "id": "mas_dolor",
     "text": "Dolor",
-    "imagePath": "",
+    "imagePath": "assets/images/categories/dolor.png",
     "categoryId": "mas_categorias",
     "type": "word"
   },
   {
     "id": "mas_bano",
     "text": "Baño",
-    "imagePath": "",
+    "imagePath": "assets/images/categories/baño.png",
     "categoryId": "mas_categorias",
     "type": "word"
   },
   {
     "id": "alfabeto",
     "text": "Alfabeto",
-    "imagePath": "",
+    "imagePath": "assets/images/alfabeto.png",
     "categoryId": "home_center",
     "type": "category",
     "targetCategoryId": "alfabeto",
@@ -77,7 +84,7 @@
   {
     "id": "mas_bano",
     "text": "Personas",
-    "imagePath": "",
+    "imagePath": "assets/images/personas.png",
     "categoryId": "home_main",
     "type": "category",
     "targetCategoryId": "personas"
@@ -86,7 +93,7 @@
     "id": "mas_verbos",
     "text": "Verbos",
     "imagePath": "",
-    "categoryId": "mas_categorias",
+    "categoryId": "home_main",
     "type": "category",
     "targetCategoryId": "verbos",
     "categoryOpenMode": "fullBoard"
@@ -94,15 +101,15 @@
   {
     "id": "mas_preguntas",
     "text": "Preguntas",
-    "imagePath": "",
-    "categoryId": "mas_categorias",
+    "imagePath": "assets/images/categories/pregunta.png",
+    "categoryId": "home_main",
     "type": "category",
     "targetCategoryId": "preguntas"
   },
   {
     "id": "home_frases",
     "text": "Frases",
-    "imagePath": "",
+    "imagePath": "assets/images/frase.png",
     "categoryId": "home_main",
     "type": "category",
     "targetCategoryId": "frases_rapidas",
@@ -112,32 +119,30 @@
     "id": "mas_emociones",
     "text": "Emociones",
     "imagePath": "",
-    "categoryId": "mas_categorias",
+    "categoryId": "home_main",
     "type": "category",
     "targetCategoryId": "emociones"
   },
   {
     "id": "mas_comida",
     "text": "Comida",
-    "imagePath": "",
+    "imagePath": "assets/images/categories/comida.png",
     "categoryId": "mas_categorias",
     "type": "category",
-    "targetCategoryId": "comida",
-    "categoryOpenMode": "fullBoard"
+    "targetCategoryId": "comida"
   },
   {
     "id": "mas_bebida",
     "text": "Bebida",
-    "imagePath": "",
+    "imagePath": "assets/images/categories/bebida.png",
     "categoryId": "mas_categorias",
     "type": "category",
-    "targetCategoryId": "bebida",
-    "categoryOpenMode": "fullBoard"
+    "targetCategoryId": "bebida"
   },
   {
     "id": "mas_casa",
     "text": "Casa",
-    "imagePath": "",
+    "imagePath": "assets/images/categories/casa.png",
     "categoryId": "mas_categorias",
     "type": "category",
     "targetCategoryId": "casa"
@@ -145,24 +150,23 @@
   {
     "id": "mas_colegio",
     "text": "Colegio",
-    "imagePath": "",
+    "imagePath": "assets/images/categories/colegio-png",
     "categoryId": "mas_categorias",
     "type": "category",
     "targetCategoryId": "colegio"
   },
   {
-    "id": "mas_salud",
-    "text": "Salud",
-    "imagePath": "",
-    "categoryId": "mas_categorias",
+    "id": "mas_cuerpo",
+    "text": "Cuerpo",
+    "imagePath": "assets/images/categories/salud.png",
+    "categoryId": "home_main",
     "type": "category",
-    "targetCategoryId": "salud",
-    "categoryOpenMode": "fullBoard"
+    "targetCategoryId": "cuerpo"
   },
   {
     "id": "mas_lugares",
     "text": "Lugares",
-    "imagePath": "",
+    "imagePath": "assets/images/categories/lugares,png",
     "categoryId": "mas_categorias",
     "type": "category",
     "targetCategoryId": "lugares"
@@ -170,20 +174,18 @@
   {
     "id": "mas_objetos",
     "text": "Objetos",
-    "imagePath": "",
+    "imagePath": "assets/images/categories/objetos.png",
     "categoryId": "mas_categorias",
     "type": "category",
-    "targetCategoryId": "objetos",
-    "categoryOpenMode": "fullBoard"
+    "targetCategoryId": "objetos"
   },
   {
     "id": "mas_trabajo",
-    "text": "Trabajo",
-    "imagePath": "",
+    "text": "Trabajos",
+    "imagePath": "assets/images/categories/trabajo.png",
     "categoryId": "mas_categorias",
     "type": "category",
-    "targetCategoryId": "trabajo",
-    "categoryOpenMode": "fullBoard"
+    "targetCategoryId": "trabajo"
   },
   {
     "id": "saludos",
@@ -197,42 +199,42 @@
   {
     "id": "yo",
     "text": "Yo",
-    "imagePath": "",
+    "imagePath": "assets/images/personas/yo.png",
     "categoryId": "personas",
     "type": "word"
   },
   {
     "id": "tu",
     "text": "Tú",
-    "imagePath": "",
+    "imagePath": "assets/images/personas/tu.png",
     "categoryId": "personas",
     "type": "word"
   },
   {
     "id": "mama",
     "text": "Mamá",
-    "imagePath": "",
+    "imagePath": "assets/images/personas/mama.png",
     "categoryId": "personas",
     "type": "word"
   },
   {
     "id": "papa",
     "text": "Papá",
-    "imagePath": "",
+    "imagePath": "assets/images/personas/papa.png",
     "categoryId": "personas",
     "type": "word"
   },
   {
     "id": "profesor",
     "text": "Profesor",
-    "imagePath": "",
+    "imagePath": "assets/images/personas/profesora.png",
     "categoryId": "personas",
     "type": "word"
   },
   {
     "id": "amigo",
     "text": "Amigo",
-    "imagePath": "",
+    "imagePath": "assets/images/personas/amigo.png",
     "categoryId": "personas",
     "type": "word"
   },
@@ -254,35 +256,35 @@
   {
     "id": "buenos_dias",
     "text": "Buenos días",
-    "imagePath": "",
+    "imagePath": "assets/images/saludos/buenosdias.png",
     "categoryId": "saludos",
     "type": "word"
   },
   {
     "id": "buenas_tardes",
     "text": "Buenas tardes",
-    "imagePath": "",
+    "imagePath": "assets/images/saludos/buenastardes.png",
     "categoryId": "saludos",
     "type": "word"
   },
   {
     "id": "buenas_noches",
     "text": "Buenas noches",
-    "imagePath": "",
+    "imagePath": "assets/images/saludos/buenasnoches.png",
     "categoryId": "saludos",
     "type": "word"
   },
   {
     "id": "por_favor",
     "text": "Por favor",
-    "imagePath": "",
+    "imagePath": "assets/images/saludos/porfavor.png",
     "categoryId": "saludos",
     "type": "word"
   },
   {
     "id": "gracias",
     "text": "Gracias",
-    "imagePath": "",
+    "imagePath": "assets/images/saludos/gracias.png",
     "categoryId": "saludos",
     "type": "word"
   },
@@ -290,42 +292,42 @@
   {
     "id": "quiero",
     "text": "Quiero",
-    "imagePath": "",
+    "imagePath": "assets/images/necesidades/quiero.png",
     "categoryId": "necesidades",
     "type": "word"
   },
   {
     "id": "agua",
     "text": "Agua",
-    "imagePath": "",
+    "imagePath": "assets/images/necesidades/agua.png",
     "categoryId": "necesidades",
     "type": "word"
   },
   {
     "id": "comer",
     "text": "Comer",
-    "imagePath": "",
+    "imagePath": "assets/images/necesidades/comer.png",
     "categoryId": "necesidades",
     "type": "word"
   },
   {
     "id": "bano",
     "text": "Baño",
-    "imagePath": "",
+    "imagePath": "assets/images/necesidades/baño.png",
     "categoryId": "necesidades",
     "type": "word"
   },
   {
     "id": "dormir",
     "text": "Dormir",
-    "imagePath": "",
+    "imagePath": "assets/images/necesidades/dormir.png",
     "categoryId": "necesidades",
     "type": "word"
   },
   {
     "id": "descansar",
     "text": "Descansar",
-    "imagePath": "",
+    "imagePath": "assets/images/necesidades/descansar.png",
     "categoryId": "necesidades",
     "type": "word"
   },
@@ -333,42 +335,42 @@
   {
     "id": "ir",
     "text": "Ir",
-    "imagePath": "",
+    "imagePath": "assets/images/acciones/ir.png",
     "categoryId": "acciones",
     "type": "word"
   },
   {
     "id": "venir",
     "text": "Venir",
-    "imagePath": "",
+    "imagePath": "assets/images/acciones/venir.png",
     "categoryId": "acciones",
     "type": "word"
   },
   {
     "id": "dar",
     "text": "Dar",
-    "imagePath": "",
+    "imagePath": "assets/images/acciones/dar.png",
     "categoryId": "acciones",
     "type": "word"
   },
   {
     "id": "hacer",
     "text": "Hacer",
-    "imagePath": "",
+    "imagePath": "assets/images/acciones/hacer.png",
     "categoryId": "acciones",
     "type": "word"
   },
   {
     "id": "ver",
     "text": "Ver",
-    "imagePath": "",
+    "imagePath": "assets/images/acciones/ver.png",
     "categoryId": "acciones",
     "type": "word"
   },
   {
     "id": "escuchar",
     "text": "Escuchar",
-    "imagePath": "",
+    "imagePath": "assets/images/acciones/escuchar.png",
     "categoryId": "acciones",
     "type": "word"
   },
@@ -376,28 +378,28 @@
   {
     "id": "juguete",
     "text": "Juguete",
-    "imagePath": "",
+    "imagePath": "assets/images/cosas/juguete.png",
     "categoryId": "cosas",
     "type": "word"
   },
   {
     "id": "pelota",
     "text": "Pelota",
-    "imagePath": "",
+    "imagePath": "assets/images/cosas/pelota.png",
     "categoryId": "cosas",
     "type": "word"
   },
   {
     "id": "telefono",
     "text": "Teléfono",
-    "imagePath": "",
+    "imagePath": "assets/images/cosas/telefono.png",
     "categoryId": "cosas",
     "type": "word"
   },
   {
     "id": "tablet",
     "text": "Tablet",
-    "imagePath": "",
+    "imagePath": "assets/images/cosas/tablet.png",
     "categoryId": "cosas",
     "type": "word"
   },
@@ -405,7 +407,7 @@
   {
     "id": "letter_a",
     "text": "A",
-    "imagePath": "",
+    "imagePath": "assets/images/alfabeto/A.png",
     "categoryId": "alfabeto",
     "type": "letter",
     "value": "a"
@@ -413,7 +415,7 @@
   {
     "id": "letter_b",
     "text": "B",
-    "imagePath": "",
+    "imagePath": "assets/images/alfabeto/B.png",
     "categoryId": "alfabeto",
     "type": "letter",
     "value": "b"
@@ -421,7 +423,7 @@
   {
     "id": "letter_c",
     "text": "C",
-    "imagePath": "",
+    "imagePath": "assets/images/alfabeto/C.png",
     "categoryId": "alfabeto",
     "type": "letter",
     "value": "c"
@@ -429,7 +431,7 @@
   {
     "id": "letter_d",
     "text": "D",
-    "imagePath": "",
+    "imagePath": "assets/images/alfabeto/D.png",
     "categoryId": "alfabeto",
     "type": "letter",
     "value": "d"
@@ -437,7 +439,7 @@
   {
     "id": "letter_e",
     "text": "E",
-    "imagePath": "",
+    "imagePath": "assets/images/alfabeto/E.png",
     "categoryId": "alfabeto",
     "type": "letter",
     "value": "e"
@@ -445,7 +447,7 @@
   {
     "id": "letter_f",
     "text": "F",
-    "imagePath": "",
+    "imagePath": "assets/images/alfabeto/F.png",
     "categoryId": "alfabeto",
     "type": "letter",
     "value": "f"
@@ -453,7 +455,7 @@
   {
     "id": "letter_g",
     "text": "G",
-    "imagePath": "",
+    "imagePath": "assets/images/alfabeto/G.png",
     "categoryId": "alfabeto",
     "type": "letter",
     "value": "g"
@@ -461,7 +463,7 @@
   {
     "id": "letter_h",
     "text": "H",
-    "imagePath": "",
+    "imagePath": "assets/images/alfabeto/H.png",
     "categoryId": "alfabeto",
     "type": "letter",
     "value": "h"
@@ -469,7 +471,7 @@
   {
     "id": "letter_i",
     "text": "I",
-    "imagePath": "",
+    "imagePath": "assets/images/alfabeto/I.png",
     "categoryId": "alfabeto",
     "type": "letter",
     "value": "i"
@@ -477,7 +479,7 @@
   {
     "id": "letter_j",
     "text": "J",
-    "imagePath": "",
+    "imagePath": "assets/images/alfabeto/J.png",
     "categoryId": "alfabeto",
     "type": "letter",
     "value": "j"
@@ -485,7 +487,7 @@
   {
     "id": "letter_k",
     "text": "K",
-    "imagePath": "",
+    "imagePath": "assets/images/alfabeto/K.png",
     "categoryId": "alfabeto",
     "type": "letter",
     "value": "k"
@@ -493,7 +495,7 @@
   {
     "id": "letter_l",
     "text": "L",
-    "imagePath": "",
+    "imagePath": "assets/images/alfabeto/L.png",
     "categoryId": "alfabeto",
     "type": "letter",
     "value": "l"
@@ -501,7 +503,7 @@
   {
     "id": "letter_m",
     "text": "M",
-    "imagePath": "",
+    "imagePath": "assets/images/alfabeto/M.png",
     "categoryId": "alfabeto",
     "type": "letter",
     "value": "m"
@@ -509,7 +511,7 @@
   {
     "id": "letter_n",
     "text": "N",
-    "imagePath": "",
+    "imagePath": "assets/images/alfabeto/N.png",
     "categoryId": "alfabeto",
     "type": "letter",
     "value": "n"
@@ -517,7 +519,7 @@
   {
     "id": "letter_n_tilde",
     "text": "Ñ",
-    "imagePath": "",
+    "imagePath": "assets/images/alfabeto/Nn.png",
     "categoryId": "alfabeto",
     "type": "letter",
     "value": "ñ"
@@ -525,7 +527,7 @@
   {
     "id": "letter_o",
     "text": "O",
-    "imagePath": "",
+    "imagePath": "assets/images/alfabeto/O.png",
     "categoryId": "alfabeto",
     "type": "letter",
     "value": "o"
@@ -533,7 +535,7 @@
   {
     "id": "letter_p",
     "text": "P",
-    "imagePath": "",
+    "imagePath": "assets/images/alfabeto/P.png",
     "categoryId": "alfabeto",
     "type": "letter",
     "value": "p"
@@ -541,7 +543,7 @@
   {
     "id": "letter_q",
     "text": "Q",
-    "imagePath": "",
+    "imagePath": "assets/images/alfabeto/Q.png",
     "categoryId": "alfabeto",
     "type": "letter",
     "value": "q"
@@ -549,7 +551,7 @@
   {
     "id": "letter_r",
     "text": "R",
-    "imagePath": "",
+    "imagePath": "assets/images/alfabeto/R.png",
     "categoryId": "alfabeto",
     "type": "letter",
     "value": "r"
@@ -557,7 +559,7 @@
   {
     "id": "letter_s",
     "text": "S",
-    "imagePath": "",
+    "imagePath": "assets/images/alfabeto/S.png",
     "categoryId": "alfabeto",
     "type": "letter",
     "value": "s"
@@ -565,7 +567,7 @@
   {
     "id": "letter_t",
     "text": "T",
-    "imagePath": "",
+    "imagePath": "assets/images/alfabeto/T.png",
     "categoryId": "alfabeto",
     "type": "letter",
     "value": "t"
@@ -573,7 +575,7 @@
   {
     "id": "letter_u",
     "text": "U",
-    "imagePath": "",
+    "imagePath": "assets/images/alfabeto/U.png",
     "categoryId": "alfabeto",
     "type": "letter",
     "value": "u"
@@ -581,7 +583,7 @@
   {
     "id": "letter_v",
     "text": "V",
-    "imagePath": "",
+    "imagePath": "assets/images/alfabeto/V.png",
     "categoryId": "alfabeto",
     "type": "letter",
     "value": "v"
@@ -589,7 +591,7 @@
   {
     "id": "letter_w",
     "text": "W",
-    "imagePath": "",
+    "imagePath": "assets/images/alfabeto/W.png",
     "categoryId": "alfabeto",
     "type": "letter",
     "value": "w"
@@ -597,7 +599,7 @@
   {
     "id": "letter_x",
     "text": "X",
-    "imagePath": "",
+    "imagePath": "assets/images/alfabeto/X.png",
     "categoryId": "alfabeto",
     "type": "letter",
     "value": "x"
@@ -605,7 +607,7 @@
   {
     "id": "letter_y",
     "text": "Y",
-    "imagePath": "",
+    "imagePath": "assets/images/alfabeto/Y.png",
     "categoryId": "alfabeto",
     "type": "letter",
     "value": "y"
@@ -613,7 +615,7 @@
   {
     "id": "letter_z",
     "text": "Z",
-    "imagePath": "",
+    "imagePath": "assets/images/alfabeto/Z.png",
     "categoryId": "alfabeto",
     "type": "letter",
     "value": "z"
@@ -637,196 +639,196 @@
   {
     "id": "verbo_ser",
     "text": "Ser",
-    "imagePath": "",
+    "imagePath": "assets/images/verbos/ser.png",
     "categoryId": "verbos",
     "type": "word"
   },
   {
     "id": "verbo_estar",
     "text": "Estar",
-    "imagePath": "",
+    "imagePath": "assets/images/verbos/estar.png",
     "categoryId": "verbos",
     "type": "word"
   },
   {
     "id": "verbo_tener",
     "text": "Tener",
-    "imagePath": "",
+    "imagePath": "assets/images/verbos/tener.png",
     "categoryId": "verbos",
     "type": "word"
   },
   {
     "id": "verbo_querer",
     "text": "Querer",
-    "imagePath": "",
+    "imagePath": "assets/images/verbos/querer.png",
     "categoryId": "verbos",
     "type": "word"
   },
   {
     "id": "verbo_necesitar",
     "text": "Necesitar",
-    "imagePath": "",
+    "imagePath": "assets/images/verbos/necesitar.png",
     "categoryId": "verbos",
     "type": "word"
   },
   {
     "id": "verbo_poder",
     "text": "Poder",
-    "imagePath": "",
+    "imagePath": "assets/images/verbos/poder.png",
     "categoryId": "verbos",
     "type": "word"
   },
   {
     "id": "verbo_ir",
     "text": "Ir",
-    "imagePath": "",
+    "imagePath": "assets/images/verbos/ir.png",
     "categoryId": "verbos",
     "type": "word"
   },
   {
     "id": "verbo_venir",
     "text": "Venir",
-    "imagePath": "",
+    "imagePath": "assets/images/verbos/venir.png",
     "categoryId": "verbos",
     "type": "word"
   },
   {
     "id": "verbo_dar",
     "text": "Dar",
-    "imagePath": "",
+    "imagePath": "assets/images/verbos/dar.png",
     "categoryId": "verbos",
     "type": "word"
   },
   {
     "id": "verbo_hacer",
     "text": "Hacer",
-    "imagePath": "",
+    "imagePath": "assets/images/verbos/hacer.png",
     "categoryId": "verbos",
     "type": "word"
   },
   {
     "id": "verbo_ver",
     "text": "Ver",
-    "imagePath": "",
+    "imagePath": "assets/images/verbos/ver.png",
     "categoryId": "verbos",
     "type": "word"
   },
   {
     "id": "verbo_escuchar",
     "text": "Escuchar",
-    "imagePath": "",
+    "imagePath": "assets/images/verbos/escuchar.png",
     "categoryId": "verbos",
     "type": "word"
   },
   {
     "id": "verbo_abrir",
     "text": "Abrir",
-    "imagePath": "",
+    "imagePath": "assets/images/verbos/abrir.png",
     "categoryId": "verbos",
     "type": "word"
   },
   {
     "id": "verbo_cerrar",
     "text": "Cerrar",
-    "imagePath": "",
+    "imagePath": "assets/images/verbos/cerrar.png",
     "categoryId": "verbos",
     "type": "word"
   },
   {
     "id": "verbo_jugar",
     "text": "Jugar",
-    "imagePath": "",
+    "imagePath": "assets/images/verbos/jugar.png",
     "categoryId": "verbos",
     "type": "word"
   },
   {
     "id": "verbo_estudiar",
     "text": "Estudiar",
-    "imagePath": "",
+    "imagePath": "assets/images/verbos/estudiar.png",
     "categoryId": "verbos",
     "type": "word"
   },
   {
     "id": "verbo_trabajar",
     "text": "Trabajar",
-    "imagePath": "",
+    "imagePath": "assets/images/verbos/trabajar.png",
     "categoryId": "verbos",
     "type": "word"
   },
   {
     "id": "verbo_esperar",
     "text": "Esperar",
-    "imagePath": "",
+    "imagePath": "assets/images/verbos/esperar.png",
     "categoryId": "verbos",
     "type": "word"
   },
   {
     "id": "verbo_ayudar",
     "text": "Ayudar",
-    "imagePath": "",
+    "imagePath": "assets/images/verbos/ayudar.png",
     "categoryId": "verbos",
     "type": "word"
   },
   {
     "id": "verbo_parar",
     "text": "Parar",
-    "imagePath": "",
+    "imagePath": "assets/images/verbos/parar.png",
     "categoryId": "verbos",
     "type": "word"
   },
   {
     "id": "pregunta_que",
     "text": "¿Qué?",
-    "imagePath": "",
+    "imagePath": "assets/images/preguntas/que.png",
     "categoryId": "preguntas",
     "type": "word"
   },
   {
     "id": "pregunta_quien",
     "text": "¿Quién?",
-    "imagePath": "",
+    "imagePath": "assets/images/preguntas/quien.png",
     "categoryId": "preguntas",
     "type": "word"
   },
   {
     "id": "pregunta_donde",
     "text": "¿Dónde?",
-    "imagePath": "",
+    "imagePath": "assets/images/preguntas/donde.png",
     "categoryId": "preguntas",
     "type": "word"
   },
   {
     "id": "pregunta_cuando",
     "text": "¿Cuándo?",
-    "imagePath": "",
+    "imagePath": "assets/images/preguntas/cuando.png",
     "categoryId": "preguntas",
     "type": "word"
   },
   {
     "id": "pregunta_por_que",
     "text": "¿Por qué?",
-    "imagePath": "",
+    "imagePath": "assets/images/preguntas/porque.png",
     "categoryId": "preguntas",
     "type": "word"
   },
   {
     "id": "pregunta_como",
     "text": "¿Cómo?",
-    "imagePath": "",
+    "imagePath": "assets/images/preguntas/como.png",
     "categoryId": "preguntas",
     "type": "word"
   },
   {
     "id": "pregunta_cuanto",
     "text": "¿Cuánto?",
-    "imagePath": "",
+    "imagePath": "assets/images/preguntas/cuanto.png",
     "categoryId": "preguntas",
     "type": "word"
   },
   {
     "id": "pregunta_puedo",
     "text": "¿Puedo?",
-    "imagePath": "",
+    "imagePath": "assets/images/preguntas/puedo.png",
     "categoryId": "preguntas",
     "type": "word"
   },
@@ -847,84 +849,84 @@
   {
     "id": "pregunta_que_hacemos",
     "text": "¿Qué hacemos?",
-    "imagePath": "",
+    "imagePath": "assets/images/preguntas/quehacemos.png",
     "categoryId": "preguntas",
     "type": "word"
   },
   {
     "id": "pregunta_donde_esta",
     "text": "¿Dónde está?",
-    "imagePath": "",
+    "imagePath": "assets/images/preguntas/dondeesta.png",
     "categoryId": "preguntas",
     "type": "word"
   },
   {
     "id": "emocion_contento",
     "text": "Contento",
-    "imagePath": "",
+    "imagePath": "assets/images/emociones/contento.png",
     "categoryId": "emociones",
     "type": "word"
   },
   {
     "id": "emocion_triste",
     "text": "Triste",
-    "imagePath": "",
+    "imagePath": "assets/images/emociones/triste.png",
     "categoryId": "emociones",
     "type": "word"
   },
   {
     "id": "emocion_enfadado",
     "text": "Enfadado",
-    "imagePath": "",
+    "imagePath": "assets/images/emociones/enfadado.png",
     "categoryId": "emociones",
     "type": "word"
   },
   {
     "id": "emocion_nervioso",
     "text": "Nervioso",
-    "imagePath": "",
+    "imagePath": "assets/images/emociones/nerviosa.png",
     "categoryId": "emociones",
     "type": "word"
   },
   {
     "id": "emocion_asustado",
     "text": "Asustado",
-    "imagePath": "",
+    "imagePath": "assets/images/emociones/asustado.png",
     "categoryId": "emociones",
     "type": "word"
   },
   {
     "id": "emocion_cansado",
     "text": "Cansado",
-    "imagePath": "",
+    "imagePath": "assets/images/emociones/cansada.png",
     "categoryId": "emociones",
     "type": "word"
   },
   {
     "id": "emocion_bien",
     "text": "Bien",
-    "imagePath": "",
+    "imagePath": "assets/images/emociones/bien.png",
     "categoryId": "emociones",
     "type": "word"
   },
   {
     "id": "emocion_mal",
     "text": "Mal",
-    "imagePath": "",
+    "imagePath": "assets/images/emociones/mal.png",
     "categoryId": "emociones",
     "type": "word"
   },
   {
     "id": "emocion_me_gusta",
     "text": "Me gusta",
-    "imagePath": "",
+    "imagePath": "assets/images/emociones/megusta.png",
     "categoryId": "emociones",
     "type": "word"
   },
   {
     "id": "emocion_no_me_gusta",
     "text": "No me gusta",
-    "imagePath": "",
+    "imagePath": "assets/images/emociones/nomegusta.png",
     "categoryId": "emociones",
     "type": "word"
   },
@@ -945,70 +947,70 @@
   {
     "id": "comida_comer",
     "text": "Comer",
-    "imagePath": "",
+    "imagePath": "assets/images/comida/comer.png",
     "categoryId": "comida",
     "type": "word"
   },
   {
     "id": "comida_pan",
     "text": "Pan",
-    "imagePath": "",
+    "imagePath": "assets/images/comida/pan.png",
     "categoryId": "comida",
     "type": "word"
   },
   {
     "id": "comida_arroz",
     "text": "Arroz",
-    "imagePath": "",
+    "imagePath": "assets/images/comida/arroz.png",
     "categoryId": "comida",
     "type": "word"
   },
   {
     "id": "comida_pasta",
     "text": "Pasta",
-    "imagePath": "",
+    "imagePath": "assets/images/comida/pasta.png",
     "categoryId": "comida",
     "type": "word"
   },
   {
     "id": "comida_pollo",
     "text": "Pollo",
-    "imagePath": "",
+    "imagePath": "assets/images/comida/pollo.png",
     "categoryId": "comida",
     "type": "word"
   },
   {
     "id": "comida_pescado",
     "text": "Pescado",
-    "imagePath": "",
+    "imagePath": "assets/images/comida/pescado.png",
     "categoryId": "comida",
     "type": "word"
   },
   {
     "id": "comida_fruta",
     "text": "Fruta",
-    "imagePath": "",
+    "imagePath": "assets/images/comida/fruta.png",
     "categoryId": "comida",
     "type": "word"
   },
   {
     "id": "comida_yogur",
     "text": "Yogur",
-    "imagePath": "",
+    "imagePath": "assets/images/comida/yogur.png",
     "categoryId": "comida",
     "type": "word"
   },
   {
     "id": "comida_galleta",
     "text": "Galleta",
-    "imagePath": "",
+    "imagePath": "assets/images/comida/galleta.png",
     "categoryId": "comida",
     "type": "word"
   },
   {
     "id": "comida_bocadillo",
     "text": "Bocadillo",
-    "imagePath": "",
+    "imagePath": "assets/images/comida/bocadillo.png",
     "categoryId": "comida",
     "type": "word"
   },
@@ -1029,49 +1031,49 @@
   {
     "id": "bebida_beber",
     "text": "Beber",
-    "imagePath": "",
+    "imagePath": "assets/images/bebida/beber.png",
     "categoryId": "bebida",
     "type": "word"
   },
   {
     "id": "bebida_agua",
     "text": "Agua",
-    "imagePath": "",
+    "imagePath": "assets/images/bebida/agua.png",
     "categoryId": "bebida",
     "type": "word"
   },
   {
     "id": "bebida_leche",
     "text": "Leche",
-    "imagePath": "",
+    "imagePath": "assets/images/bebida/leche.png",
     "categoryId": "bebida",
     "type": "word"
   },
   {
     "id": "bebida_zumo",
     "text": "Zumo",
-    "imagePath": "",
+    "imagePath": "assets/images/bebida/zumo.png",
     "categoryId": "bebida",
     "type": "word"
   },
   {
     "id": "bebida_batido",
     "text": "Batido",
-    "imagePath": "",
+    "imagePath": "assets/images/bebida/batido.png",
     "categoryId": "bebida",
     "type": "word"
   },
   {
     "id": "bebida_caliente",
     "text": "Caliente",
-    "imagePath": "",
+    "imagePath": "assets/images/bebida/caliente.png",
     "categoryId": "bebida",
     "type": "word"
   },
   {
     "id": "bebida_frio",
     "text": "Frío",
-    "imagePath": "",
+    "imagePath": "frio",
     "categoryId": "bebida",
     "type": "word"
   },
@@ -1085,595 +1087,581 @@
   {
     "id": "salud_me_duele",
     "text": "Me duele",
-    "imagePath": "",
-    "categoryId": "salud",
+    "imagePath": "assets/images/cuerpo/meduele.png",
+    "categoryId": "cuerpo",
     "type": "word"
   },
   {
-    "id": "salud_cabeza",
+    "id": "cuerpo_cabeza",
     "text": "Cabeza",
-    "imagePath": "",
-    "categoryId": "salud",
+    "imagePath": "assets/images/cuerpo/cabeza.png",
+    "categoryId": "cuerpo",
     "type": "word"
   },
   {
-    "id": "salud_barriga",
+    "id": "cuerpo_barriga",
     "text": "Barriga",
-    "imagePath": "",
-    "categoryId": "salud",
+    "imagePath": "assets/images/cuerpo/barriga.png",
+    "categoryId": "cuerpo",
     "type": "word"
   },
   {
-    "id": "salud_boca",
+    "id": "cuerpo_boca",
     "text": "Boca",
-    "imagePath": "",
-    "categoryId": "salud",
+    "imagePath": "assets/images/cuerpo/boca.png",
+    "categoryId": "cuerpo",
     "type": "word"
   },
   {
-    "id": "salud_garganta",
+    "id": "cuerpo_garganta",
     "text": "Garganta",
-    "imagePath": "",
-    "categoryId": "salud",
+    "imagePath": "assets/images/cuerpo/garganta.png",
+    "categoryId": "cuerpo",
     "type": "word"
   },
   {
-    "id": "salud_mano",
+    "id": "cuerpo_mano",
     "text": "Mano",
-    "imagePath": "",
-    "categoryId": "salud",
+    "imagePath": "assets/images/cuerpo/mano.png",
+    "categoryId": "cuerpo",
     "type": "word"
   },
   {
-    "id": "salud_pie",
+    "id": "cuerpo_pie",
     "text": "Pie",
-    "imagePath": "",
-    "categoryId": "salud",
+    "imagePath": "assets/images/cuerpo/pie.png",
+    "categoryId": "cuerpo",
     "type": "word"
   },
   {
-    "id": "salud_mareado",
+    "id": "cuerpo_mareado",
     "text": "Mareado",
-    "imagePath": "",
-    "categoryId": "salud",
+    "imagePath": "assets/images/cuerpo/mareado.png",
+    "categoryId": "cuerpo",
     "type": "word"
   },
   {
-    "id": "salud_enfermo",
+    "id": "emociones_enfermo",
     "text": "Enfermo",
-    "imagePath": "",
-    "categoryId": "salud",
+    "imagePath": "assets/images/cuerpo/enferma.png",
+    "categoryId": "emociones",
     "type": "word"
   },
   {
-    "id": "salud_medico",
+    "id": "trabajo_medico",
     "text": "Médico",
-    "imagePath": "",
-    "categoryId": "salud",
+    "imagePath": "assets/images/cuerpo/medico.png",
+    "categoryId": "trabajo",
     "type": "word"
   },
   {
-    "id": "salud_medicina",
+    "id": "objetos_medicina",
     "text": "Medicina",
-    "imagePath": "",
-    "categoryId": "salud",
-    "type": "word"
-  },
-  {
-    "id": "salud_descansar",
-    "text": "Descansar",
-    "imagePath": "",
-    "categoryId": "salud",
+    "imagePath": "assets/images/cuerpo/medicina.png",
+    "categoryId": "objetos",
     "type": "word"
   },
   {
     "id": "casa_habitacion",
     "text": "Habitación",
-    "imagePath": "",
+    "imagePath": "assets/images/casa/habitacion.png",
     "categoryId": "casa",
     "type": "word"
   },
   {
     "id": "casa_cocina",
     "text": "Cocina",
-    "imagePath": "",
+    "imagePath": "assets/images/casa/cocina.png",
     "categoryId": "casa",
     "type": "word"
   },
   {
     "id": "casa_bano",
     "text": "Baño",
-    "imagePath": "",
+    "imagePath": "assets/images/casa/baño.png",
     "categoryId": "casa",
     "type": "word"
   },
   {
     "id": "casa_salon",
     "text": "Salón",
-    "imagePath": "",
+    "imagePath": "assets/images/casa/salon.png",
     "categoryId": "casa",
     "type": "word"
   },
   {
     "id": "casa_cama",
     "text": "Cama",
-    "imagePath": "",
+    "imagePath": "assets/images/casa/cama.png",
     "categoryId": "casa",
     "type": "word"
   },
   {
     "id": "casa_ducha",
     "text": "Ducha",
-    "imagePath": "",
+    "imagePath": "assets/images/casa/ducha.png",
     "categoryId": "casa",
     "type": "word"
   },
   {
     "id": "casa_luz",
     "text": "Luz",
-    "imagePath": "",
+    "imagePath": "assets/images/casa/luz.png",
     "categoryId": "casa",
     "type": "word"
   },
   {
     "id": "casa_puerta",
     "text": "Puerta",
-    "imagePath": "",
+    "imagePath": "assets/images/casa/puerta.png",
     "categoryId": "casa",
     "type": "word"
   },
   {
     "id": "casa_abrir",
     "text": "Abrir",
-    "imagePath": "",
+    "imagePath": "assets/images/casa/abrir.png",
     "categoryId": "casa",
     "type": "word"
   },
   {
     "id": "casa_cerrar",
     "text": "Cerrar",
-    "imagePath": "",
+    "imagePath": "assets/images/casa/cerrar.png",
     "categoryId": "casa",
     "type": "word"
   },
   {
     "id": "colegio_profesor",
     "text": "Profesor",
-    "imagePath": "",
+    "imagePath": "assets/images/colegio/profesor.png",
     "categoryId": "colegio",
     "type": "word"
   },
   {
     "id": "colegio_clase",
     "text": "Clase",
-    "imagePath": "",
+    "imagePath": "assets/images/colegio/clase.png",
     "categoryId": "colegio",
     "type": "word"
   },
   {
     "id": "colegio_recreo",
     "text": "Recreo",
-    "imagePath": "",
+    "imagePath": "assets/images/colegio/recreo.png",
     "categoryId": "colegio",
     "type": "word"
   },
   {
     "id": "colegio_tarea",
     "text": "Tarea",
-    "imagePath": "",
+    "imagePath": "assets/images/colegio/cuaderno.png",
     "categoryId": "colegio",
     "type": "word"
   },
   {
     "id": "colegio_libro",
     "text": "Libro",
-    "imagePath": "",
+    "imagePath": "assets/images/colegio/libro.png",
     "categoryId": "colegio",
     "type": "word"
   },
   {
     "id": "colegio_lapiz",
     "text": "Lápiz",
-    "imagePath": "",
+    "imagePath": "assets/images/colegio/lapiz.png",
     "categoryId": "colegio",
     "type": "word"
   },
   {
     "id": "colegio_mochila",
     "text": "Mochila",
-    "imagePath": "",
+    "imagePath": "assets/images/colegio/mochila.png",
     "categoryId": "colegio",
     "type": "word"
   },
   {
     "id": "colegio_companero",
     "text": "Compañero",
-    "imagePath": "",
-    "categoryId": "colegio",
-    "type": "word"
-  },
-  {
-    "id": "colegio_no_entiendo",
-    "text": "No entiendo",
-    "imagePath": "",
+    "imagePath": "assets/images/colegio/compañero.png",
     "categoryId": "colegio",
     "type": "word"
   },
   {
     "id": "colegio_he_terminado",
     "text": "He terminado",
-    "imagePath": "",
+    "imagePath": "assets/images/colegio/heterminado.png",
     "categoryId": "colegio",
     "type": "word"
   },
   {
     "id": "colegio_necesito_ayuda",
     "text": "Necesito ayuda",
-    "imagePath": "",
+    "imagePath": "assets/images/colegio/necesitoayuda.png",
     "categoryId": "colegio",
     "type": "word"
   },
   {
     "id": "colegio_quiero_descansar",
     "text": "Quiero descansar",
-    "imagePath": "",
+    "imagePath": "assets/images/colegio/descanso.png",
     "categoryId": "colegio",
     "type": "word"
   },
   {
     "id": "trabajo_trabajar",
     "text": "Trabajar",
-    "imagePath": "",
-    "categoryId": "trabajo",
+    "imagePath": "assets/images/trabajo/trabajar.png",
+    "categoryId": "colegio",
     "type": "word"
   },
   {
     "id": "trabajo_descanso",
     "text": "Descanso",
-    "imagePath": "",
-    "categoryId": "trabajo",
+    "imagePath": "assets/images/trabajo/descanso.png",
+    "categoryId": "colegio",
     "type": "word"
   },
   {
     "id": "trabajo_jefe",
     "text": "Jefe",
-    "imagePath": "",
-    "categoryId": "trabajo",
+    "imagePath": "assets/images/trabajo/jefe.png",
+    "categoryId": "colegio",
     "type": "word"
   },
   {
     "id": "trabajo_companero",
     "text": "Compañero",
-    "imagePath": "",
-    "categoryId": "trabajo",
+    "imagePath": "assets/images/trabajo/compañero.png",
+    "categoryId": "colegio",
     "type": "word"
   },
   {
     "id": "trabajo_reunion",
     "text": "Reunión",
-    "imagePath": "",
-    "categoryId": "trabajo",
+    "imagePath": "assets/images/trabajo/reunion.png",
+    "categoryId": "colegio",
     "type": "word"
   },
   {
     "id": "trabajo_tarea",
     "text": "Tarea",
-    "imagePath": "",
-    "categoryId": "trabajo",
+    "imagePath": "assets/images/trabajo/tarea.png",
+    "categoryId": "colegio",
     "type": "word"
   },
   {
     "id": "trabajo_ayuda",
     "text": "Ayuda",
-    "imagePath": "",
-    "categoryId": "trabajo",
+    "imagePath": "assets/images/trabajo/ayuda.png",
+    "categoryId": "colegio",
     "type": "word"
   },
   {
     "id": "trabajo_no_entiendo",
     "text": "No entiendo",
-    "imagePath": "",
-    "categoryId": "trabajo",
+    "imagePath": "assets/images/trabajo/noentiendo.png",
+    "categoryId": "colegio",
     "type": "word"
   },
   {
     "id": "trabajo_he_terminado",
     "text": "He terminado",
-    "imagePath": "",
-    "categoryId": "trabajo",
+    "imagePath": "assets/images/trabajo/terminar.png",
+    "categoryId": "colegio",
     "type": "word"
   },
   {
     "id": "trabajo_necesito_descanso",
     "text": "Necesito descanso",
-    "imagePath": "",
-    "categoryId": "trabajo",
+    "imagePath": "assets/images/trabajo/necesitodescanso.png",
+    "categoryId": "colegio",
     "type": "word"
   },
   {
     "id": "lugar_casa",
     "text": "Casa",
-    "imagePath": "",
+    "imagePath": "assets/images/lugares/casa.png",
     "categoryId": "lugares",
     "type": "word"
   },
   {
     "id": "lugar_colegio",
     "text": "Colegio",
-    "imagePath": "",
+    "imagePath": "assets/images/lugares/colegio.png",
     "categoryId": "lugares",
     "type": "word"
   },
   {
     "id": "lugar_trabajo",
     "text": "Trabajo",
-    "imagePath": "",
+    "imagePath": "assets/images/lugares/obra.png",
     "categoryId": "lugares",
     "type": "word"
   },
   {
     "id": "lugar_parque",
     "text": "Parque",
-    "imagePath": "",
+    "imagePath": "assets/images/lugares/parque.png",
     "categoryId": "lugares",
     "type": "word"
   },
   {
     "id": "lugar_tienda",
     "text": "Tienda",
-    "imagePath": "",
+    "imagePath": "assets/images/lugares/bazar.png",
     "categoryId": "lugares",
     "type": "word"
   },
   {
     "id": "lugar_medico",
     "text": "Médico",
-    "imagePath": "",
+    "imagePath": "assets/images/lugares/hospital.png",
     "categoryId": "lugares",
     "type": "word"
   },
   {
     "id": "lugar_bano",
     "text": "Baño",
-    "imagePath": "",
+    "imagePath": "assets/images/lugares/baños.png",
     "categoryId": "lugares",
     "type": "word"
   },
   {
     "id": "lugar_calle",
     "text": "Calle",
-    "imagePath": "",
+    "imagePath": "assets/images/lugares/calle.png",
     "categoryId": "lugares",
     "type": "word"
   },
   {
     "id": "lugar_coche",
     "text": "Coche",
-    "imagePath": "",
+    "imagePath": "assets/images/lugares/coche.png",
     "categoryId": "lugares",
     "type": "word"
   },
   {
     "id": "lugar_autobus",
     "text": "Autobús",
-    "imagePath": "",
+    "imagePath": "assets/images/lugares/autobus.png",
     "categoryId": "lugares",
     "type": "word"
   },
   {
     "id": "objeto_tablet",
     "text": "Tablet",
-    "imagePath": "",
+    "imagePath": "assets/images/objetos/tablet.png",
     "categoryId": "objetos",
     "type": "word"
   },
   {
     "id": "objeto_telefono",
     "text": "Teléfono",
-    "imagePath": "",
+    "imagePath": "assets/images/objetos/telefono.png",
     "categoryId": "objetos",
     "type": "word"
   },
   {
     "id": "objeto_juguete",
     "text": "Juguete",
-    "imagePath": "",
+    "imagePath": "assets/images/objetos/juguete.png",
     "categoryId": "objetos",
     "type": "word"
   },
   {
     "id": "objeto_pelota",
     "text": "Pelota",
-    "imagePath": "",
+    "imagePath": "assets/images/objetos/pelota.png ",
     "categoryId": "objetos",
     "type": "word"
   },
   {
     "id": "objeto_mando",
     "text": "Mando",
-    "imagePath": "",
+    "imagePath": "assets/images/objetos/mando.png",
     "categoryId": "objetos",
     "type": "word"
   },
   {
     "id": "objeto_llaves",
     "text": "Llaves",
-    "imagePath": "",
+    "imagePath": "assets/images/objetos/llaves.png",
     "categoryId": "objetos",
     "type": "word"
   },
   {
     "id": "objeto_ropa",
     "text": "Ropa",
-    "imagePath": "",
+    "imagePath": "assets/images/objetos/ropa.png",
     "categoryId": "objetos",
     "type": "word"
   },
   {
     "id": "objeto_zapatos",
     "text": "Zapatos",
-    "imagePath": "",
+    "imagePath": "assets/images/objetos/zapatos.png",
     "categoryId": "objetos",
     "type": "word"
   },
   {
     "id": "objeto_mochila",
     "text": "Mochila",
-    "imagePath": "",
+    "imagePath": "assets/images/objetos/mochila.png",
     "categoryId": "objetos",
     "type": "word"
   },
   {
     "id": "objeto_dinero",
     "text": "Dinero",
-    "imagePath": "",
+    "imagePath": "assets/images/objetos/dinero.png",
     "categoryId": "objetos",
     "type": "word"
   },
   {
     "id": "persona_abuelo",
     "text": "Abuelo",
-    "imagePath": "",
+    "imagePath": "assets/images/personas/abuelo.png",
     "categoryId": "personas",
     "type": "word"
   },
   {
     "id": "persona_abuela",
     "text": "Abuela",
-    "imagePath": "",
+    "imagePath": "assets/images/personas/abuela.png",
     "categoryId": "personas",
     "type": "word"
   },
   {
     "id": "persona_hermano",
     "text": "Hermano",
-    "imagePath": "",
+    "imagePath": "assets/images/personas/hermano.png",
     "categoryId": "personas",
     "type": "word"
   },
   {
     "id": "persona_hermana",
     "text": "Hermana",
-    "imagePath": "",
+    "imagePath": "assets/images/personas/hermana.png",
     "categoryId": "personas",
     "type": "word"
   },
   {
     "id": "persona_medico",
     "text": "Médico",
-    "imagePath": "",
+    "imagePath": "assets/images/personas/medica.png",
     "categoryId": "personas",
     "type": "word"
   },
   {
     "id": "persona_profesor",
     "text": "Profesor",
-    "imagePath": "",
+    "imagePath": "assets/images/personas/profesor.png",
     "categoryId": "personas",
     "type": "word"
   },
   {
     "id": "persona_cuidador",
     "text": "Cuidador",
-    "imagePath": "",
+    "imagePath": "assets/images/personas/cuidador.png",
     "categoryId": "personas",
     "type": "word"
   },
   {
     "id": "persona_amigo",
     "text": "Amigo",
-    "imagePath": "",
+    "imagePath": "assets/images/personas/amiga.png",
     "categoryId": "personas",
     "type": "word"
   },
   {
     "id": "frase_quiero_agua",
     "text": "Quiero agua",
-    "imagePath": "",
+    "imagePath": "assets/images/frases/quieroagua.png",
     "categoryId": "frases_rapidas",
     "type": "word"
   },
   {
     "id": "frase_necesito_ayuda",
     "text": "Necesito ayuda",
-    "imagePath": "",
+    "imagePath": "assets/images/frases/necesitoayuda.png",
     "categoryId": "frases_rapidas",
     "type": "word"
   },
   {
     "id": "frase_quiero_ir_bano",
     "text": "Quiero ir al baño",
-    "imagePath": "",
+    "imagePath": "assets/images/frases/iralbaño.png",
     "categoryId": "frases_rapidas",
     "type": "word"
   },
   {
     "id": "frase_me_duele",
     "text": "Me duele",
-    "imagePath": "",
+    "imagePath": "assets/images/frases/meduele.png",
     "categoryId": "frases_rapidas",
     "type": "word"
   },
   {
     "id": "frase_tengo_hambre",
     "text": "Tengo hambre",
-    "imagePath": "",
+    "imagePath": "assets/images/frases/tengohambre.png",
     "categoryId": "frases_rapidas",
     "type": "word"
   },
   {
     "id": "frase_tengo_sed",
     "text": "Tengo sed",
-    "imagePath": "",
+    "imagePath": "assets/images/frases/tengosed.png",
     "categoryId": "frases_rapidas",
     "type": "word"
   },
   {
     "id": "frase_estoy_cansado",
     "text": "Estoy cansado",
-    "imagePath": "",
+    "imagePath": "assets/images/frases/estoycansado.png",
     "categoryId": "frases_rapidas",
     "type": "word"
   },
   {
     "id": "frase_necesito_descansar",
     "text": "Necesito descansar",
-    "imagePath": "",
+    "imagePath": "assets/images/frases/necesitodescansar.png",
     "categoryId": "frases_rapidas",
     "type": "word"
   },
   {
     "id": "frase_necesito_calma",
     "text": "Necesito calma",
-    "imagePath": "",
+    "imagePath": "assets/images/frases/necesitocalma.png",
     "categoryId": "frases_rapidas",
     "type": "word"
   },
   {
     "id": "frase_estoy_nervioso",
     "text": "Estoy nervioso",
-    "imagePath": "",
+    "imagePath": "assets/images/frases/estoynervioso.png",
     "categoryId": "frases_rapidas",
     "type": "word"
   },
   {
     "id": "frase_estoy_triste",
     "text": "Estoy triste",
-    "imagePath": "",
+    "imagePath": "assets/images/frases/estoytriste.png",
     "categoryId": "frases_rapidas",
     "type": "word"
   },
   {
     "id": "frase_estoy_contento",
     "text": "Estoy contento",
-    "imagePath": "",
+    "imagePath": "assets/images/frases/estoycontento.png",
     "categoryId": "frases_rapidas",
     "type": "word"
   },
   {
     "id": "frase_no_entiendo",
     "text": "No entiendo",
-    "imagePath": "",
+    "imagePath": "assets/images/frases/noentiendo.png",
     "categoryId": "frases_rapidas",
     "type": "word"
   },
@@ -1694,63 +1682,63 @@
   {
     "id": "frase_quiero_parar",
     "text": "Quiero parar",
-    "imagePath": "",
+    "imagePath": "assets/images/frases/quieroparar.png",
     "categoryId": "frases_rapidas",
     "type": "word"
   },
   {
     "id": "frase_no_me_gusta",
     "text": "No me gusta",
-    "imagePath": "",
+    "imagePath": "assets/images/frases/nomegusta.png",
     "categoryId": "frases_rapidas",
     "type": "word"
   },
   {
     "id": "frase_me_gusta",
     "text": "Me gusta",
-    "imagePath": "",
+    "imagePath": "assets/images/frases/megusta.png",
     "categoryId": "frases_rapidas",
     "type": "word"
   },
   {
     "id": "frase_quiero_estar_solo",
     "text": "Quiero estar solo",
-    "imagePath": "",
+    "imagePath": "assets/images/frases/quieroestarsolo.png",
     "categoryId": "frases_rapidas",
     "type": "word"
   },
   {
     "id": "frase_quiero_ir_casa",
     "text": "Quiero ir a casa",
-    "imagePath": "",
+    "imagePath": "assets/images/frases/quieroiracasa.png",
     "categoryId": "frases_rapidas",
     "type": "word"
   },
   {
     "id": "frase_he_terminado",
     "text": "He terminado",
-    "imagePath": "",
+    "imagePath": "assets/images/frases/heterminado.png",
     "categoryId": "frases_rapidas",
     "type": "word"
   },
   {
     "id": "frase_quiero_jugar",
     "text": "Quiero jugar",
-    "imagePath": "",
+    "imagePath": "assets/images/frases/quierojugar.png",
     "categoryId": "frases_rapidas",
     "type": "word"
   },
   {
     "id": "frase_gracias",
     "text": "Gracias",
-    "imagePath": "",
+    "imagePath": "assets/images/frases/gracias.png",
     "categoryId": "frases_rapidas",
     "type": "word"
   },
   {
     "id": "frase_por_favor",
     "text": "Por favor",
-    "imagePath": "",
+    "imagePath": "assets/images/frases/porfavor.png",
     "categoryId": "frases_rapidas",
     "type": "word"
   }

@@ -68,11 +68,11 @@ flutter:
     - assets/images/verbos/
     - assets/images/preguntas/
     - assets/images/emociones/
-    - assets/images/comidas/
-    - assets/images/bebidas/
+    - assets/images/comida/
+    - assets/images/bebida/
     - assets/images/casa/
     - assets/images/colegio/
-    - assets/images/salud/
+    - assets/images/cuerpo/
     - assets/images/lugares/
     - assets/images/objetos/
     - assets/images/trabajo/

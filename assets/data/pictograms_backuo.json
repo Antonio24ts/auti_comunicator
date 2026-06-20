@@ -121,12 +121,12 @@
     "targetCategoryId": "colegio"
   },
   {
-    "id": "salud",
-    "text": "Salud",
+    "id": "cuerpo",
+    "text": "cuerpo",
     "imagePath": "",
     "categoryId": "home",
     "type": "category",
-    "targetCategoryId": "salud"
+    "targetCategoryId": "cuerpo"
   },
   {
     "id": "lugares",
