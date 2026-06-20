@@ -8,7 +8,7 @@ class AutiComunicadorApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Auti Comunicador',
+      title: 'Comunicador auti',
       debugShowCheckedModeBanner: false,
       home: const BoardScreen(),
     );
