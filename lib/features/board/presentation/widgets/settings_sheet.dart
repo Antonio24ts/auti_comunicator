@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/settings/app_settings.dart';
+import 'credits_sheet.dart';
 
 class SettingsSheet extends StatefulWidget {
   final AppSettings settings;
@@ -33,6 +34,17 @@ class _SettingsSheetState extends State<SettingsSheet> {
     });
 
     widget.onSettingsChanged(newSettings);
+  }
+
+  Future<void> _openCredits() async {
+    await showModalBottomSheet<void>(
+      context: context,
+      backgroundColor: Colors.white,
+      isScrollControlled: true,
+      builder: (context) {
+        return const CreditsSheet();
+      },
+    );
   }
 
   @override
@@ -76,6 +88,15 @@ class _SettingsSheetState extends State<SettingsSheet> {
                   onChanged: (value) {
                     _updateSettings(_settings.copyWith(speakOnCardTap: value));
                   },
+                ),
+                const SizedBox(height: 10),
+                SizedBox(
+                  width: double.infinity,
+                  child: OutlinedButton.icon(
+                    onPressed: _openCredits,
+                    icon: const Icon(Icons.info_outline),
+                    label: const Text('Créditos y licencia'),
+                  ),
                 ),
                 const SizedBox(height: 16),
                 Align(

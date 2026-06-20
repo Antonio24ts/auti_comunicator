@@ -506,7 +506,7 @@ class _BoardScreenState extends State<BoardScreen> {
                       : _buildFullBoardLayout(),
                 ),
               ),
-              BottomActionBar(onSettingsTap: _openSettings),
+              BottomActionBar(onSettingsLongPressCompleted: _openSettings),
             ],
           );
         },

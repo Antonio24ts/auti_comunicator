@@ -88,8 +88,7 @@
     "imagePath": "",
     "categoryId": "mas_categorias",
     "type": "category",
-    "targetCategoryId": "preguntas",
-    "categoryOpenMode": "fullBoard"
+    "targetCategoryId": "preguntas"
   },
   {
     "id": "home_frases",
