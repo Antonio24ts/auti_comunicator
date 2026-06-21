@@ -3,7 +3,9 @@ import 'dart:io';
 
 void main() {
   const pictogramsPath = 'assets/data/pictograms.json';
+  const pubspecPath = 'pubspec.yaml';
   const assetsRoot = 'assets';
+  const imagesRoot = 'assets/images';
 
   final errors = <String>[];
   final warnings = <String>[];
@@ -49,7 +51,11 @@ void main() {
   for (final pictogram in pictograms) {
     final id = _readString(pictogram, 'id');
     final text = _readString(pictogram, 'text');
-    final imagePath = _readString(pictogram, 'imagePath', required: false);
+    final imagePath = _readString(
+      pictogram,
+      'imagePath',
+      required: false,
+    );
     final categoryId = _readString(pictogram, 'categoryId');
     final type = _readString(pictogram, 'type');
     final targetCategoryId = _readString(
@@ -172,6 +178,13 @@ void main() {
     }
   }
 
+  final pubspecWarnings = _validatePubspecImageAssets(
+    pubspecPath: pubspecPath,
+    imagesRoot: imagesRoot,
+  );
+
+  warnings.addAll(pubspecWarnings);
+
   _printSummary(
     pictogramCount: pictograms.length,
     categoryCount: categoryIds.length,
@@ -228,23 +241,157 @@ List<String> _findUnusedImages({
     return [];
   }
 
-  final imageExtensions = {'.png', '.jpg', '.jpeg', '.webp', '.gif'};
-
-  final allImages =
-      root
-          .listSync(recursive: true)
-          .whereType<File>()
-          .map((file) => file.path.replaceAll('\\', '/'))
-          .where((path) {
-            final lowerPath = path.toLowerCase();
-
-            return imageExtensions.any(lowerPath.endsWith);
-          })
-          .where((path) => !path.contains('/audio/'))
-          .toList()
-        ..sort();
+  final allImages = _findAllImageFiles(root.path);
 
   return allImages.where((path) => !usedImagePaths.contains(path)).toList();
+}
+
+List<String> _validatePubspecImageAssets({
+  required String pubspecPath,
+  required String imagesRoot,
+}) {
+  final warnings = <String>[];
+
+  final pubspecFile = File(pubspecPath);
+
+  if (!pubspecFile.existsSync()) {
+    warnings.add(
+      'No se ha encontrado pubspec.yaml. No se pueden validar los assets declarados.',
+    );
+    return warnings;
+  }
+
+  final declaredAssets = _readDeclaredAssetsFromPubspec(pubspecFile);
+  final imageDirectories = _findImageDirectories(imagesRoot);
+
+  if (imageDirectories.isEmpty) {
+    return warnings;
+  }
+
+  for (final directory in imageDirectories) {
+    final isDeclared = _isAssetDirectoryDeclared(
+      directory: directory,
+      declaredAssets: declaredAssets,
+    );
+
+    if (!isDeclared) {
+      warnings.add(
+        'La carpeta "$directory" contiene imágenes, pero no está declarada en pubspec.yaml.',
+      );
+    }
+  }
+
+  return warnings;
+}
+
+Set<String> _readDeclaredAssetsFromPubspec(File pubspecFile) {
+  final declaredAssets = <String>{};
+
+  final lines = pubspecFile.readAsLinesSync();
+
+  for (final line in lines) {
+    final trimmed = line.trim();
+
+    if (!trimmed.startsWith('- ')) {
+      continue;
+    }
+
+    final assetPath = trimmed.substring(2).trim();
+
+    if (assetPath.isEmpty) {
+      continue;
+    }
+
+    if (!assetPath.startsWith('assets/')) {
+      continue;
+    }
+
+    declaredAssets.add(_normalizeAssetDirectory(assetPath));
+  }
+
+  return declaredAssets;
+}
+
+Set<String> _findImageDirectories(String imagesRoot) {
+  final root = Directory(imagesRoot);
+
+  if (!root.existsSync()) {
+    return {};
+  }
+
+  final imageFiles = _findAllImageFiles(imagesRoot);
+  final directories = <String>{};
+
+  for (final imageFilePath in imageFiles) {
+    final parentPath = File(imageFilePath).parent.path.replaceAll('\\', '/');
+    directories.add(_normalizeAssetDirectory(parentPath));
+  }
+
+  return directories;
+}
+
+List<String> _findAllImageFiles(String rootPath) {
+  final root = Directory(rootPath);
+
+  if (!root.existsSync()) {
+    return [];
+  }
+
+  final imageExtensions = {
+    '.png',
+    '.jpg',
+    '.jpeg',
+    '.webp',
+    '.gif',
+  };
+
+  final files = root
+      .listSync(recursive: true)
+      .whereType<File>()
+      .map((file) => file.path.replaceAll('\\', '/'))
+      .where((path) {
+        final lowerPath = path.toLowerCase();
+
+        return imageExtensions.any(lowerPath.endsWith);
+      })
+      .where((path) => !path.contains('/audio/'))
+      .toList()
+    ..sort();
+
+  return files;
+}
+
+bool _isAssetDirectoryDeclared({
+  required String directory,
+  required Set<String> declaredAssets,
+}) {
+  final normalizedDirectory = _normalizeAssetDirectory(directory);
+
+  for (final declaredAsset in declaredAssets) {
+    if (declaredAsset == normalizedDirectory) {
+      return true;
+    }
+
+    if (normalizedDirectory.startsWith(declaredAsset)) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+String _normalizeAssetDirectory(String path) {
+  var normalized = path.replaceAll('\\', '/').trim();
+
+  if (normalized.isEmpty) {
+    return normalized;
+  }
+
+  if (!normalized.endsWith('/')) {
+    normalized = '$normalized/';
+  }
+
+  return normalized;
 }
 
 void _printSummary({
