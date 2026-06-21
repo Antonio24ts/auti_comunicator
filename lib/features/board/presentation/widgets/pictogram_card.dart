@@ -69,7 +69,13 @@ class _PictogramCardState extends State<PictogramCard> {
             color: Colors.transparent,
             borderRadius: BorderRadius.circular(16),
             child: InkWell(
-              onTap: widget.onTap,
+              onTap: () {
+                setState(() {
+                  _isPressed = false;
+                });
+
+                widget.onTap();
+              },
               borderRadius: BorderRadius.circular(16),
               splashColor: style.accentColor.withValues(alpha: 0.12),
               highlightColor: style.accentColor.withValues(alpha: 0.08),
@@ -79,11 +85,9 @@ class _PictogramCardState extends State<PictogramCard> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Expanded(
-                      child: _CardVisual(
-                        pictogram: widget.pictogram,
-                        style: style,
-                        iconSize: _getIconSize(),
-                        letterFontSize: _getLetterFontSize(),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8),
+                        child: Center(child: _buildImageContent(style)),
                       ),
                     ),
                     const SizedBox(height: 6),
@@ -91,7 +95,6 @@ class _PictogramCardState extends State<PictogramCard> {
                       text: _getDisplayText(),
                       fontSize: _getTextFontSize(),
                       isCategory: widget.pictogram.isCategory,
-                      accentColor: style.accentColor,
                     ),
                   ],
                 ),
@@ -100,6 +103,73 @@ class _PictogramCardState extends State<PictogramCard> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildImageContent(PictogramStyle style) {
+    final imagePath = widget.pictogram.imagePath.trim();
+
+    if (imagePath.isNotEmpty) {
+      return Stack(
+        children: [
+          Center(
+            child: Image.asset(
+              imagePath,
+              fit: BoxFit.contain,
+              errorBuilder: (context, error, stackTrace) {
+                return _buildFallbackContent(style);
+              },
+            ),
+          ),
+          if (widget.pictogram.isCategory)
+            Positioned(
+              right: 0,
+              top: 0,
+              child: _CategoryBadge(color: style.accentColor),
+            ),
+        ],
+      );
+    }
+
+    return _buildFallbackContent(style);
+  }
+
+  Widget _buildFallbackContent(PictogramStyle style) {
+    if (widget.pictogram.isLetter) {
+      return FittedBox(
+        fit: BoxFit.scaleDown,
+        child: Text(
+          widget.pictogram.text.toLowerCase(),
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: _getFallbackLetterFontSize(),
+            fontWeight: FontWeight.w900,
+            color: Colors.amber.shade900,
+          ),
+        ),
+      );
+    }
+
+    if (widget.pictogram.isCategory) {
+      return Icon(
+        Icons.folder_rounded,
+        size: _getFallbackIconSize(),
+        color: style.accentColor,
+      );
+    }
+
+    if (widget.pictogram.isKeyboardAction) {
+      return Icon(
+        Icons.keyboard_alt_outlined,
+        size: _getFallbackIconSize(),
+        color: style.accentColor,
+      );
+    }
+
+    return Icon(
+      Icons.image_not_supported_outlined,
+      size: _getFallbackIconSize(),
+      color: Colors.blueGrey.shade300,
     );
   }
 
@@ -133,117 +203,26 @@ class _PictogramCardState extends State<PictogramCard> {
     }
   }
 
-  double _getLetterFontSize() {
+  double _getFallbackLetterFontSize() {
     switch (widget.cardSize) {
       case CardSize.small:
-        return 28;
+        return 34;
       case CardSize.medium:
-        return 36;
+        return 46;
       case CardSize.large:
+        return 58;
+    }
+  }
+
+  double _getFallbackIconSize() {
+    switch (widget.cardSize) {
+      case CardSize.small:
+        return 32;
+      case CardSize.medium:
         return 44;
-    }
-  }
-
-  double _getIconSize() {
-    switch (widget.cardSize) {
-      case CardSize.small:
-        return 30;
-      case CardSize.medium:
-        return 40;
       case CardSize.large:
-        return 50;
+        return 56;
     }
-  }
-}
-
-class _CardVisual extends StatelessWidget {
-  final Pictogram pictogram;
-  final PictogramStyle style;
-  final double iconSize;
-  final double letterFontSize;
-
-  const _CardVisual({
-    required this.pictogram,
-    required this.style,
-    required this.iconSize,
-    required this.letterFontSize,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    if (pictogram.isLetter) {
-      return Center(
-        child: Text(
-          pictogram.text.toLowerCase(),
-          style: TextStyle(
-            fontSize: letterFontSize,
-            fontWeight: FontWeight.w900,
-            color: Colors.black87,
-          ),
-        ),
-      );
-    }
-
-    if (pictogram.imagePath.trim().isNotEmpty) {
-      return Stack(
-        children: [
-          Center(
-            child: Image.asset(
-              pictogram.imagePath,
-              fit: BoxFit.contain,
-              errorBuilder: (context, error, stackTrace) {
-                return _FallbackIcon(
-                  pictogram: pictogram,
-                  style: style,
-                  iconSize: iconSize,
-                );
-              },
-            ),
-          ),
-          if (pictogram.isCategory)
-            Positioned(
-              right: 0,
-              top: 0,
-              child: _CategoryBadge(color: style.accentColor),
-            ),
-        ],
-      );
-    }
-
-    return _FallbackIcon(
-      pictogram: pictogram,
-      style: style,
-      iconSize: iconSize,
-    );
-  }
-}
-
-class _FallbackIcon extends StatelessWidget {
-  final Pictogram pictogram;
-  final PictogramStyle style;
-  final double iconSize;
-
-  const _FallbackIcon({
-    required this.pictogram,
-    required this.style,
-    required this.iconSize,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    IconData icon;
-
-    if (pictogram.isCategory) {
-      icon = Icons.folder_rounded;
-    } else if (pictogram.isKeyboardAction) {
-      icon = Icons.keyboard_alt_outlined;
-    } else {
-      icon = Icons.image_outlined;
-    }
-
-    return Center(
-      child: Icon(icon, size: iconSize, color: style.accentColor),
-    );
   }
 }
 
@@ -270,13 +249,11 @@ class _CardText extends StatelessWidget {
   final String text;
   final double fontSize;
   final bool isCategory;
-  final Color accentColor;
 
   const _CardText({
     required this.text,
     required this.fontSize,
     required this.isCategory,
-    required this.accentColor,
   });
 
   @override

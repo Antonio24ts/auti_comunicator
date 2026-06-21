@@ -361,7 +361,7 @@
   },
   {
     "id": "letter_a",
-    "text": "A",
+    "text": "a",
     "imagePath": "assets/images/alfabeto/A.png",
     "categoryId": "alfabeto",
     "type": "letter",
@@ -573,7 +573,7 @@
     "imagePath": "assets/images/alfabeto/Z.png",
     "categoryId": "alfabeto",
     "type": "letter",
-    "value": "z"
+    "value": "Z"
   },
   {
     "id": "keyboard_space",
