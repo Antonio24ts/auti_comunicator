@@ -7,14 +7,6 @@
     "type": "word"
   },
   {
-    "id": "home_mas",
-    "text": "Más",
-    "imagePath": "assets/images/Mas.png",
-    "categoryId": "home_main",
-    "type": "category",
-    "targetCategoryId": "mas_categorias"
-  },
-  {
     "id": "home_ayuda",
     "text": "Ayuda",
     "imagePath": "assets/images/casa/Ayuda.png",
@@ -66,7 +58,7 @@
   {
     "id": "alfabeto",
     "text": "Alfabeto",
-    "imagePath": "assets/images/alfabeto.png",
+    "imagePath": "assets/images/categories/alfabeto.png",
     "categoryId": "home_center",
     "type": "category",
     "targetCategoryId": "alfabeto",
@@ -75,16 +67,33 @@
   {
     "id": "home_calculadora",
     "text": "Calculadora",
-    "imagePath": "assets/images/calculadora.png",
+    "imagePath": "assets/images/categories/calculadora.png",
     "categoryId": "home_center",
     "type": "category",
     "targetCategoryId": "calculadora",
     "categoryOpenMode": "fullBoard"
   },
   {
+    "id": "home_temporizador",
+    "text": "Temporizador",
+    "imagePath": "assets/images/categories/temporizador.png",
+    "categoryId": "home_center",
+    "type": "category",
+    "targetCategoryId": "temporizador",
+    "categoryOpenMode": "fullBoard"
+  },
+  {
+    "id": "home_mas",
+    "text": "Más",
+    "imagePath": "assets/images/categories/Mas.png",
+    "categoryId": "home_main",
+    "type": "category",
+    "targetCategoryId": "mas_categorias"
+  },
+  {
     "id": "mas_personas",
     "text": "Personas",
-    "imagePath": "assets/images/personas.png",
+    "imagePath": "assets/images/categories/personas.png",
     "categoryId": "home_main",
     "type": "category",
     "targetCategoryId": "personas"
@@ -109,7 +118,7 @@
   {
     "id": "home_frases",
     "text": "Frases",
-    "imagePath": "assets/images/frase.png",
+    "imagePath": "assets/images/categories/frase.png",
     "categoryId": "home_main",
     "type": "category",
     "targetCategoryId": "frases_rapidas",
@@ -118,7 +127,7 @@
   {
     "id": "mas_emociones",
     "text": "Sentimiento",
-    "imagePath": "assets/images/sentimiento.png",
+    "imagePath": "assets/images/categories/sentimiento.png",
     "categoryId": "home_main",
     "type": "category",
     "targetCategoryId": "emociones"
@@ -158,7 +167,7 @@
   {
     "id": "mas_cuerpo",
     "text": "Cuerpo",
-    "imagePath": "assets/images/cuerpo.png",
+    "imagePath": "assets/images/categories/cuerpo.png",
     "categoryId": "home_main",
     "type": "category",
     "targetCategoryId": "cuerpo"

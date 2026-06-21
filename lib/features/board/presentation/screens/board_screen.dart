@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:wakelock_plus/wakelock_plus.dart';
 
 import '../../../../data/models/pictogram.dart';
 import '../../../../data/repositories/pictogram_repository.dart';
@@ -13,6 +14,7 @@ import '../../../../services/ambient_music_services.dart';
 import '../widgets/child_name_dialog.dart';
 import '../../../calculator/domain/simple_calculator_engine.dart';
 import '../../../calculator/presentation/widgets/calculator_panel.dart';
+import '../../../timer/presentation/widgets/visual_timer_panel.dart';
 
 import '../widgets/zone_panel.dart';
 
@@ -21,6 +23,8 @@ import '../../../../core/settings/app_settings_service.dart';
 import '../widgets/settings_sheet.dart';
 
 enum BoardZone { main, center, right }
+
+enum _TimerFinishedAction { stop, repeat }
 
 class BoardScreen extends StatefulWidget {
   const BoardScreen({super.key});
@@ -60,6 +64,14 @@ class _BoardScreenState extends State<BoardScreen> {
   String? _fullBoardCategoryId;
   final List<String> _fullBoardHistory = [];
 
+  static const int _defaultTimerSeconds = 60;
+
+  Timer? _visualTimer;
+  int _selectedTimerSeconds = _defaultTimerSeconds;
+  int _remainingTimerSeconds = _defaultTimerSeconds;
+  bool _isTimerRunning = false;
+  bool _isTimerPaused = false;
+
   BoardZone _lastActiveZone = BoardZone.main;
 
   @override
@@ -71,6 +83,161 @@ class _BoardScreenState extends State<BoardScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       unawaited(_showChildNameDialogOnStartup());
     });
+  }
+
+  void _selectTimerDuration(int seconds) {
+    if (_isTimerRunning) {
+      return;
+    }
+
+    setState(() {
+      _selectedTimerSeconds = seconds;
+      _remainingTimerSeconds = seconds;
+      _isTimerPaused = false;
+    });
+  }
+
+  void _addOneMinuteToTimer() {
+    if (_isTimerRunning) {
+      return;
+    }
+
+    const oneMinute = 60;
+    const maxTimerSeconds = 60 * 60;
+
+    setState(() {
+      final newSelectedSeconds = _selectedTimerSeconds + oneMinute;
+
+      _selectedTimerSeconds = newSelectedSeconds.clamp(
+        oneMinute,
+        maxTimerSeconds,
+      );
+
+      _remainingTimerSeconds = _selectedTimerSeconds;
+      _isTimerPaused = false;
+    });
+  }
+
+  void _startTimer() {
+    if (_remainingTimerSeconds <= 0) {
+      setState(() {
+        _remainingTimerSeconds = _selectedTimerSeconds;
+      });
+    }
+
+    _visualTimer?.cancel();
+
+    unawaited(WakelockPlus.enable());
+
+    setState(() {
+      _isTimerRunning = true;
+      _isTimerPaused = false;
+    });
+
+    _visualTimer = Timer.periodic(const Duration(seconds: 1), (_) {
+      if (!mounted) {
+        return;
+      }
+
+      if (_remainingTimerSeconds <= 1) {
+        _finishTimer();
+        return;
+      }
+
+      setState(() {
+        _remainingTimerSeconds--;
+      });
+    });
+  }
+
+  void _pauseTimer() {
+    _visualTimer?.cancel();
+
+    unawaited(WakelockPlus.disable());
+
+    setState(() {
+      _isTimerRunning = false;
+      _isTimerPaused = true;
+    });
+  }
+
+  void _resetTimer() {
+    _visualTimer?.cancel();
+
+    unawaited(WakelockPlus.disable());
+
+    setState(() {
+      _remainingTimerSeconds = _selectedTimerSeconds;
+      _isTimerRunning = false;
+      _isTimerPaused = false;
+    });
+  }
+
+  void _finishTimer() {
+    _visualTimer?.cancel();
+
+    unawaited(WakelockPlus.disable());
+
+    setState(() {
+      _remainingTimerSeconds = 0;
+      _isTimerRunning = false;
+      _isTimerPaused = false;
+    });
+
+    unawaited(_speechService.speakPhrase('Tiempo terminado'));
+
+    unawaited(_showTimerFinishedDialog());
+  }
+
+  Future<void> _showTimerFinishedDialog() async {
+    if (!mounted) {
+      return;
+    }
+
+    final result = await showDialog<_TimerFinishedAction>(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Tiempo terminado'),
+          content: const Text(
+            'El temporizador ha terminado.',
+            style: TextStyle(fontSize: 18, height: 1.25),
+          ),
+          actions: [
+            TextButton.icon(
+              onPressed: () {
+                Navigator.of(context).pop(_TimerFinishedAction.stop);
+              },
+              icon: const Icon(Icons.stop),
+              label: const Text('Parar'),
+            ),
+            ElevatedButton.icon(
+              onPressed: () {
+                Navigator.of(context).pop(_TimerFinishedAction.repeat);
+              },
+              icon: const Icon(Icons.replay),
+              label: const Text('Repetir tiempo'),
+            ),
+          ],
+        );
+      },
+    );
+
+    if (!mounted) {
+      return;
+    }
+
+    if (result == _TimerFinishedAction.repeat) {
+      setState(() {
+        _remainingTimerSeconds = _selectedTimerSeconds;
+      });
+
+      _startTimer();
+      return;
+    }
+
+    _resetTimer();
   }
 
   void _handleCalculatorKey(String key) {
@@ -244,6 +411,8 @@ class _BoardScreenState extends State<BoardScreen> {
 
   @override
   void dispose() {
+    _visualTimer?.cancel();
+    unawaited(WakelockPlus.disable());
     unawaited(_speechService.stop());
     unawaited(_ambientMusicService.dispose());
     super.dispose();
@@ -463,6 +632,14 @@ class _BoardScreenState extends State<BoardScreen> {
           _calculatorExpression = '';
           _calculatorResult = '';
         }
+
+        if (targetCategoryId == 'temporizador') {
+          _visualTimer?.cancel();
+          _selectedTimerSeconds = _defaultTimerSeconds;
+          _remainingTimerSeconds = _defaultTimerSeconds;
+          _isTimerRunning = false;
+          _isTimerPaused = false;
+        }
       });
 
       return;
@@ -482,6 +659,9 @@ class _BoardScreenState extends State<BoardScreen> {
   }
 
   void _goHome() {
+    _visualTimer?.cancel();
+    unawaited(WakelockPlus.disable());
+
     setState(() {
       _currentCategoryByZone[BoardZone.main] =
           PictogramRepository.homeMainCategoryId;
@@ -497,17 +677,34 @@ class _BoardScreenState extends State<BoardScreen> {
       _fullBoardCategoryId = null;
       _fullBoardHistory.clear();
 
+      _isTimerRunning = false;
+      _isTimerPaused = false;
+      _remainingTimerSeconds = _selectedTimerSeconds;
+
       _lastActiveZone = BoardZone.main;
     });
   }
 
   void _goBack() {
     if (_fullBoardCategoryId != null) {
+      final wasTimerOpen = _fullBoardCategoryId == 'temporizador';
+
+      if (wasTimerOpen) {
+        _visualTimer?.cancel();
+        unawaited(WakelockPlus.disable());
+      }
+
       setState(() {
         if (_fullBoardHistory.isNotEmpty) {
           _fullBoardCategoryId = _fullBoardHistory.removeLast();
         } else {
           _fullBoardCategoryId = null;
+        }
+
+        if (wasTimerOpen) {
+          _isTimerRunning = false;
+          _isTimerPaused = false;
+          _remainingTimerSeconds = _selectedTimerSeconds;
         }
       });
 
@@ -673,6 +870,20 @@ class _BoardScreenState extends State<BoardScreen> {
         expression: _calculatorExpression,
         result: _calculatorResult,
         onKeyPressed: _handleCalculatorKey,
+      );
+    }
+
+    if (categoryId == 'temporizador') {
+      return VisualTimerPanel(
+        selectedSeconds: _selectedTimerSeconds,
+        remainingSeconds: _remainingTimerSeconds,
+        isRunning: _isTimerRunning,
+        isPaused: _isTimerPaused,
+        onDurationSelected: _selectTimerDuration,
+        onStart: _startTimer,
+        onPause: _pauseTimer,
+        onReset: _resetTimer,
+        onAddMinute: _addOneMinuteToTimer,
       );
     }
 

@@ -161,6 +161,12 @@ PictogramStyle _categoryStyle(String categoryId) {
         borderColor: Colors.blue.shade300,
         accentColor: Colors.blue.shade700,
       );
+    case 'temporizador':
+      return PictogramStyle(
+        backgroundColor: Colors.purple.shade50,
+        borderColor: Colors.purple.shade300,
+        accentColor: Colors.purple.shade700,
+      );
 
     default:
       return PictogramStyle(
