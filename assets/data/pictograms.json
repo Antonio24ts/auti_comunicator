@@ -42,6 +42,35 @@
     "type": "word"
   },
   {
+    "id": "home_y",
+    "text": "Y",
+    "imagePath": "assets/images/y.png",
+    "categoryId": "home_right",
+    "type": "word"
+  },
+   {
+    "id": "home_yo",
+    "text": "Yo",
+    "imagePath": "assets/images/personas/yo.png",
+    "categoryId": "home_right",
+    "type": "word"
+  },
+  {
+    "id": "saludos",
+    "text": "Saludos",
+    "imagePath": "assets/images/categories/saludo.png",
+    "categoryId": "home_right",
+    "type": "category",
+    "targetCategoryId": "saludos"
+  },
+  {
+    "id": "home_estoy",
+    "text": "Estoy",
+    "imagePath": "assets/images/estoy.png",
+    "categoryId": "home_right",
+    "type": "word"
+  },
+  {
     "id": "mas_dolor",
     "text": "Dolor",
     "imagePath": "assets/images/categories/dolor.png",
@@ -104,8 +133,7 @@
     "imagePath": "",
     "categoryId": "home_main",
     "type": "category",
-    "targetCategoryId": "verbos",
-    "categoryOpenMode": "fullBoard"
+    "targetCategoryId": "verbos"
   },
   {
     "id": "mas_preguntas",
@@ -196,15 +224,6 @@
     "type": "category",
     "targetCategoryId": "trabajo"
   },
-  {
-    "id": "saludos",
-    "text": "Saludos",
-    "imagePath": "assets/images/categories/saludo.png",
-    "categoryId": "home_right",
-    "type": "category",
-    "targetCategoryId": "saludos"
-  },
-
   {
     "id": "yo",
     "text": "Yo",
@@ -340,79 +359,6 @@
     "categoryId": "necesidades",
     "type": "word"
   },
-
-  {
-    "id": "ir",
-    "text": "Ir",
-    "imagePath": "assets/images/acciones/ir.png",
-    "categoryId": "acciones",
-    "type": "word"
-  },
-  {
-    "id": "venir",
-    "text": "Venir",
-    "imagePath": "assets/images/acciones/venir.png",
-    "categoryId": "acciones",
-    "type": "word"
-  },
-  {
-    "id": "dar",
-    "text": "Dar",
-    "imagePath": "assets/images/acciones/dar.png",
-    "categoryId": "acciones",
-    "type": "word"
-  },
-  {
-    "id": "hacer",
-    "text": "Hacer",
-    "imagePath": "assets/images/acciones/hacer.png",
-    "categoryId": "acciones",
-    "type": "word"
-  },
-  {
-    "id": "ver",
-    "text": "Ver",
-    "imagePath": "assets/images/acciones/ver.png",
-    "categoryId": "acciones",
-    "type": "word"
-  },
-  {
-    "id": "escuchar",
-    "text": "Escuchar",
-    "imagePath": "assets/images/acciones/escuchar.png",
-    "categoryId": "acciones",
-    "type": "word"
-  },
-
-  {
-    "id": "juguete",
-    "text": "Juguete",
-    "imagePath": "assets/images/cosas/juguete.png",
-    "categoryId": "cosas",
-    "type": "word"
-  },
-  {
-    "id": "pelota",
-    "text": "Pelota",
-    "imagePath": "assets/images/cosas/pelota.png",
-    "categoryId": "cosas",
-    "type": "word"
-  },
-  {
-    "id": "telefono",
-    "text": "Teléfono",
-    "imagePath": "assets/images/cosas/telefono.png",
-    "categoryId": "cosas",
-    "type": "word"
-  },
-  {
-    "id": "tablet",
-    "text": "Tablet",
-    "imagePath": "assets/images/cosas/tablet.png",
-    "categoryId": "cosas",
-    "type": "word"
-  },
-
   {
     "id": "letter_a",
     "text": "A",
@@ -935,14 +881,14 @@
   {
     "id": "emocion_quiero_descansar",
     "text": "Quiero descansar",
-    "imagePath": "",
+    "imagePath": "assets/images/emociones/descansar.png",
     "categoryId": "emociones",
     "type": "word"
   },
   {
     "id": "emocion_necesito_calma",
     "text": "Necesito calma",
-    "imagePath": "",
+    "imagePath": "assets/images/emociones/calma.png",
     "categoryId": "emociones",
     "type": "word"
   },
@@ -1060,8 +1006,15 @@
   },
   {
     "id": "bebida_frio",
-    "text": "Frío",
+    "text": "Fría",
     "imagePath": "assets/images/bebida/frio.png",
+    "categoryId": "bebida",
+    "type": "word"
+  },
+  {
+    "id": "bebida_templada",
+    "text": "Templada",
+    "imagePath": "assets/images/bebida/templada.png",
     "categoryId": "bebida",
     "type": "word"
   },
@@ -1168,6 +1121,13 @@
     "text": "Enfermo",
     "imagePath": "assets/images/cuerpo/enferma.png",
     "categoryId": "emociones",
+    "type": "word"
+  },
+  {
+    "id": "trabajo_ser",
+    "text": "Ser",
+    "imagePath": "assets/images/verbos/ser.png",
+    "categoryId": "trabajo",
     "type": "word"
   },
   {
@@ -1402,6 +1362,13 @@
     "type": "word"
   },
   {
+    "id": "lugares_ir",
+    "text": "Ir",
+    "imagePath": "assets/images/verbos/ir.png",
+    "categoryId": "lugares",
+    "type": "word"
+  },
+  {
     "id": "lugar_casa",
     "text": "Casa",
     "imagePath": "assets/images/lugares/casa.png",
@@ -1495,7 +1462,7 @@
   {
     "id": "objeto_pelota",
     "text": "Pelota",
-    "imagePath": "assets/images/objetos/pelota.png ",
+    "imagePath": "assets/images/objetos/pelota.png",
     "categoryId": "objetos",
     "type": "word"
   },
