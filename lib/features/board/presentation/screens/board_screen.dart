@@ -19,6 +19,8 @@ import '../../../timer/presentation/widgets/visual_timer_panel.dart';
 import '../../../games/presentation/widgets/games_menu_panel.dart';
 import '../../../games/presentation/widgets/listen_and_touch_game_panel.dart';
 import '../../../games/presentation/widgets/memory_match_game_panel.dart';
+import '../../../games/domain/game_progress.dart';
+import '../../../games/domain/game_progress_services.dart';
 
 import '../widgets/zone_panel.dart';
 
@@ -49,6 +51,14 @@ class _BoardScreenState extends State<BoardScreen> {
   final PictogramRepository _repository = PictogramRepository();
   final AppSettingsService _settingsService = AppSettingsService();
   final AmbientMusicService _ambientMusicService = AmbientMusicService();
+
+  final GameProgressService _gameProgressService = GameProgressService();
+
+  GameProgress _listenAndTouchProgress = GameProgress.empty(
+    GameIds.listenAndTouch,
+  );
+
+  GameProgress _memoryMatchProgress = GameProgress.empty(GameIds.memoryMatch);
 
   bool _hasShownStartupNameDialog = false;
 
@@ -492,6 +502,16 @@ class _BoardScreenState extends State<BoardScreen> {
 
     _settings = loadedSettings;
 
+    _listenAndTouchProgress = await _gameProgressService.load(
+      childName: _settings.childName,
+      gameId: GameIds.listenAndTouch,
+    );
+
+    _memoryMatchProgress = await _gameProgressService.load(
+      childName: _settings.childName,
+      gameId: GameIds.memoryMatch,
+    );
+
     await _ambientMusicService.init(_settings);
 
     await _speechService.init(
@@ -516,6 +536,10 @@ class _BoardScreenState extends State<BoardScreen> {
   }
 
   Future<void> _applySettings(AppSettings newSettings) async {
+    final oldChildName = _settings.childName.trim();
+    final newChildName = newSettings.childName.trim();
+    final hasChangedChildName = oldChildName != newChildName;
+
     setState(() {
       _settings = newSettings;
     });
@@ -524,6 +548,54 @@ class _BoardScreenState extends State<BoardScreen> {
 
     await _speechService.setSpeechRate(newSettings.speechRate);
     await _ambientMusicService.applySettings(newSettings);
+
+    if (hasChangedChildName) {
+      await _reloadGameProgressForCurrentChild();
+    }
+  }
+
+  Future<void> _reloadGameProgressForCurrentChild() async {
+    final listenProgress = await _gameProgressService.load(
+      childName: _settings.childName,
+      gameId: GameIds.listenAndTouch,
+    );
+
+    final memoryProgress = await _gameProgressService.load(
+      childName: _settings.childName,
+      gameId: GameIds.memoryMatch,
+    );
+
+    if (!mounted) {
+      return;
+    }
+
+    setState(() {
+      _listenAndTouchProgress = listenProgress;
+      _memoryMatchProgress = memoryProgress;
+    });
+  }
+
+  Future<void> _recordGameProgress(GameProgressUpdate update) async {
+    final newProgress = await _gameProgressService.record(
+      childName: _settings.childName,
+      update: update,
+    );
+
+    if (!mounted) {
+      return;
+    }
+
+    setState(() {
+      if (update.gameId == GameIds.listenAndTouch) {
+        _listenAndTouchProgress = newProgress;
+        return;
+      }
+
+      if (update.gameId == GameIds.memoryMatch) {
+        _memoryMatchProgress = newProgress;
+        return;
+      }
+    });
   }
 
   Future<void> _openSettings() async {
@@ -997,6 +1069,8 @@ class _BoardScreenState extends State<BoardScreen> {
       return GamesMenuPanel(
         onOpenListenAndTouch: _openListenAndTouchGame,
         onOpenMemoryMatch: _openMemoryMatchGame,
+        listenAndTouchProgress: _listenAndTouchProgress,
+        memoryMatchProgress: _memoryMatchProgress,
       );
     }
 
@@ -1005,6 +1079,7 @@ class _BoardScreenState extends State<BoardScreen> {
         repository: _repository,
         speechService: _speechService,
         cardSize: _getResponsiveCardSize(),
+        onProgressChanged: _recordGameProgress,
       );
     }
 
@@ -1014,6 +1089,7 @@ class _BoardScreenState extends State<BoardScreen> {
         speechService: _speechService,
         cardSize: _getResponsiveCardSize(),
         onBackToGames: _backToGamesMenu,
+        onProgressChanged: _recordGameProgress,
       );
     }
 

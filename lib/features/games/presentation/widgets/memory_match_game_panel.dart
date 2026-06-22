@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'dart:async';
 
 import 'package:flutter/material.dart';
 
@@ -6,6 +7,7 @@ import '../../../../core/settings/app_settings.dart';
 import '../../../../data/models/pictogram.dart';
 import '../../../../data/repositories/pictogram_repository.dart';
 import '../../../../services/speech_services.dart';
+import '../../domain/game_progress.dart';
 
 enum _MemoryFinishedAction { repeat, next, backToGames }
 
@@ -14,6 +16,7 @@ class MemoryMatchGamePanel extends StatefulWidget {
   final SpeechService speechService;
   final CardSize cardSize;
   final VoidCallback onBackToGames;
+  final GameProgressChanged onProgressChanged;
 
   const MemoryMatchGamePanel({
     super.key,
@@ -21,6 +24,7 @@ class MemoryMatchGamePanel extends StatefulWidget {
     required this.speechService,
     required this.cardSize,
     required this.onBackToGames,
+    required this.onProgressChanged,
   });
 
   @override
@@ -58,6 +62,7 @@ class _MemoryMatchGamePanelState extends State<MemoryMatchGamePanel> {
   int _attempts = 0;
   int _matchedPairs = 0;
   int _totalCompletedPairs = 0;
+  int _streak = 0;
 
   String? _firstSelectedCardId;
   String? _secondSelectedCardId;
@@ -154,6 +159,7 @@ class _MemoryMatchGamePanelState extends State<MemoryMatchGamePanel> {
 
     setState(() {
       _cards = cards;
+      _streak = 0;
       _attempts = 0;
       _matchedPairs = 0;
       _firstSelectedCardId = null;
@@ -172,6 +178,16 @@ class _MemoryMatchGamePanelState extends State<MemoryMatchGamePanel> {
       setState(() {
         _levelIndex++;
       });
+
+      unawaited(
+        widget.onProgressChanged(
+          GameProgressUpdate(
+            gameId: GameIds.memoryMatch,
+            level: _getCurrentLevelNumber(),
+            streak: _streak,
+          ),
+        ),
+      );
 
       _startLevel();
       return;
@@ -252,6 +268,7 @@ class _MemoryMatchGamePanelState extends State<MemoryMatchGamePanel> {
     setState(() {
       _matchedPairs++;
       _totalCompletedPairs++;
+      _streak++;
       _message = feedbackText;
 
       _cards = _cards.map((item) {
@@ -266,6 +283,17 @@ class _MemoryMatchGamePanelState extends State<MemoryMatchGamePanel> {
       _secondSelectedCardId = null;
       _isBoardLocked = false;
     });
+
+    unawaited(
+      widget.onProgressChanged(
+        GameProgressUpdate(
+          gameId: GameIds.memoryMatch,
+          level: _getCurrentLevelNumber(),
+          streak: _streak,
+          correctAnswersToAdd: 1,
+        ),
+      ),
+    );
 
     await widget.speechService.speakPhrase(feedbackText);
 
@@ -305,6 +333,7 @@ class _MemoryMatchGamePanelState extends State<MemoryMatchGamePanel> {
     _MemoryCardItem secondCard,
   ) async {
     setState(() {
+      _streak = 0;
       _message = 'No son iguales';
     });
 
@@ -455,6 +484,7 @@ class _MemoryMatchGamePanelState extends State<MemoryMatchGamePanel> {
             totalCompletedPairs: _totalCompletedPairs,
             message: _message,
             onRestart: _restartCurrentLevel,
+            streak: _streak,
           ),
           const SizedBox(height: 8),
           Expanded(
@@ -572,6 +602,7 @@ class _MemoryHeader extends StatelessWidget {
   final int totalCompletedPairs;
   final String message;
   final VoidCallback onRestart;
+  final int streak;
 
   const _MemoryHeader({
     required this.level,
@@ -582,6 +613,7 @@ class _MemoryHeader extends StatelessWidget {
     required this.totalCompletedPairs,
     required this.message,
     required this.onRestart,
+    required this.streak,
   });
 
   @override
@@ -605,6 +637,7 @@ class _MemoryHeader extends StatelessWidget {
               attempts: attempts,
               totalCompletedPairs: totalCompletedPairs,
               message: message,
+              streak: streak,
             ),
           ),
           const SizedBox(width: 10),
@@ -634,6 +667,7 @@ class _MemoryHeaderInfo extends StatelessWidget {
   final int attempts;
   final int totalCompletedPairs;
   final String message;
+  final int streak;
 
   const _MemoryHeaderInfo({
     required this.level,
@@ -643,6 +677,7 @@ class _MemoryHeaderInfo extends StatelessWidget {
     required this.attempts,
     required this.totalCompletedPairs,
     required this.message,
+    required this.streak,
   });
 
   @override
@@ -689,7 +724,7 @@ class _MemoryHeaderInfo extends StatelessWidget {
         const SizedBox(height: 3),
         Text(
           'Nivel $level/$maxLevel · $pairCount parejas · '
-          'Encontradas $matchedPairs/$pairCount · Intentos $attempts',
+          'Encontradas $matchedPairs/$pairCount · Racha $streak · Intentos $attempts',
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           style: TextStyle(

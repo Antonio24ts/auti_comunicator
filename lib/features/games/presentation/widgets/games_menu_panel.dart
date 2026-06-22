@@ -1,14 +1,25 @@
 import 'package:flutter/material.dart';
+import '../../domain/game_progress.dart';
 
 class GamesMenuPanel extends StatelessWidget {
   final VoidCallback onOpenListenAndTouch;
   final VoidCallback onOpenMemoryMatch;
+  final GameProgress listenAndTouchProgress;
+  final GameProgress memoryMatchProgress;
 
   const GamesMenuPanel({
     super.key,
     required this.onOpenListenAndTouch,
     required this.onOpenMemoryMatch,
+    required this.listenAndTouchProgress,
+    required this.memoryMatchProgress,
   });
+
+  String _buildProgressText(GameProgress progress) {
+    return 'Nivel: ${progress.bestLevel} · '
+        'Racha: ${progress.bestStreak} · '
+        'Aciertos: ${progress.totalCorrectAnswers}';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +50,7 @@ class GamesMenuPanel extends StatelessWidget {
                     height: 170,
                     child: _GameButton(
                       title: 'Toca lo que escuchas',
-                      subtitle: 'Escucha y toca el pictograma correcto',
+                      subtitle: _buildProgressText(listenAndTouchProgress),
                       icon: Icons.hearing_rounded,
                       onTap: onOpenListenAndTouch,
                     ),
@@ -50,7 +61,7 @@ class GamesMenuPanel extends StatelessWidget {
                     height: 170,
                     child: _GameButton(
                       title: 'Emparejar',
-                      subtitle: 'Encuentra las parejas iguales',
+                      subtitle: _buildProgressText(memoryMatchProgress),
                       icon: Icons.grid_view_rounded,
                       onTap: onOpenMemoryMatch,
                     ),

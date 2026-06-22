@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'dart:async';
 
 import 'package:flutter/material.dart';
 
@@ -7,17 +8,20 @@ import '../../../../data/models/pictogram.dart';
 import '../../../../data/repositories/pictogram_repository.dart';
 import '../../../../services/speech_services.dart';
 import '../../../board/presentation/widgets/pictogram_card.dart';
+import '../../domain/game_progress.dart';
 
 class ListenAndTouchGamePanel extends StatefulWidget {
   final PictogramRepository repository;
   final SpeechService speechService;
   final CardSize cardSize;
+  final GameProgressChanged onProgressChanged;
 
   const ListenAndTouchGamePanel({
     super.key,
     required this.repository,
     required this.speechService,
     required this.cardSize,
+    required this.onProgressChanged,
   });
 
   @override
@@ -237,6 +241,17 @@ class _ListenAndTouchGamePanelState extends State<ListenAndTouchGamePanel> {
       _message = correctFeedbackText;
     });
 
+    unawaited(
+      widget.onProgressChanged(
+        GameProgressUpdate(
+          gameId: GameIds.listenAndTouch,
+          level: _getCurrentLevelNumber(),
+          streak: _streak,
+          correctAnswersToAdd: 1,
+        ),
+      ),
+    );
+
     await widget.speechService.speakPhrase(correctFeedbackText);
 
     await Future.delayed(_getDelayAfterSpeech(correctFeedbackText));
@@ -257,6 +272,16 @@ class _ListenAndTouchGamePanelState extends State<ListenAndTouchGamePanel> {
         _streak = 0;
         _message = levelUpText;
       });
+
+      unawaited(
+        widget.onProgressChanged(
+          GameProgressUpdate(
+            gameId: GameIds.listenAndTouch,
+            level: _getCurrentLevelNumber(),
+            streak: _streak,
+          ),
+        ),
+      );
 
       await widget.speechService.speakPhrase(levelUpText);
 
