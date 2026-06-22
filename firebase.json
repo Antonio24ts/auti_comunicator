@@ -1,0 +1,43 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "comunicador-23052",
+          "appId": "1:10702788155:android:4740943bf764a5629cae1e",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "comunicador-23052",
+          "configurations": {
+            "android": "1:10702788155:android:4740943bf764a5629cae1e",
+            "ios": "1:10702788155:ios:2e7c6c9dd87e5d439cae1e",
+            "macos": "1:10702788155:ios:2e7c6c9dd87e5d439cae1e",
+            "web": "1:10702788155:web:b1dab8d7d849e4cc9cae1e",
+            "windows": "1:10702788155:web:3643d7b31232058c9cae1e"
+          }
+        }
+      }
+    }
+  },
+  "functions": [
+    {
+      "source": "functions",
+      "codebase": "default",
+      "disallowLegacyRuntimeConfig": true,
+      "ignore": [
+        "node_modules",
+        ".git",
+        "firebase-debug.log",
+        "firebase-debug.*.log",
+        "*.local"
+      ],
+      "predeploy": [
+        "npm --prefix \"$RESOURCE_DIR\" run lint",
+        "npm --prefix \"$RESOURCE_DIR\" run build"
+      ]
+    }
+  ]
+}

@@ -12,10 +12,7 @@ class AmbientMusicService {
   bool _wasPlayingBeforeSpeech = false;
 
   Future<void> init(AppSettings settings) async {
-    await _loadPlaylistIfNeeded(
-      settings: settings,
-      forceReload: true,
-    );
+    await _loadPlaylistIfNeeded(settings: settings, forceReload: true);
 
     await applySettings(settings);
   }
@@ -71,7 +68,8 @@ class AmbientMusicService {
     required AppSettings settings,
     bool forceReload = false,
   }) async {
-    final shouldReload = forceReload ||
+    final shouldReload =
+        forceReload ||
         _loadedTrackId != settings.ambientMusicTrackId ||
         _loadedPlaybackMode != settings.ambientMusicPlaybackMode;
 
@@ -101,9 +99,7 @@ class AmbientMusicService {
       initialPosition: Duration.zero,
     );
 
-    await _player.setLoopMode(
-      _getLoopMode(settings.ambientMusicPlaybackMode),
-    );
+    await _player.setLoopMode(_getLoopMode(settings.ambientMusicPlaybackMode));
 
     _loadedTrackId = settings.ambientMusicTrackId;
     _loadedPlaybackMode = settings.ambientMusicPlaybackMode;

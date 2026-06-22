@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/settings/app_settings.dart';
 import '../../../board/presentation/widgets/child_name_dialog.dart';
+import '../../../requests/presentation/screens/request_screen.dart';
 
 import 'credits_sheet.dart';
 
@@ -126,33 +127,25 @@ class _SettingsSheetState extends State<SettingsSheet> {
                   enabled: _settings.ambientMusicEnabled,
                   onEnabledChanged: (value) {
                     _updateSettings(
-                      _settings.copyWith(
-                        ambientMusicEnabled: value,
-                      ),
+                      _settings.copyWith(ambientMusicEnabled: value),
                     );
                   },
                   volume: _settings.ambientMusicVolume,
                   onVolumeChanged: (value) {
                     _updateSettings(
-                      _settings.copyWith(
-                        ambientMusicVolume: value,
-                      ),
+                      _settings.copyWith(ambientMusicVolume: value),
                     );
                   },
                   selectedTrackId: _settings.ambientMusicTrackId,
                   selectedPlaybackMode: _settings.ambientMusicPlaybackMode,
                   onTrackChanged: (trackId) {
                     _updateSettings(
-                      _settings.copyWith(
-                        ambientMusicTrackId: trackId,
-                      ),
+                      _settings.copyWith(ambientMusicTrackId: trackId),
                     );
                   },
                   onPlaybackModeChanged: (mode) {
                     _updateSettings(
-                      _settings.copyWith(
-                        ambientMusicPlaybackMode: mode,
-                      ),
+                      _settings.copyWith(ambientMusicPlaybackMode: mode),
                     );
                   },
                 ),
@@ -164,6 +157,19 @@ class _SettingsSheetState extends State<SettingsSheet> {
                     icon: const Icon(Icons.info_outline),
                     label: const Text('Créditos y licencia'),
                   ),
+                ),
+                const SizedBox(height: 12),
+                _RequestSettingButton(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        fullscreenDialog: true,
+                        builder: (_) {
+                          return RequestScreen(childName: _settings.childName);
+                        },
+                      ),
+                    );
+                  },
                 ),
                 const SizedBox(height: 16),
                 Align(
@@ -214,9 +220,7 @@ class _MusicSetting extends StatelessWidget {
           contentPadding: EdgeInsets.zero,
           title: const Text(
             'Música ambiental',
-            style: TextStyle(
-              fontWeight: FontWeight.w900,
-            ),
+            style: TextStyle(fontWeight: FontWeight.w900),
           ),
           subtitle: const Text(
             'Reproduce música suave mientras se usa la app.',
@@ -291,9 +295,7 @@ class _MusicSetting extends StatelessWidget {
           onChanged: onVolumeChanged,
         ),
         const SizedBox(height: 4),
-        _MusicModeHelpText(
-          selectedPlaybackMode: selectedPlaybackMode,
-        ),
+        _MusicModeHelpText(selectedPlaybackMode: selectedPlaybackMode),
       ],
     );
   }
@@ -460,7 +462,6 @@ class _ChildNameSetting extends StatelessWidget {
   }
 }
 
-
 class _MusicDropdown<T> extends StatelessWidget {
   final String label;
   final T value;
@@ -482,23 +483,14 @@ class _MusicDropdown<T> extends StatelessWidget {
         isDense: true,
         filled: true,
         fillColor: Colors.blueGrey.shade50,
-        contentPadding: const EdgeInsets.symmetric(
-          horizontal: 12,
-          vertical: 8,
-        ),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(14),
-          borderSide: BorderSide(
-            color: Colors.blueGrey.shade100,
-            width: 1.2,
-          ),
+          borderSide: BorderSide(color: Colors.blueGrey.shade100, width: 1.2),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(14),
-          borderSide: BorderSide(
-            color: Colors.blueGrey.shade100,
-            width: 1.2,
-          ),
+          borderSide: BorderSide(color: Colors.blueGrey.shade100, width: 1.2),
         ),
       ),
       child: DropdownButtonHideUnderline(
@@ -517,9 +509,7 @@ class _MusicDropdown<T> extends StatelessWidget {
 class _MusicModeHelpText extends StatelessWidget {
   final AmbientMusicPlaybackMode selectedPlaybackMode;
 
-  const _MusicModeHelpText({
-    required this.selectedPlaybackMode,
-  });
+  const _MusicModeHelpText({required this.selectedPlaybackMode});
 
   @override
   Widget build(BuildContext context) {
@@ -536,6 +526,65 @@ class _MusicModeHelpText extends StatelessWidget {
         fontSize: 12,
         fontWeight: FontWeight.w700,
         color: Colors.blueGrey.shade600,
+      ),
+    );
+  }
+}
+
+class _RequestSettingButton extends StatelessWidget {
+  final VoidCallback onTap;
+
+  const _RequestSettingButton({required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: Colors.teal.shade50,
+      borderRadius: BorderRadius.circular(16),
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(16),
+        child: Container(
+          width: double.infinity,
+          padding: const EdgeInsets.all(14),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(color: Colors.teal.shade100, width: 1.3),
+          ),
+          child: Row(
+            children: [
+              Icon(
+                Icons.mark_email_read_outlined,
+                color: Colors.teal.shade700,
+                size: 30,
+              ),
+              const SizedBox(width: 12),
+              const Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Solicitudes y sugerencias',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                    SizedBox(height: 3),
+                    Text(
+                      'Pedir pictogramas, juegos, categorías o comunicar errores.',
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Icon(Icons.chevron_right_rounded, color: Colors.teal.shade700),
+            ],
+          ),
+        ),
       ),
     );
   }

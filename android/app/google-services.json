@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "10702788155",
+    "project_id": "comunicador-23052",
+    "storage_bucket": "comunicador-23052.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:10702788155:android:4740943bf764a5629cae1e",
+        "android_client_info": {
+          "package_name": "com.example.auti_comunicator"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTV9VF4LyVsw0-ADjM8_8BJnlt2Y1YEXQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
