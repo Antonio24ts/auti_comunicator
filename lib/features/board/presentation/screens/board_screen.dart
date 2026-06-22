@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
 
+import '../widgets/pictogram_card.dart';
 import '../../../../data/models/pictogram.dart';
 import '../../../../data/repositories/pictogram_repository.dart';
 import '../../../../services/speech_services.dart';
@@ -26,6 +27,13 @@ import '../../../../core/settings/app_settings_service.dart';
 import '../widgets/settings_sheet.dart';
 
 enum BoardZone { main, center, right }
+
+class _MobilePictogramEntry {
+  final Pictogram pictogram;
+  final BoardZone zone;
+
+  const _MobilePictogramEntry({required this.pictogram, required this.zone});
+}
 
 enum _TimerFinishedAction { stop, repeat }
 
@@ -844,7 +852,31 @@ class _BoardScreenState extends State<BoardScreen> {
     await _speechService.speakPhrase(phrase);
   }
 
+  bool _isMobilePortrait(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
+    final size = mediaQuery.size;
+
+    return mediaQuery.orientation == Orientation.portrait &&
+        size.shortestSide < 600;
+  }
+
+  CardSize _getResponsiveCardSize() {
+    if (_isMobilePortrait(context)) {
+      return CardSize.small;
+    }
+
+    return _settings.cardSize;
+  }
+
   Widget _buildZoneLayout() {
+    if (_isMobilePortrait(context)) {
+      return _buildMobileZoneLayout();
+    }
+
+    return _buildTabletZoneLayout();
+  }
+
+  Widget _buildTabletZoneLayout() {
     final aspectRatio = _getChildAspectRatio();
 
     return Row(
@@ -891,6 +923,47 @@ class _BoardScreenState extends State<BoardScreen> {
     );
   }
 
+  Widget _buildMobileZoneLayout() {
+    final entries = _getMobileHomeEntries();
+
+    return GridView.builder(
+      padding: const EdgeInsets.all(8),
+      itemCount: entries.length,
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        mainAxisSpacing: 8,
+        crossAxisSpacing: 8,
+        childAspectRatio: 0.95,
+      ),
+      itemBuilder: (context, index) {
+        final entry = entries[index];
+
+        return PictogramCard(
+          pictogram: entry.pictogram,
+          cardSize: _getResponsiveCardSize(),
+          onTap: () {
+            _handlePictogramTap(entry.pictogram, entry.zone);
+          },
+        );
+      },
+    );
+  }
+
+  List<_MobilePictogramEntry> _getMobileHomeEntries() {
+    final mainPictograms = _getPictogramsForZone(BoardZone.main);
+    final centerPictograms = _getPictogramsForZone(BoardZone.center);
+    final rightPictograms = _getPictogramsForZone(BoardZone.right);
+
+    return [
+      for (final pictogram in mainPictograms)
+        _MobilePictogramEntry(pictogram: pictogram, zone: BoardZone.main),
+      for (final pictogram in centerPictograms)
+        _MobilePictogramEntry(pictogram: pictogram, zone: BoardZone.center),
+      for (final pictogram in rightPictograms)
+        _MobilePictogramEntry(pictogram: pictogram, zone: BoardZone.right),
+    ];
+  }
+
   Widget _buildFullBoardLayout() {
     final categoryId = _fullBoardCategoryId;
 
@@ -931,7 +1004,7 @@ class _BoardScreenState extends State<BoardScreen> {
       return ListenAndTouchGamePanel(
         repository: _repository,
         speechService: _speechService,
-        cardSize: _settings.cardSize,
+        cardSize: _getResponsiveCardSize(),
       );
     }
 
@@ -939,7 +1012,7 @@ class _BoardScreenState extends State<BoardScreen> {
       return MemoryMatchGamePanel(
         repository: _repository,
         speechService: _speechService,
-        cardSize: _settings.cardSize,
+        cardSize: _getResponsiveCardSize(),
         onBackToGames: _backToGamesMenu,
       );
     }
@@ -948,13 +1021,45 @@ class _BoardScreenState extends State<BoardScreen> {
 
     return ZonePanel(
       pictograms: pictograms,
-      crossAxisCount: 8,
-      childAspectRatio: _getFullBoardChildAspectRatio(categoryId),
-      cardSize: _settings.cardSize,
+      crossAxisCount: _getFullBoardCrossAxisCount(categoryId),
+      childAspectRatio: _getResponsiveFullBoardChildAspectRatio(categoryId),
+      cardSize: _getResponsiveCardSize(),
       onPictogramTap: (pictogram) {
         _handlePictogramTap(pictogram, _lastActiveZone);
       },
     );
+  }
+
+  int _getFullBoardCrossAxisCount(String categoryId) {
+    if (!_isMobilePortrait(context)) {
+      return 8;
+    }
+
+    if (categoryId == 'alfabeto') {
+      return 4;
+    }
+
+    if (categoryId == 'frases_rapidas') {
+      return 2;
+    }
+
+    return 2;
+  }
+
+  double _getResponsiveFullBoardChildAspectRatio(String categoryId) {
+    if (!_isMobilePortrait(context)) {
+      return _getFullBoardChildAspectRatio(categoryId);
+    }
+
+    if (categoryId == 'alfabeto') {
+      return 1.05;
+    }
+
+    if (categoryId == 'frases_rapidas') {
+      return 1.25;
+    }
+
+    return 0.95;
   }
 
   @override
@@ -994,7 +1099,7 @@ class _BoardScreenState extends State<BoardScreen> {
               ),
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.all(6),
+                  padding: EdgeInsets.all(_isMobilePortrait(context) ? 6 : 8),
                   child: _fullBoardCategoryId == null
                       ? _buildZoneLayout()
                       : _buildFullBoardLayout(),
