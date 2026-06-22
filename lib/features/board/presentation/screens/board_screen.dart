@@ -17,6 +17,7 @@ import '../../../calculator/presentation/widgets/calculator_panel.dart';
 import '../../../timer/presentation/widgets/visual_timer_panel.dart';
 import '../../../games/presentation/widgets/games_menu_panel.dart';
 import '../../../games/presentation/widgets/listen_and_touch_game_panel.dart';
+import '../../../games/presentation/widgets/memory_match_game_panel.dart';
 
 import '../widgets/zone_panel.dart';
 
@@ -106,6 +107,26 @@ class _BoardScreenState extends State<BoardScreen> {
       }
 
       _fullBoardCategoryId = 'juego_escucha_toca';
+    });
+  }
+
+  void _openMemoryMatchGame() {
+    setState(() {
+      if (_fullBoardCategoryId != null) {
+        _fullBoardHistory.add(_fullBoardCategoryId!);
+      }
+
+      _fullBoardCategoryId = 'juego_emparejar';
+    });
+  }
+
+  void _backToGamesMenu() {
+    setState(() {
+      _fullBoardCategoryId = 'juegos';
+
+      _fullBoardHistory.removeWhere(
+        (categoryId) => categoryId == 'juego_emparejar',
+      );
     });
   }
 
@@ -900,7 +921,10 @@ class _BoardScreenState extends State<BoardScreen> {
     }
 
     if (categoryId == 'juegos') {
-      return GamesMenuPanel(onOpenListenAndTouch: _openListenAndTouchGame);
+      return GamesMenuPanel(
+        onOpenListenAndTouch: _openListenAndTouchGame,
+        onOpenMemoryMatch: _openMemoryMatchGame,
+      );
     }
 
     if (categoryId == 'juego_escucha_toca') {
@@ -908,6 +932,15 @@ class _BoardScreenState extends State<BoardScreen> {
         repository: _repository,
         speechService: _speechService,
         cardSize: _settings.cardSize,
+      );
+    }
+
+    if (categoryId == 'juego_emparejar') {
+      return MemoryMatchGamePanel(
+        repository: _repository,
+        speechService: _speechService,
+        cardSize: _settings.cardSize,
+        onBackToGames: _backToGamesMenu,
       );
     }
 

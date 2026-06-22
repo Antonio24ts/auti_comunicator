@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 
 class GamesMenuPanel extends StatelessWidget {
   final VoidCallback onOpenListenAndTouch;
+  final VoidCallback onOpenMemoryMatch;
 
-  const GamesMenuPanel({super.key, required this.onOpenListenAndTouch});
+  const GamesMenuPanel({
+    super.key,
+    required this.onOpenListenAndTouch,
+    required this.onOpenMemoryMatch,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -26,15 +31,31 @@ class GamesMenuPanel extends StatelessWidget {
           const SizedBox(height: 18),
           Expanded(
             child: Center(
-              child: SizedBox(
-                width: 420,
-                height: 170,
-                child: _GameButton(
-                  title: 'Toca lo que escuchas',
-                  subtitle: 'Escucha y toca el pictograma correcto',
-                  icon: Icons.hearing_rounded,
-                  onTap: onOpenListenAndTouch,
-                ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    width: 420,
+                    height: 170,
+                    child: _GameButton(
+                      title: 'Toca lo que escuchas',
+                      subtitle: 'Escucha y toca el pictograma correcto',
+                      icon: Icons.hearing_rounded,
+                      onTap: onOpenListenAndTouch,
+                    ),
+                  ),
+                  const SizedBox(width: 22),
+                  SizedBox(
+                    width: 420,
+                    height: 170,
+                    child: _GameButton(
+                      title: 'Emparejar',
+                      subtitle: 'Encuentra las parejas iguales',
+                      icon: Icons.grid_view_rounded,
+                      onTap: onOpenMemoryMatch,
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
