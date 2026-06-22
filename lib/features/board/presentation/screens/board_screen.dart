@@ -520,7 +520,7 @@ class _BoardScreenState extends State<BoardScreen> {
         unawaited(_ambientMusicService.pauseForSpeech());
       },
       onSpeechEnd: () {
-        unawaited(_ambientMusicService.resumeAfterSpeech());
+        unawaited(_ambientMusicService.resumeAfterSpeech(_settings));
       },
     );
   }

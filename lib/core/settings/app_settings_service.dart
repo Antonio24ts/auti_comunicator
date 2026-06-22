@@ -9,6 +9,8 @@ class AppSettingsService {
   static const String _ambientMusicEnabledKey = 'ambientMusicEnabled';
   static const String _ambientMusicVolumeKey = 'ambientMusicVolume';
   static const String _childNameKey = 'childName';
+  static const String _ambientMusicTrackIdKey = 'ambientMusicTrackId';
+  static const String _ambientMusicPlaybackModeKey = 'ambientMusicPlaybackMode';
 
   Future<AppSettings> load() async {
     final prefs = await SharedPreferences.getInstance();
@@ -35,6 +37,19 @@ class AppSettingsService {
     final childName =
         prefs.getString(_childNameKey)?.trim() ?? defaultSettings.childName;
 
+    final ambientMusicTrackId =
+        prefs.getString(_ambientMusicTrackIdKey) ??
+        AmbientMusicTracks.relaxing1Id;
+
+    final playbackModeName =
+        prefs.getString(_ambientMusicPlaybackModeKey) ??
+        AmbientMusicPlaybackMode.loopSelected.name;
+
+    final ambientMusicPlaybackMode = AmbientMusicPlaybackMode.values.firstWhere(
+      (mode) => mode.name == playbackModeName,
+      orElse: () => AmbientMusicPlaybackMode.loopSelected,
+    );
+
     return AppSettings(
       speechRate: speechRate,
       cardSize: cardSize,
@@ -42,6 +57,8 @@ class AppSettingsService {
       ambientMusicEnabled: ambientMusicEnabled,
       ambientMusicVolume: ambientMusicVolume,
       childName: childName,
+      ambientMusicTrackId: ambientMusicTrackId,
+      ambientMusicPlaybackMode: ambientMusicPlaybackMode,
     );
   }
 
@@ -54,6 +71,14 @@ class AppSettingsService {
     await prefs.setBool(_ambientMusicEnabledKey, settings.ambientMusicEnabled);
     await prefs.setDouble(_ambientMusicVolumeKey, settings.ambientMusicVolume);
     await prefs.setString(_childNameKey, settings.childName.trim());
+    await prefs.setString(
+      _ambientMusicTrackIdKey,
+      settings.ambientMusicTrackId,
+    );
+    await prefs.setString(
+      _ambientMusicPlaybackModeKey,
+      settings.ambientMusicPlaybackMode.name,
+    );
   }
 
   CardSize? _parseCardSize(String? value) {

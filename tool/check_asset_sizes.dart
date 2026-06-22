@@ -2,20 +2,9 @@ import 'dart:io';
 
 const String assetsRootPath = 'assets';
 
-const Set<String> imageExtensions = {
-  '.png',
-  '.jpg',
-  '.jpeg',
-  '.webp',
-};
+const Set<String> imageExtensions = {'.png', '.jpg', '.jpeg', '.webp'};
 
-const Set<String> audioExtensions = {
-  '.mp3',
-  '.m4a',
-  '.aac',
-  '.ogg',
-  '.wav',
-};
+const Set<String> audioExtensions = {'.mp3', '.m4a', '.aac', '.ogg', '.wav'};
 
 const int imageWarningBytes = 150 * 1024; // 150 KB
 const int imageCriticalBytes = 500 * 1024; // 500 KB
@@ -103,25 +92,13 @@ void main() {
   stdout.writeln('');
   stdout.writeln('Total assets: ${_formatBytes(totalAssetsBytes)}');
 
-  _printTopFiles(
-    title: 'Imágenes más pesadas',
-    files: imageFiles,
-  );
+  _printTopFiles(title: 'Imágenes más pesadas', files: imageFiles);
 
-  _printTopFiles(
-    title: 'Audios más pesados',
-    files: audioFiles,
-  );
+  _printTopFiles(title: 'Audios más pesados', files: audioFiles);
 
-  _printTopFiles(
-    title: 'Otros assets más pesados',
-    files: otherFiles,
-  );
+  _printTopFiles(title: 'Otros assets más pesados', files: otherFiles);
 
-  _printWarnings(
-    warnings: warnings,
-    criticals: criticals,
-  );
+  _printWarnings(warnings: warnings, criticals: criticals);
 
   if (criticals.isNotEmpty) {
     exitCode = 1;
@@ -131,10 +108,7 @@ void main() {
 List<File> _getAssetFiles(Directory directory) {
   final files = <File>[];
 
-  final entities = directory.listSync(
-    recursive: true,
-    followLinks: false,
-  );
+  final entities = directory.listSync(recursive: true, followLinks: false);
 
   for (final entity in entities) {
     if (entity is! File) {
@@ -150,7 +124,9 @@ List<File> _getAssetFiles(Directory directory) {
     files.add(entity);
   }
 
-  files.sort((a, b) => _normalizePath(a.path).compareTo(_normalizePath(b.path)));
+  files.sort(
+    (a, b) => _normalizePath(a.path).compareTo(_normalizePath(b.path)),
+  );
 
   return files;
 }
@@ -248,9 +224,13 @@ void _collectTotalWarnings({
 
 void _printHeader(String title) {
   stdout.writeln('');
-  stdout.writeln('============================================================');
+  stdout.writeln(
+    '============================================================',
+  );
   stdout.writeln(title);
-  stdout.writeln('============================================================');
+  stdout.writeln(
+    '============================================================',
+  );
 }
 
 void _printSummaryLine({
@@ -258,15 +238,10 @@ void _printSummaryLine({
   required int fileCount,
   required int bytes,
 }) {
-  stdout.writeln(
-    '- $label: $fileCount archivos · ${_formatBytes(bytes)}',
-  );
+  stdout.writeln('- $label: $fileCount archivos · ${_formatBytes(bytes)}');
 }
 
-void _printTopFiles({
-  required String title,
-  required List<File> files,
-}) {
+void _printTopFiles({required String title, required List<File> files}) {
   if (files.isEmpty) {
     return;
   }

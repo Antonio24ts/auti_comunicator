@@ -5,58 +5,54 @@ import 'package:just_audio/just_audio.dart';
 import '../core/settings/app_settings.dart';
 
 class AmbientMusicService {
-  static const String _musicAssetPath = 'assets/audio/musica_relajante.mp3';
-
   final AudioPlayer _player = AudioPlayer();
 
-  bool _isInitialized = false;
-  bool _isEnabled = false;
-  bool _pausedForSpeech = false;
-  double _volume = 0.12;
+  String? _loadedTrackId;
+  AmbientMusicPlaybackMode? _loadedPlaybackMode;
+  bool _wasPlayingBeforeSpeech = false;
 
   Future<void> init(AppSettings settings) async {
-    if (!_isInitialized) {
-      await _player.setAsset(_musicAssetPath);
-      await _player.setLoopMode(LoopMode.one);
-
-      _isInitialized = true;
-    }
+    await _loadPlaylistIfNeeded(
+      settings: settings,
+      forceReload: true,
+    );
 
     await applySettings(settings);
   }
 
   Future<void> applySettings(AppSettings settings) async {
-    _isEnabled = settings.ambientMusicEnabled;
-    _volume = settings.ambientMusicVolume.clamp(0.0, 1.0);
+    await _loadPlaylistIfNeeded(settings: settings);
 
-    await _player.setVolume(_volume);
+    await _player.setVolume(settings.ambientMusicVolume);
 
-    if (!_isEnabled) {
-      _pausedForSpeech = false;
+    if (!settings.ambientMusicEnabled) {
       await _player.pause();
       return;
     }
 
-    if (!_pausedForSpeech && !_player.playing) {
+    if (!_player.playing) {
       unawaited(_player.play());
     }
   }
 
   Future<void> pauseForSpeech() async {
-    if (!_isInitialized || !_isEnabled || !_player.playing) {
-      return;
-    }
+    _wasPlayingBeforeSpeech = _player.playing;
 
-    _pausedForSpeech = true;
-    await _player.pause();
+    if (_player.playing) {
+      await _player.pause();
+    }
   }
 
-  Future<void> resumeAfterSpeech() async {
-    if (!_isInitialized || !_isEnabled || !_pausedForSpeech) {
+  Future<void> resumeAfterSpeech(AppSettings settings) async {
+    if (!settings.ambientMusicEnabled) {
       return;
     }
 
-    _pausedForSpeech = false;
+    if (!_wasPlayingBeforeSpeech) {
+      return;
+    }
+
+    await _loadPlaylistIfNeeded(settings: settings);
 
     if (!_player.playing) {
       unawaited(_player.play());
@@ -64,11 +60,65 @@ class AmbientMusicService {
   }
 
   Future<void> stop() async {
-    _pausedForSpeech = false;
     await _player.stop();
   }
 
   Future<void> dispose() async {
     await _player.dispose();
+  }
+
+  Future<void> _loadPlaylistIfNeeded({
+    required AppSettings settings,
+    bool forceReload = false,
+  }) async {
+    final shouldReload = forceReload ||
+        _loadedTrackId != settings.ambientMusicTrackId ||
+        _loadedPlaybackMode != settings.ambientMusicPlaybackMode;
+
+    if (!shouldReload) {
+      await _player.setLoopMode(
+        _getLoopMode(settings.ambientMusicPlaybackMode),
+      );
+      return;
+    }
+
+    final wasPlaying = _player.playing;
+
+    final selectedTrackIndex = AmbientMusicTracks.getIndexById(
+      settings.ambientMusicTrackId,
+    );
+
+    final playlist = ConcatenatingAudioSource(
+      children: [
+        for (final track in AmbientMusicTracks.all)
+          AudioSource.asset(track.assetPath),
+      ],
+    );
+
+    await _player.setAudioSource(
+      playlist,
+      initialIndex: selectedTrackIndex,
+      initialPosition: Duration.zero,
+    );
+
+    await _player.setLoopMode(
+      _getLoopMode(settings.ambientMusicPlaybackMode),
+    );
+
+    _loadedTrackId = settings.ambientMusicTrackId;
+    _loadedPlaybackMode = settings.ambientMusicPlaybackMode;
+
+    if (wasPlaying && settings.ambientMusicEnabled) {
+      unawaited(_player.play());
+    }
+  }
+
+  LoopMode _getLoopMode(AmbientMusicPlaybackMode playbackMode) {
+    switch (playbackMode) {
+      case AmbientMusicPlaybackMode.loopSelected:
+        return LoopMode.one;
+      case AmbientMusicPlaybackMode.sequential:
+        return LoopMode.all;
+    }
   }
 }

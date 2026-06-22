@@ -124,15 +124,35 @@ class _SettingsSheetState extends State<SettingsSheet> {
                 const SizedBox(height: 12),
                 _MusicSetting(
                   enabled: _settings.ambientMusicEnabled,
-                  volume: _settings.ambientMusicVolume,
                   onEnabledChanged: (value) {
                     _updateSettings(
-                      _settings.copyWith(ambientMusicEnabled: value),
+                      _settings.copyWith(
+                        ambientMusicEnabled: value,
+                      ),
                     );
                   },
+                  volume: _settings.ambientMusicVolume,
                   onVolumeChanged: (value) {
                     _updateSettings(
-                      _settings.copyWith(ambientMusicVolume: value),
+                      _settings.copyWith(
+                        ambientMusicVolume: value,
+                      ),
+                    );
+                  },
+                  selectedTrackId: _settings.ambientMusicTrackId,
+                  selectedPlaybackMode: _settings.ambientMusicPlaybackMode,
+                  onTrackChanged: (trackId) {
+                    _updateSettings(
+                      _settings.copyWith(
+                        ambientMusicTrackId: trackId,
+                      ),
+                    );
+                  },
+                  onPlaybackModeChanged: (mode) {
+                    _updateSettings(
+                      _settings.copyWith(
+                        ambientMusicPlaybackMode: mode,
+                      ),
                     );
                   },
                 ),
@@ -166,67 +186,113 @@ class _SettingsSheetState extends State<SettingsSheet> {
 
 class _MusicSetting extends StatelessWidget {
   final bool enabled;
-  final double volume;
   final ValueChanged<bool> onEnabledChanged;
+  final double volume;
   final ValueChanged<double> onVolumeChanged;
+  final String selectedTrackId;
+  final AmbientMusicPlaybackMode selectedPlaybackMode;
+  final ValueChanged<String> onTrackChanged;
+  final ValueChanged<AmbientMusicPlaybackMode> onPlaybackModeChanged;
 
   const _MusicSetting({
     required this.enabled,
     required this.volume,
     required this.onEnabledChanged,
     required this.onVolumeChanged,
+    required this.selectedTrackId,
+    required this.selectedPlaybackMode,
+    required this.onTrackChanged,
+    required this.onPlaybackModeChanged,
   });
 
   @override
   Widget build(BuildContext context) {
-    final percentage = (volume * 100).round();
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SwitchListTile(
           contentPadding: EdgeInsets.zero,
           title: const Text(
-            'Música relajante',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+            'Música ambiental',
+            style: TextStyle(
+              fontWeight: FontWeight.w900,
+            ),
           ),
           subtitle: const Text(
-            'Reproduce música suave en bucle mientras se usa la app.',
+            'Reproduce música suave mientras se usa la app.',
           ),
           value: enabled,
           onChanged: onEnabledChanged,
         ),
+        const SizedBox(height: 10),
         Row(
           children: [
-            const SizedBox(
-              width: 92,
-              child: Text(
-                'Volumen',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
-              ),
-            ),
             Expanded(
-              child: Slider(
-                value: volume,
-                min: 0.0,
-                max: 0.50,
-                divisions: 10,
-                label: '$percentage%',
-                onChanged: enabled ? onVolumeChanged : null,
+              child: _MusicDropdown<String>(
+                label: 'Canción',
+                value: selectedTrackId,
+                items: [
+                  for (final track in AmbientMusicTracks.all)
+                    DropdownMenuItem<String>(
+                      value: track.id,
+                      child: Text(track.name),
+                    ),
+                ],
+                onChanged: (value) {
+                  if (value == null) {
+                    return;
+                  }
+
+                  onTrackChanged(value);
+                },
               ),
             ),
-            SizedBox(
-              width: 48,
-              child: Text(
-                '$percentage%',
-                textAlign: TextAlign.right,
-                style: const TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w700,
-                ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: _MusicDropdown<AmbientMusicPlaybackMode>(
+                label: 'Reproducción',
+                value: selectedPlaybackMode,
+                items: const [
+                  DropdownMenuItem<AmbientMusicPlaybackMode>(
+                    value: AmbientMusicPlaybackMode.loopSelected,
+                    child: Text('Bucle'),
+                  ),
+                  DropdownMenuItem<AmbientMusicPlaybackMode>(
+                    value: AmbientMusicPlaybackMode.sequential,
+                    child: Text('Seguida'),
+                  ),
+                ],
+                onChanged: (value) {
+                  if (value == null) {
+                    return;
+                  }
+
+                  onPlaybackModeChanged(value);
+                },
               ),
             ),
           ],
+        ),
+        const SizedBox(height: 14),
+        Text(
+          'Volumen',
+          style: TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w900,
+            color: Colors.blueGrey.shade800,
+          ),
+        ),
+        Slider(
+          value: volume,
+          min: 0,
+          max: 1,
+          divisions: 10,
+          label: '${(volume * 100).round()}%',
+          onChanged: onVolumeChanged,
+        ),
+        const SizedBox(height: 4),
+        _MusicModeHelpText(
+          selectedPlaybackMode: selectedPlaybackMode,
         ),
       ],
     );
@@ -389,6 +455,87 @@ class _ChildNameSetting extends StatelessWidget {
             const Icon(Icons.edit),
           ],
         ),
+      ),
+    );
+  }
+}
+
+
+class _MusicDropdown<T> extends StatelessWidget {
+  final String label;
+  final T value;
+  final List<DropdownMenuItem<T>> items;
+  final ValueChanged<T?> onChanged;
+
+  const _MusicDropdown({
+    required this.label,
+    required this.value,
+    required this.items,
+    required this.onChanged,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return InputDecorator(
+      decoration: InputDecoration(
+        labelText: label,
+        isDense: true,
+        filled: true,
+        fillColor: Colors.blueGrey.shade50,
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 12,
+          vertical: 8,
+        ),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(14),
+          borderSide: BorderSide(
+            color: Colors.blueGrey.shade100,
+            width: 1.2,
+          ),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(14),
+          borderSide: BorderSide(
+            color: Colors.blueGrey.shade100,
+            width: 1.2,
+          ),
+        ),
+      ),
+      child: DropdownButtonHideUnderline(
+        child: DropdownButton<T>(
+          value: value,
+          isExpanded: true,
+          borderRadius: BorderRadius.circular(14),
+          items: items,
+          onChanged: onChanged,
+        ),
+      ),
+    );
+  }
+}
+
+class _MusicModeHelpText extends StatelessWidget {
+  final AmbientMusicPlaybackMode selectedPlaybackMode;
+
+  const _MusicModeHelpText({
+    required this.selectedPlaybackMode,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final text = switch (selectedPlaybackMode) {
+      AmbientMusicPlaybackMode.loopSelected =>
+        'Bucle: repite siempre la canción seleccionada.',
+      AmbientMusicPlaybackMode.sequential =>
+        'Seguida: cuando termina una canción, pasa a la siguiente.',
+    };
+
+    return Text(
+      text,
+      style: TextStyle(
+        fontSize: 12,
+        fontWeight: FontWeight.w700,
+        color: Colors.blueGrey.shade600,
       ),
     );
   }
