@@ -1,19 +1,5 @@
 [
   {
-    "id": "colegio_no_entiendo",
-    "text": "No entiendo",
-    "imagePath": "assets/images/colegio/noentiendo.png",
-    "categoryId": "home_main",
-    "type": "word"
-  },
-  {
-    "id": "home_ayuda",
-    "text": "Ayuda",
-    "imagePath": "assets/images/casa/Ayuda.png",
-    "categoryId": "home",
-    "type": "word"
-  },
-  {
     "id": "home_si",
     "text": "Sí",
     "imagePath": "assets/images/si.png",
@@ -71,17 +57,10 @@
     "type": "word"
   },
   {
-    "id": "mas_dolor",
-    "text": "Dolor",
-    "imagePath": "assets/images/categories/dolor.png",
-    "categoryId": "mas_categorias",
-    "type": "word"
-  },
-  {
-    "id": "mas_bano",
-    "text": "Baño",
-    "imagePath": "assets/images/categories/baño.png",
-    "categoryId": "home_main",
+    "id": "colegio_no_entiendo",
+    "text": "No entiendo",
+    "imagePath": "assets/images/colegio/noentiendo.png",
+    "categoryId": "home_right",
     "type": "word"
   },
   {
@@ -112,12 +91,28 @@
     "categoryOpenMode": "fullBoard"
   },
   {
-    "id": "home_mas",
-    "text": "Más",
-    "imagePath": "assets/images/categories/Mas.png",
+    "id": "home_juegos",
+    "text": "Juegos",
+    "imagePath": "assets/images/categories/juegos.png",
+    "categoryId": "home_center",
+    "type": "category",
+    "targetCategoryId": "juegos",
+    "categoryOpenMode": "fullBoard"
+  },
+  {
+    "id": "mas_bano",
+    "text": "Baño",
+    "imagePath": "assets/images/categories/baño.png",
+    "categoryId": "home_main",
+    "type": "word"
+  },
+  {
+    "id": "mas_sensorial",
+    "text": "Sensorial",
+    "imagePath": "assets/images/categories/saturado.png",
     "categoryId": "home_main",
     "type": "category",
-    "targetCategoryId": "mas_categorias"
+    "targetCategoryId": "sensorial"
   },
   {
     "id": "mas_personas",
@@ -136,21 +131,20 @@
     "targetCategoryId": "verbos"
   },
   {
+    "id": "mas_posicion",
+    "text": "Posicion",
+    "imagePath": "",
+    "categoryId": "home_main",
+    "type": "category",
+    "targetCategoryId": "posicion"
+  },
+  {
     "id": "mas_preguntas",
     "text": "Preguntas",
     "imagePath": "assets/images/categories/pregunta.png",
     "categoryId": "home_main",
     "type": "category",
     "targetCategoryId": "preguntas"
-  },
-  {
-    "id": "home_frases",
-    "text": "Frases",
-    "imagePath": "assets/images/categories/frase.png",
-    "categoryId": "home_main",
-    "type": "category",
-    "targetCategoryId": "frases_rapidas",
-    "categoryOpenMode": "fullBoard"
   },
   {
     "id": "mas_emociones",
@@ -215,6 +209,23 @@
     "categoryId": "home_main",
     "type": "category",
     "targetCategoryId": "objetos"
+  },
+    {
+    "id": "home_frases",
+    "text": "Frases",
+    "imagePath": "assets/images/categories/frase.png",
+    "categoryId": "home_main",
+    "type": "category",
+    "targetCategoryId": "frases_rapidas",
+    "categoryOpenMode": "fullBoard"
+  },
+  {
+    "id": "home_mas",
+    "text": "Más",
+    "imagePath": "assets/images/categories/Mas.png",
+    "categoryId": "home_main",
+    "type": "category",
+    "targetCategoryId": "mas_categorias"
   },
   {
     "id": "mas_trabajo",
@@ -1730,6 +1741,90 @@
     "text": "Por favor",
     "imagePath": "assets/images/frases/porfavor.png",
     "categoryId": "frases_rapidas",
+    "type": "word"
+  },
+  {
+    "id": "sensorial_mucho_ruido",
+    "text": "Hay mucho ruido",
+    "imagePath": "assets/images/sensorial/ruido.png",
+    "categoryId": "sensorial",
+    "type": "word"
+  },
+  {
+    "id": "sensorial_mucha_luz",
+    "text": "Hay mucha luz",
+    "imagePath": "assets/images/sensorial/luz.png",
+    "categoryId": "sensorial",
+    "type": "word"
+  },
+  {
+    "id": "sensorial_huele_fuerte",
+    "text": "Huele fuerte",
+    "imagePath": "assets/images/sensorial/olor.png",
+    "categoryId": "sensorial",
+    "type": "word"
+  },
+  {
+    "id": "sensorial_me_molesta",
+    "text": "Me molesta",
+    "imagePath": "",
+    "categoryId": "sensorial",
+    "type": "word"
+  },
+  {
+    "id": "sensorial_molesta_ropa",
+    "text": "Me molesta la ropa",
+    "imagePath": "",
+    "categoryId": "sensorial",
+    "type": "word"
+  },
+  {
+    "id": "sensorial_textura",
+    "text": "No me gusta esa textura",
+    "imagePath": "",
+    "categoryId": "sensorial",
+    "type": "word"
+  },
+  {
+    "id": "sensorial_no_me_gusta",
+    "text": "No me gusta",
+    "imagePath": "",
+    "categoryId": "sensorial",
+    "type": "word"
+  },
+  {
+    "id": "sensorial_necesito_auriculares",
+    "text": "Necesito auriculares",
+    "imagePath": "",
+    "categoryId": "sensorial",
+    "type": "word"
+  },
+  {
+    "id": "sensorial_apagar_luz",
+    "text": "Necesito apagar la luz",
+    "imagePath": "",
+    "categoryId": "sensorial",
+    "type": "word"
+  },
+  {
+    "id": "sensorial_necesito_salir",
+    "text": "Necesito salir",
+    "imagePath": "",
+    "categoryId": "sensorial",
+    "type": "word"
+  },
+  {
+    "id": "sensorial_necesito_moverme",
+    "text": "Necesito moverme",
+    "imagePath": "",
+    "categoryId": "sensorial",
+    "type": "word"
+  },
+  {
+    "id": "sensorial_necesito_objeto",
+    "text": "Necesito mi objeto",
+    "imagePath": "",
+    "categoryId": "sensorial",
     "type": "word"
   }
 ]

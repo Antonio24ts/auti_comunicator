@@ -44,4 +44,16 @@ class PictogramRepository {
         .where((pictogram) => pictogram.categoryId == categoryId)
         .toList();
   }
+
+  List<Pictogram> getPictogramsByCategories(Set<String> categoryIds) {
+    if (!_isLoaded) {
+      throw StateError(
+        'PictogramRepository debe cargarse con load() antes de usarse.',
+      );
+    }
+
+    return _pictograms
+        .where((pictogram) => categoryIds.contains(pictogram.categoryId))
+        .toList();
+  }
 }

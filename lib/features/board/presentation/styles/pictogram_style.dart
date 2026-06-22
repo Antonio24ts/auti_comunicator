@@ -90,6 +90,13 @@ PictogramStyle _categoryStyle(String categoryId) {
         accentColor: Colors.red.shade500,
       );
 
+    case 'cuerpo':
+      return PictogramStyle(
+        backgroundColor: Colors.red.shade50,
+        borderColor: Colors.red.shade300,
+        accentColor: Colors.red.shade500,
+      );
+
     case 'casa':
       return PictogramStyle(
         backgroundColor: Colors.brown.shade50,
@@ -98,6 +105,27 @@ PictogramStyle _categoryStyle(String categoryId) {
       );
 
     case 'colegio':
+      return PictogramStyle(
+        backgroundColor: Colors.cyan.shade50,
+        borderColor: Colors.cyan.shade300,
+        accentColor: Colors.cyan.shade700,
+      );
+
+    case 'juegos':
+      return PictogramStyle(
+        backgroundColor: Colors.indigo.shade50,
+        borderColor: Colors.indigo.shade300,
+        accentColor: Colors.indigo.shade700,
+      );
+
+    case 'juego_escucha_toca':
+      return PictogramStyle(
+        backgroundColor: Colors.indigo.shade50,
+        borderColor: Colors.indigo.shade300,
+        accentColor: Colors.indigo.shade700,
+      );
+
+    case 'posicion':
       return PictogramStyle(
         backgroundColor: Colors.cyan.shade50,
         borderColor: Colors.cyan.shade300,
@@ -166,6 +194,12 @@ PictogramStyle _categoryStyle(String categoryId) {
         backgroundColor: Colors.purple.shade50,
         borderColor: Colors.purple.shade300,
         accentColor: Colors.purple.shade700,
+      );
+    case 'sensorial':
+      return PictogramStyle(
+        backgroundColor: Colors.deepPurple.shade50,
+        borderColor: Colors.deepPurple.shade300,
+        accentColor: Colors.deepPurple.shade700,
       );
 
     default:

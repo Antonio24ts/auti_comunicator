@@ -51,11 +51,7 @@ void main() {
   for (final pictogram in pictograms) {
     final id = _readString(pictogram, 'id');
     final text = _readString(pictogram, 'text');
-    final imagePath = _readString(
-      pictogram,
-      'imagePath',
-      required: false,
-    );
+    final imagePath = _readString(pictogram, 'imagePath', required: false);
     final categoryId = _readString(pictogram, 'categoryId');
     final type = _readString(pictogram, 'type');
     final targetCategoryId = _readString(
@@ -337,26 +333,21 @@ List<String> _findAllImageFiles(String rootPath) {
     return [];
   }
 
-  final imageExtensions = {
-    '.png',
-    '.jpg',
-    '.jpeg',
-    '.webp',
-    '.gif',
-  };
+  final imageExtensions = {'.png', '.jpg', '.jpeg', '.webp', '.gif'};
 
-  final files = root
-      .listSync(recursive: true)
-      .whereType<File>()
-      .map((file) => file.path.replaceAll('\\', '/'))
-      .where((path) {
-        final lowerPath = path.toLowerCase();
+  final files =
+      root
+          .listSync(recursive: true)
+          .whereType<File>()
+          .map((file) => file.path.replaceAll('\\', '/'))
+          .where((path) {
+            final lowerPath = path.toLowerCase();
 
-        return imageExtensions.any(lowerPath.endsWith);
-      })
-      .where((path) => !path.contains('/audio/'))
-      .toList()
-    ..sort();
+            return imageExtensions.any(lowerPath.endsWith);
+          })
+          .where((path) => !path.contains('/audio/'))
+          .toList()
+        ..sort();
 
   return files;
 }

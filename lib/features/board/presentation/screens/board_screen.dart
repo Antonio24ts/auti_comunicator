@@ -15,6 +15,8 @@ import '../widgets/child_name_dialog.dart';
 import '../../../calculator/domain/simple_calculator_engine.dart';
 import '../../../calculator/presentation/widgets/calculator_panel.dart';
 import '../../../timer/presentation/widgets/visual_timer_panel.dart';
+import '../../../games/presentation/widgets/games_menu_panel.dart';
+import '../../../games/presentation/widgets/listen_and_touch_game_panel.dart';
 
 import '../widgets/zone_panel.dart';
 
@@ -94,6 +96,16 @@ class _BoardScreenState extends State<BoardScreen> {
       _selectedTimerSeconds = seconds;
       _remainingTimerSeconds = seconds;
       _isTimerPaused = false;
+    });
+  }
+
+  void _openListenAndTouchGame() {
+    setState(() {
+      if (_fullBoardCategoryId != null) {
+        _fullBoardHistory.add(_fullBoardCategoryId!);
+      }
+
+      _fullBoardCategoryId = 'juego_escucha_toca';
     });
   }
 
@@ -884,6 +896,18 @@ class _BoardScreenState extends State<BoardScreen> {
         onPause: _pauseTimer,
         onReset: _resetTimer,
         onAddMinute: _addOneMinuteToTimer,
+      );
+    }
+
+    if (categoryId == 'juegos') {
+      return GamesMenuPanel(onOpenListenAndTouch: _openListenAndTouchGame);
+    }
+
+    if (categoryId == 'juego_escucha_toca') {
+      return ListenAndTouchGamePanel(
+        repository: _repository,
+        speechService: _speechService,
+        cardSize: _settings.cardSize,
       );
     }
 
