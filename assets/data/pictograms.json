@@ -338,14 +338,14 @@
   {
     "id": "agua",
     "text": "Agua",
-    "imagePath": "assets/images/necesidades/agua.png",
+    "imagePath": "assets/images/bebida/agua.png",
     "categoryId": "necesidades",
     "type": "word"
   },
   {
     "id": "comer",
     "text": "Comer",
-    "imagePath": "assets/images/necesidades/comer.png",
+    "imagePath": "assets/images/comida/comer.png",
     "categoryId": "necesidades",
     "type": "word"
   },

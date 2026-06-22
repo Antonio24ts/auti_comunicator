@@ -159,14 +159,14 @@ class _ListenAndTouchGamePanelState extends State<ListenAndTouchGamePanel> {
   }
 
   int _getGridColumnCount() {
-    final count = _getCurrentOptionCount();
+    final count = _currentOptions.length;
 
     if (count <= 2) {
       return 2;
     }
 
     if (count <= 4) {
-      return 4;
+      return 2;
     }
 
     if (count <= 8) {
@@ -174,28 +174,22 @@ class _ListenAndTouchGamePanelState extends State<ListenAndTouchGamePanel> {
     }
 
     if (count <= 12) {
-      return 6;
+      return 4;
     }
 
     if (count <= 20) {
-      return 8;
+      return 5;
+    }
+
+    if (count <= 24) {
+      return 6;
+    }
+
+    if (count <= 30) {
+      return 6;
     }
 
     return 8;
-  }
-
-  double _getGridAspectRatio() {
-    final count = _getCurrentOptionCount();
-
-    if (count <= 4) {
-      return 1.05;
-    }
-
-    if (count <= 12) {
-      return 1.15;
-    }
-
-    return 1.25;
   }
 
   Future<void> _speakTarget() async {
@@ -235,31 +229,38 @@ class _ListenAndTouchGamePanelState extends State<ListenAndTouchGamePanel> {
   }
 
   Future<void> _handleCorrectAnswer() async {
+    const correctFeedbackText = 'Bien';
+
     setState(() {
       _totalCorrectAnswers++;
       _streak++;
-      _message = 'Bien';
+      _message = correctFeedbackText;
     });
 
-    await widget.speechService.speakPhrase('Bien');
+    await widget.speechService.speakPhrase(correctFeedbackText);
 
-    await Future.delayed(const Duration(milliseconds: 450));
+    await Future.delayed(_getDelayAfterSpeech(correctFeedbackText));
 
     if (!mounted) {
       return;
     }
 
-    if (_streak >= _correctAnswersToLevelUp &&
-        _levelIndex < _optionsByLevel.length - 1) {
+    final shouldLevelUp =
+        _streak >= _correctAnswersToLevelUp &&
+        _levelIndex < _optionsByLevel.length - 1;
+
+    if (shouldLevelUp) {
+      const levelUpText = 'Subes de nivel';
+
       setState(() {
         _levelIndex++;
         _streak = 0;
-        _message = 'Subes de nivel';
+        _message = levelUpText;
       });
 
-      await widget.speechService.speakPhrase('Subes de nivel');
+      await widget.speechService.speakPhrase(levelUpText);
 
-      await Future.delayed(const Duration(milliseconds: 450));
+      await Future.delayed(_getDelayAfterSpeech(levelUpText));
 
       if (!mounted) {
         return;
@@ -267,6 +268,18 @@ class _ListenAndTouchGamePanelState extends State<ListenAndTouchGamePanel> {
     }
 
     _startNewRound(speakTarget: true);
+  }
+
+  Duration _getDelayAfterSpeech(String text) {
+    final cleanText = text.trim();
+
+    if (cleanText.isEmpty) {
+      return const Duration(milliseconds: 500);
+    }
+
+    final estimatedMilliseconds = 650 + (cleanText.length * 55);
+
+    return Duration(milliseconds: estimatedMilliseconds.clamp(900, 2200));
   }
 
   Future<void> _handleWrongAnswer() async {
@@ -333,25 +346,54 @@ class _ListenAndTouchGamePanelState extends State<ListenAndTouchGamePanel> {
           ),
           const SizedBox(height: 8),
           Expanded(
-            child: GridView.builder(
-              padding: const EdgeInsets.all(4),
-              itemCount: _currentOptions.length,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: _getGridColumnCount(),
-                mainAxisSpacing: 8,
-                crossAxisSpacing: 8,
-                childAspectRatio: _getGridAspectRatio(),
-              ),
-              itemBuilder: (context, index) {
-                final pictogram = _currentOptions[index];
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                final columns = _getGridColumnCount();
+                final rows = (_currentOptions.length / columns).ceil();
 
-                return _GameOptionCard(
-                  pictogram: pictogram,
-                  cardSize: widget.cardSize,
-                  isSelected: _selectedPictogramId == pictogram.id,
-                  isCorrectTarget: _targetPictogram?.id == pictogram.id,
-                  isAnswerLocked: _isAnswerLocked,
-                  onTap: () => _handleOptionTap(pictogram),
+                const gridPadding = 4.0;
+                const spacing = 8.0;
+
+                final totalHorizontalSpacing =
+                    (gridPadding * 2) + (spacing * (columns - 1));
+                final totalVerticalSpacing =
+                    (gridPadding * 2) + (spacing * (rows - 1));
+
+                final availableCellWidth =
+                    (constraints.maxWidth - totalHorizontalSpacing) / columns;
+                final availableCellHeight =
+                    (constraints.maxHeight - totalVerticalSpacing) / rows;
+
+                final rawChildAspectRatio =
+                    availableCellWidth / availableCellHeight;
+
+                final childAspectRatio =
+                    rawChildAspectRatio.isFinite && rawChildAspectRatio > 0
+                    ? rawChildAspectRatio
+                    : 1.0;
+
+                return GridView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  padding: const EdgeInsets.all(gridPadding),
+                  itemCount: _currentOptions.length,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: columns,
+                    mainAxisSpacing: spacing,
+                    crossAxisSpacing: spacing,
+                    childAspectRatio: childAspectRatio,
+                  ),
+                  itemBuilder: (context, index) {
+                    final pictogram = _currentOptions[index];
+
+                    return _GameOptionCard(
+                      pictogram: pictogram,
+                      cardSize: widget.cardSize,
+                      isSelected: _selectedPictogramId == pictogram.id,
+                      isCorrectTarget: _targetPictogram?.id == pictogram.id,
+                      isAnswerLocked: _isAnswerLocked,
+                      onTap: () => _handleOptionTap(pictogram),
+                    );
+                  },
                 );
               },
             ),
@@ -412,8 +454,8 @@ class _GameHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 84,
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      height: 80,
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
