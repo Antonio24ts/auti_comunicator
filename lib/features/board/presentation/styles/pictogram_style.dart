@@ -201,6 +201,40 @@ PictogramStyle _categoryStyle(String categoryId) {
         borderColor: Colors.deepPurple.shade300,
         accentColor: Colors.deepPurple.shade700,
       );
+    case 'ropa':
+      return PictogramStyle(
+        backgroundColor: Colors.lightBlue.shade50,
+        borderColor: Colors.lightBlue.shade300,
+        accentColor: Colors.lightBlue.shade700,
+      );
+
+    case 'tiempo':
+      return PictogramStyle(
+        backgroundColor: Colors.cyan.shade50,
+        borderColor: Colors.cyan.shade300,
+        accentColor: Colors.cyan.shade700,
+      );
+
+    case 'colores':
+      return PictogramStyle(
+        backgroundColor: Colors.amber.shade50,
+        borderColor: Colors.amber.shade300,
+        accentColor: Colors.amber.shade800,
+      );
+
+    case 'tamanos':
+      return PictogramStyle(
+        backgroundColor: Colors.indigo.shade50,
+        borderColor: Colors.indigo.shade300,
+        accentColor: Colors.indigo.shade700,
+      );
+
+    case 'higiene':
+      return PictogramStyle(
+        backgroundColor: Colors.teal.shade50,
+        borderColor: Colors.teal.shade300,
+        accentColor: Colors.teal.shade700,
+      );
 
     default:
       return PictogramStyle(

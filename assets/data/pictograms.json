@@ -123,20 +123,20 @@
     "targetCategoryId": "personas"
   },
   {
+    "id": "mas_colores",
+    "text": "Colores",
+    "imagePath": "assets/images/colores/rojo.png",
+    "categoryId": "home_main",
+    "type": "category",
+    "targetCategoryId": "colores"
+  },
+  {
     "id": "mas_verbos",
     "text": "Verbos",
     "imagePath": "",
     "categoryId": "home_main",
     "type": "category",
     "targetCategoryId": "verbos"
-  },
-  {
-    "id": "mas_posicion",
-    "text": "Posicion",
-    "imagePath": "",
-    "categoryId": "home_main",
-    "type": "category",
-    "targetCategoryId": "posicion"
   },
   {
     "id": "mas_preguntas",
@@ -153,22 +153,6 @@
     "categoryId": "home_main",
     "type": "category",
     "targetCategoryId": "emociones"
-  },
-  {
-    "id": "mas_comida",
-    "text": "Comida",
-    "imagePath": "assets/images/categories/comida.png",
-    "categoryId": "mas_categorias",
-    "type": "category",
-    "targetCategoryId": "comida"
-  },
-  {
-    "id": "mas_bebida",
-    "text": "Bebida",
-    "imagePath": "assets/images/categories/bebida.png",
-    "categoryId": "mas_categorias",
-    "type": "category",
-    "targetCategoryId": "bebida"
   },
   {
     "id": "mas_casa",
@@ -195,14 +179,6 @@
     "targetCategoryId": "cuerpo"
   },
   {
-    "id": "mas_lugares",
-    "text": "Lugares",
-    "imagePath": "assets/images/categories/lugares.png",
-    "categoryId": "mas_categorias",
-    "type": "category",
-    "targetCategoryId": "lugares"
-  },
-  {
     "id": "mas_objetos",
     "text": "Objetos",
     "imagePath": "assets/images/categories/objetos.png",
@@ -210,7 +186,7 @@
     "type": "category",
     "targetCategoryId": "objetos"
   },
-    {
+  {
     "id": "home_frases",
     "text": "Frases",
     "imagePath": "assets/images/categories/frase.png",
@@ -218,6 +194,14 @@
     "type": "category",
     "targetCategoryId": "frases_rapidas",
     "categoryOpenMode": "fullBoard"
+  },
+  {
+    "id": "mas_posicion",
+    "text": "Posición",
+    "imagePath": "assets/images/posicion/aqui.png",
+    "categoryId": "home_main",
+    "type": "category",
+    "targetCategoryId": "posicion"
   },
   {
     "id": "home_mas",
@@ -228,12 +212,61 @@
     "targetCategoryId": "mas_categorias"
   },
   {
+    "id": "mas_comida",
+    "text": "Comida",
+    "imagePath": "assets/images/categories/comida.png",
+    "categoryId": "mas_categorias",
+    "type": "category",
+    "targetCategoryId": "comida"
+  },
+  {
+    "id": "mas_bebida",
+    "text": "Bebida",
+    "imagePath": "assets/images/categories/bebida.png",
+    "categoryId": "mas_categorias",
+    "type": "category",
+    "targetCategoryId": "bebida"
+  },
+  {
+    "id": "mas_lugares",
+    "text": "Lugares",
+    "imagePath": "assets/images/categories/lugares.png",
+    "categoryId": "mas_categorias",
+    "type": "category",
+    "targetCategoryId": "lugares"
+  },
+  {
     "id": "mas_trabajo",
     "text": "Trabajos",
     "imagePath": "assets/images/categories/trabajo.png",
     "categoryId": "mas_categorias",
     "type": "category",
     "targetCategoryId": "trabajo"
+  },
+  {
+    "id": "mas_tamanos",
+    "text": "Tamaños",
+    "imagePath": "assets/images/tamanos/grande.png",
+    "categoryId": "mas_categorias",
+    "type": "category",
+    "targetCategoryId": "tamanos"
+  },
+  {
+    "id": "mas_higiene",
+    "text": "Higiene",
+    "imagePath": "assets/images/higiene/lavarse_manos.png",
+    "categoryId": "mas_categorias",
+    "type": "category",
+    "targetCategoryId": "higiene"
+  },
+  {
+    "id": "mas_ropa",
+    "text": "Ropa",
+    "imagePath": "assets/images/ropa/camiseta.png",
+    "categoryId": "mas_categorias",
+    "type": "category",
+    "targetCategoryId": "ropa",
+    "categoryOpenMode": "fullBoard"
   },
   {
     "id": "yo",
@@ -1825,6 +1858,860 @@
     "text": "Necesito mi objeto",
     "imagePath": "",
     "categoryId": "sensorial",
+    "type": "word"
+  },
+  {
+    "id": "ropa_me_quiero_vestir",
+    "text": "Me quiero vestir",
+    "imagePath": "assets/images/ropa/me_quiero_vestir.png",
+    "categoryId": "ropa",
+    "type": "word"
+  },
+  {
+    "id": "ropa_me_quiero_quitar_la_ropa",
+    "text": "Me quiero quitar la ropa",
+    "imagePath": "assets/images/ropa/me_quiero_quitar_la_ropa.png",
+    "categoryId": "ropa",
+    "type": "word"
+  },
+  {
+    "id": "ropa_necesito_cambiarme",
+    "text": "Necesito cambiarme",
+    "imagePath": "assets/images/ropa/necesito_cambiarme.png",
+    "categoryId": "ropa",
+    "type": "word"
+  },
+  {
+    "id": "ropa_me_molesta",
+    "text": "Me molesta",
+    "imagePath": "assets/images/ropa/me_molesta.png",
+    "categoryId": "ropa",
+    "type": "word"
+  },
+  {
+    "id": "ropa_me_aprieta",
+    "text": "Me aprieta",
+    "imagePath": "assets/images/ropa/me_aprieta.png",
+    "categoryId": "ropa",
+    "type": "word"
+  },
+  {
+    "id": "ropa_me_pica",
+    "text": "Me pica",
+    "imagePath": "assets/images/ropa/me_pica.png",
+    "categoryId": "ropa",
+    "type": "word"
+  },
+  {
+    "id": "ropa_tengo_frio",
+    "text": "Tengo frío",
+    "imagePath": "assets/images/ropa/tengo_frio.png",
+    "categoryId": "ropa",
+    "type": "word"
+  },
+  {
+    "id": "ropa_tengo_calor",
+    "text": "Tengo calor",
+    "imagePath": "assets/images/ropa/tengo_calor.png",
+    "categoryId": "ropa",
+    "type": "word"
+  },
+  {
+    "id": "ropa_camiseta",
+    "text": "Camiseta",
+    "imagePath": "assets/images/ropa/camiseta.png",
+    "categoryId": "ropa",
+    "type": "word"
+  },
+  {
+    "id": "ropa_pantalon",
+    "text": "Pantalón",
+    "imagePath": "assets/images/ropa/pantalon.png",
+    "categoryId": "ropa",
+    "type": "word"
+  },
+  {
+    "id": "ropa_pantalon_corto",
+    "text": "Pantalón corto",
+    "imagePath": "assets/images/ropa/pantalon_corto.png",
+    "categoryId": "ropa",
+    "type": "word"
+  },
+  {
+    "id": "ropa_jersey",
+    "text": "Jersey",
+    "imagePath": "assets/images/ropa/jersey.png",
+    "categoryId": "ropa",
+    "type": "word"
+  },
+  {
+    "id": "ropa_sudadera",
+    "text": "Sudadera",
+    "imagePath": "assets/images/ropa/sudadera.png",
+    "categoryId": "ropa",
+    "type": "word"
+  },
+  {
+    "id": "ropa_chaqueta",
+    "text": "Chaqueta",
+    "imagePath": "assets/images/ropa/chaqueta.png",
+    "categoryId": "ropa",
+    "type": "word"
+  },
+  {
+    "id": "ropa_abrigo",
+    "text": "Abrigo",
+    "imagePath": "assets/images/ropa/abrigo.png",
+    "categoryId": "ropa",
+    "type": "word"
+  },
+  {
+    "id": "ropa_vestido",
+    "text": "Vestido",
+    "imagePath": "assets/images/ropa/vestido.png",
+    "categoryId": "ropa",
+    "type": "word"
+  },
+  {
+    "id": "ropa_falda",
+    "text": "Falda",
+    "imagePath": "assets/images/ropa/falda.png",
+    "categoryId": "ropa",
+    "type": "word"
+  },
+  {
+    "id": "ropa_calcetines",
+    "text": "Calcetines",
+    "imagePath": "assets/images/ropa/calcetines.png",
+    "categoryId": "ropa",
+    "type": "word"
+  },
+  {
+    "id": "ropa_zapatos",
+    "text": "Zapatos",
+    "imagePath": "assets/images/ropa/zapatos.png",
+    "categoryId": "ropa",
+    "type": "word"
+  },
+  {
+    "id": "ropa_zapatillas",
+    "text": "Zapatillas",
+    "imagePath": "assets/images/ropa/zapatillas.png",
+    "categoryId": "ropa",
+    "type": "word"
+  },
+  {
+    "id": "ropa_botas",
+    "text": "Botas",
+    "imagePath": "assets/images/ropa/botas.png",
+    "categoryId": "ropa",
+    "type": "word"
+  },
+  {
+    "id": "ropa_sandalias",
+    "text": "Sandalias",
+    "imagePath": "assets/images/ropa/sandalias.png",
+    "categoryId": "ropa",
+    "type": "word"
+  },
+  {
+    "id": "ropa_ropa_interior",
+    "text": "Ropa interior",
+    "imagePath": "assets/images/ropa/ropa_interior.png",
+    "categoryId": "ropa",
+    "type": "word"
+  },
+  {
+    "id": "ropa_pijama",
+    "text": "Pijama",
+    "imagePath": "assets/images/ropa/pijama.png",
+    "categoryId": "ropa",
+    "type": "word"
+  },
+  {
+    "id": "ropa_gorro",
+    "text": "Gorro",
+    "imagePath": "assets/images/ropa/gorro.png",
+    "categoryId": "ropa",
+    "type": "word"
+  },
+  {
+    "id": "ropa_gorra",
+    "text": "Gorra",
+    "imagePath": "assets/images/ropa/gorra.png",
+    "categoryId": "ropa",
+    "type": "word"
+  },
+  {
+    "id": "ropa_bufanda",
+    "text": "Bufanda",
+    "imagePath": "assets/images/ropa/bufanda.png",
+    "categoryId": "ropa",
+    "type": "word"
+  },
+  {
+    "id": "ropa_guantes",
+    "text": "Guantes",
+    "imagePath": "assets/images/ropa/guantes.png",
+    "categoryId": "ropa",
+    "type": "word"
+  },
+  {
+    "id": "ropa_banador",
+    "text": "Bañador",
+    "imagePath": "assets/images/ropa/banador.png",
+    "categoryId": "ropa",
+    "type": "word"
+  },
+  {
+    "id": "ropa_mochila",
+    "text": "Mochila",
+    "imagePath": "assets/images/ropa/mochila.png",
+    "categoryId": "ropa",
+    "type": "word"
+  },
+  {
+    "id": "posicion_aqui",
+    "text": "Aquí",
+    "imagePath": "assets/images/posicion/aqui.png",
+    "categoryId": "posicion",
+    "type": "word"
+  },
+  {
+    "id": "posicion_alli",
+    "text": "Allí",
+    "imagePath": "assets/images/posicion/alli.png",
+    "categoryId": "posicion",
+    "type": "word"
+  },
+  {
+    "id": "posicion_arriba",
+    "text": "Arriba",
+    "imagePath": "assets/images/posicion/arriba.png",
+    "categoryId": "posicion",
+    "type": "word"
+  },
+  {
+    "id": "posicion_abajo",
+    "text": "Abajo",
+    "imagePath": "assets/images/posicion/abajo.png",
+    "categoryId": "posicion",
+    "type": "word"
+  },
+  {
+    "id": "posicion_encima",
+    "text": "Encima",
+    "imagePath": "assets/images/posicion/encima.png",
+    "categoryId": "posicion",
+    "type": "word"
+  },
+  {
+    "id": "posicion_debajo",
+    "text": "Debajo",
+    "imagePath": "assets/images/posicion/debajo.png",
+    "categoryId": "posicion",
+    "type": "word"
+  },
+  {
+    "id": "posicion_dentro",
+    "text": "Dentro",
+    "imagePath": "assets/images/posicion/dentro.png",
+    "categoryId": "posicion",
+    "type": "word"
+  },
+  {
+    "id": "posicion_fuera",
+    "text": "Fuera",
+    "imagePath": "assets/images/posicion/fuera.png",
+    "categoryId": "posicion",
+    "type": "word"
+  },
+  {
+    "id": "posicion_delante",
+    "text": "Delante",
+    "imagePath": "assets/images/posicion/delante.png",
+    "categoryId": "posicion",
+    "type": "word"
+  },
+  {
+    "id": "posicion_detras",
+    "text": "Detrás",
+    "imagePath": "assets/images/posicion/detras.png",
+    "categoryId": "posicion",
+    "type": "word"
+  },
+  {
+    "id": "posicion_al_lado",
+    "text": "Al lado",
+    "imagePath": "assets/images/posicion/al_lado.png",
+    "categoryId": "posicion",
+    "type": "word"
+  },
+  {
+    "id": "posicion_cerca",
+    "text": "Cerca",
+    "imagePath": "assets/images/posicion/cerca.png",
+    "categoryId": "posicion",
+    "type": "word"
+  },
+  {
+    "id": "posicion_lejos",
+    "text": "Lejos",
+    "imagePath": "assets/images/posicion/lejos.png",
+    "categoryId": "posicion",
+    "type": "word"
+  },
+  {
+    "id": "posicion_entre",
+    "text": "Entre",
+    "imagePath": "assets/images/posicion/entre.png",
+    "categoryId": "posicion",
+    "type": "word"
+  },
+  {
+    "id": "posicion_en_medio",
+    "text": "En medio",
+    "imagePath": "assets/images/posicion/en_medio.png",
+    "categoryId": "posicion",
+    "type": "word"
+  },
+  {
+    "id": "posicion_izquierda",
+    "text": "Izquierda",
+    "imagePath": "assets/images/posicion/izquierda.png",
+    "categoryId": "posicion",
+    "type": "word"
+  },
+  {
+    "id": "posicion_derecha",
+    "text": "Derecha",
+    "imagePath": "assets/images/posicion/derecha.png",
+    "categoryId": "posicion",
+    "type": "word"
+  },
+  {
+    "id": "posicion_sentado",
+    "text": "Sentado",
+    "imagePath": "assets/images/posicion/sentado.png",
+    "categoryId": "posicion",
+    "type": "word"
+  },
+  {
+    "id": "posicion_de_pie",
+    "text": "De pie",
+    "imagePath": "assets/images/posicion/de_pie.png",
+    "categoryId": "posicion",
+    "type": "word"
+  },
+  {
+    "id": "posicion_tumbado",
+    "text": "Tumbado",
+    "imagePath": "assets/images/posicion/tumbado.png",
+    "categoryId": "posicion",
+    "type": "word"
+  },
+  {
+    "id": "posicion_entrar",
+    "text": "Entrar",
+    "imagePath": "assets/images/posicion/entrar.png",
+    "categoryId": "posicion",
+    "type": "word"
+  },
+  {
+    "id": "posicion_salir",
+    "text": "Salir",
+    "imagePath": "assets/images/posicion/salir.png",
+    "categoryId": "posicion",
+    "type": "word"
+  },
+  {
+    "id": "posicion_subir",
+    "text": "Subir",
+    "imagePath": "assets/images/posicion/subir.png",
+    "categoryId": "posicion",
+    "type": "word"
+  },
+  {
+    "id": "posicion_bajar",
+    "text": "Bajar",
+    "imagePath": "assets/images/posicion/bajar.png",
+    "categoryId": "posicion",
+    "type": "word"
+  },
+  {
+    "id": "tiempo_hoy",
+    "text": "Hoy",
+    "imagePath": "assets/images/tiempo/hoy.png",
+    "categoryId": "tiempo",
+    "type": "word"
+  },
+  {
+    "id": "tiempo_manana",
+    "text": "Mañana",
+    "imagePath": "assets/images/tiempo/manana.png",
+    "categoryId": "tiempo",
+    "type": "word"
+  },
+  {
+    "id": "tiempo_ayer",
+    "text": "Ayer",
+    "imagePath": "assets/images/tiempo/ayer.png",
+    "categoryId": "tiempo",
+    "type": "word"
+  },
+  {
+    "id": "tiempo_ahora",
+    "text": "Ahora",
+    "imagePath": "assets/images/tiempo/ahora.png",
+    "categoryId": "tiempo",
+    "type": "word"
+  },
+  {
+    "id": "tiempo_luego",
+    "text": "Luego",
+    "imagePath": "assets/images/tiempo/luego.png",
+    "categoryId": "tiempo",
+    "type": "word"
+  },
+  {
+    "id": "tiempo_despues",
+    "text": "Después",
+    "imagePath": "assets/images/tiempo/despues.png",
+    "categoryId": "tiempo",
+    "type": "word"
+  },
+  {
+    "id": "tiempo_antes",
+    "text": "Antes",
+    "imagePath": "assets/images/tiempo/antes.png",
+    "categoryId": "tiempo",
+    "type": "word"
+  },
+  {
+    "id": "tiempo_dia",
+    "text": "Día",
+    "imagePath": "assets/images/tiempo/dia.png",
+    "categoryId": "tiempo",
+    "type": "word"
+  },
+  {
+    "id": "tiempo_noche",
+    "text": "Noche",
+    "imagePath": "assets/images/tiempo/noche.png",
+    "categoryId": "tiempo",
+    "type": "word"
+  },
+  {
+    "id": "tiempo_lunes",
+    "text": "Lunes",
+    "imagePath": "assets/images/tiempo/lunes.png",
+    "categoryId": "tiempo",
+    "type": "word"
+  },
+  {
+    "id": "tiempo_martes",
+    "text": "Martes",
+    "imagePath": "assets/images/tiempo/martes.png",
+    "categoryId": "tiempo",
+    "type": "word"
+  },
+  {
+    "id": "tiempo_miercoles",
+    "text": "Miércoles",
+    "imagePath": "assets/images/tiempo/miercoles.png",
+    "categoryId": "tiempo",
+    "type": "word"
+  },
+  {
+    "id": "tiempo_jueves",
+    "text": "Jueves",
+    "imagePath": "assets/images/tiempo/jueves.png",
+    "categoryId": "tiempo",
+    "type": "word"
+  },
+  {
+    "id": "tiempo_viernes",
+    "text": "Viernes",
+    "imagePath": "assets/images/tiempo/viernes.png",
+    "categoryId": "tiempo",
+    "type": "word"
+  },
+  {
+    "id": "tiempo_sabado",
+    "text": "Sábado",
+    "imagePath": "assets/images/tiempo/sabado.png",
+    "categoryId": "tiempo",
+    "type": "word"
+  },
+  {
+    "id": "tiempo_domingo",
+    "text": "Domingo",
+    "imagePath": "assets/images/tiempo/domingo.png",
+    "categoryId": "tiempo",
+    "type": "word"
+  },
+  {
+    "id": "tiempo_sol",
+    "text": "Sol",
+    "imagePath": "assets/images/tiempo/sol.png",
+    "categoryId": "tiempo",
+    "type": "word"
+  },
+  {
+    "id": "tiempo_lluvia",
+    "text": "Lluvia",
+    "imagePath": "assets/images/tiempo/lluvia.png",
+    "categoryId": "tiempo",
+    "type": "word"
+  },
+  {
+    "id": "tiempo_nublado",
+    "text": "Nublado",
+    "imagePath": "assets/images/tiempo/nublado.png",
+    "categoryId": "tiempo",
+    "type": "word"
+  },
+  {
+    "id": "tiempo_frio",
+    "text": "Frío",
+    "imagePath": "assets/images/tiempo/frio.png",
+    "categoryId": "tiempo",
+    "type": "word"
+  },
+  {
+    "id": "tiempo_calor",
+    "text": "Calor",
+    "imagePath": "assets/images/tiempo/calor.png",
+    "categoryId": "tiempo",
+    "type": "word"
+  },
+  {
+    "id": "colores_rojo",
+    "text": "Rojo",
+    "imagePath": "assets/images/colores/rojo.png",
+    "categoryId": "colores",
+    "type": "word"
+  },
+  {
+    "id": "colores_azul",
+    "text": "Azul",
+    "imagePath": "assets/images/colores/azul.png",
+    "categoryId": "colores",
+    "type": "word"
+  },
+  {
+    "id": "colores_verde",
+    "text": "Verde",
+    "imagePath": "assets/images/colores/verde.png",
+    "categoryId": "colores",
+    "type": "word"
+  },
+  {
+    "id": "colores_amarillo",
+    "text": "Amarillo",
+    "imagePath": "assets/images/colores/amarillo.png",
+    "categoryId": "colores",
+    "type": "word"
+  },
+  {
+    "id": "colores_naranja",
+    "text": "Naranja",
+    "imagePath": "assets/images/colores/naranja.png",
+    "categoryId": "colores",
+    "type": "word"
+  },
+  {
+    "id": "colores_rosa",
+    "text": "Rosa",
+    "imagePath": "assets/images/colores/rosa.png",
+    "categoryId": "colores",
+    "type": "word"
+  },
+  {
+    "id": "colores_morado",
+    "text": "Morado",
+    "imagePath": "assets/images/colores/morado.png",
+    "categoryId": "colores",
+    "type": "word"
+  },
+  {
+    "id": "colores_blanco",
+    "text": "Blanco",
+    "imagePath": "assets/images/colores/blanco.png",
+    "categoryId": "colores",
+    "type": "word"
+  },
+  {
+    "id": "colores_negro",
+    "text": "Negro",
+    "imagePath": "assets/images/colores/negro.png",
+    "categoryId": "colores",
+    "type": "word"
+  },
+  {
+    "id": "colores_gris",
+    "text": "Gris",
+    "imagePath": "assets/images/colores/gris.png",
+    "categoryId": "colores",
+    "type": "word"
+  },
+  {
+    "id": "colores_marron",
+    "text": "Marrón",
+    "imagePath": "assets/images/colores/marron.png",
+    "categoryId": "colores",
+    "type": "word"
+  },
+  {
+    "id": "tamanos_grande",
+    "text": "Grande",
+    "imagePath": "assets/images/tamanos/grande.png",
+    "categoryId": "tamanos",
+    "type": "word"
+  },
+  {
+    "id": "tamanos_pequeno",
+    "text": "Pequeño",
+    "imagePath": "assets/images/tamanos/pequeno.png",
+    "categoryId": "tamanos",
+    "type": "word"
+  },
+  {
+    "id": "tamanos_mediano",
+    "text": "Mediano",
+    "imagePath": "assets/images/tamanos/mediano.png",
+    "categoryId": "tamanos",
+    "type": "word"
+  },
+  {
+    "id": "tamanos_mucho",
+    "text": "Mucho",
+    "imagePath": "assets/images/tamanos/mucho.png",
+    "categoryId": "tamanos",
+    "type": "word"
+  },
+  {
+    "id": "tamanos_poco",
+    "text": "Poco",
+    "imagePath": "assets/images/tamanos/poco.png",
+    "categoryId": "tamanos",
+    "type": "word"
+  },
+  {
+    "id": "tamanos_mas",
+    "text": "Más",
+    "imagePath": "assets/images/tamanos/mas.png",
+    "categoryId": "tamanos",
+    "type": "word"
+  },
+  {
+    "id": "tamanos_menos",
+    "text": "Menos",
+    "imagePath": "assets/images/tamanos/menos.png",
+    "categoryId": "tamanos",
+    "type": "word"
+  },
+  {
+    "id": "tamanos_todo",
+    "text": "Todo",
+    "imagePath": "assets/images/tamanos/todo.png",
+    "categoryId": "tamanos",
+    "type": "word"
+  },
+  {
+    "id": "tamanos_nada",
+    "text": "Nada",
+    "imagePath": "assets/images/tamanos/nada.png",
+    "categoryId": "tamanos",
+    "type": "word"
+  },
+  {
+    "id": "tamanos_lleno",
+    "text": "Lleno",
+    "imagePath": "assets/images/tamanos/lleno.png",
+    "categoryId": "tamanos",
+    "type": "word"
+  },
+  {
+    "id": "tamanos_vacio",
+    "text": "Vacío",
+    "imagePath": "assets/images/tamanos/vacio.png",
+    "categoryId": "tamanos",
+    "type": "word"
+  },
+  {
+    "id": "tamanos_uno",
+    "text": "Uno",
+    "imagePath": "assets/images/tamanos/uno.png",
+    "categoryId": "tamanos",
+    "type": "word"
+  },
+  {
+    "id": "tamanos_dos",
+    "text": "Dos",
+    "imagePath": "assets/images/tamanos/dos.png",
+    "categoryId": "tamanos",
+    "type": "word"
+  },
+  {
+    "id": "tamanos_tres",
+    "text": "Tres",
+    "imagePath": "assets/images/tamanos/tres.png",
+    "categoryId": "tamanos",
+    "type": "word"
+  },
+  {
+    "id": "tamanos_igual",
+    "text": "Igual",
+    "imagePath": "assets/images/tamanos/igual.png",
+    "categoryId": "tamanos",
+    "type": "word"
+  },
+  {
+    "id": "tamanos_diferente",
+    "text": "Diferente",
+    "imagePath": "assets/images/tamanos/diferente.png",
+    "categoryId": "tamanos",
+    "type": "word"
+  },
+  {
+    "id": "higiene_bano",
+    "text": "Baño",
+    "imagePath": "assets/images/categories/baño.png",
+    "categoryId": "higiene",
+    "type": "word"
+  },
+  {
+    "id": "higiene_ducha",
+    "text": "Ducha",
+    "imagePath": "assets/images/casa/ducha.png",
+    "categoryId": "higiene",
+    "type": "word"
+  },
+  {
+    "id": "higiene_lavarse_manos",
+    "text": "Lavarse manos",
+    "imagePath": "assets/images/higiene/lavarse_manos.png",
+    "categoryId": "higiene",
+    "type": "word"
+  },
+  {
+    "id": "higiene_lavarse_dientes",
+    "text": "Lavarse dientes",
+    "imagePath": "assets/images/higiene/lavarse_dientes.png",
+    "categoryId": "higiene",
+    "type": "word"
+  },
+  {
+    "id": "higiene_cepillo_de_dientes",
+    "text": "Cepillo de dientes",
+    "imagePath": "assets/images/higiene/cepillo_de_dientes.png",
+    "categoryId": "higiene",
+    "type": "word"
+  },
+  {
+    "id": "higiene_pasta_de_dientes",
+    "text": "Pasta de dientes",
+    "imagePath": "assets/images/higiene/pasta_de_dientes.png",
+    "categoryId": "higiene",
+    "type": "word"
+  },
+  {
+    "id": "higiene_peinarse",
+    "text": "Peinarse",
+    "imagePath": "assets/images/higiene/peinarse.png",
+    "categoryId": "higiene",
+    "type": "word"
+  },
+  {
+    "id": "higiene_lavar_la_cara",
+    "text": "Lavar la cara",
+    "imagePath": "assets/images/higiene/lavar_la_cara.png",
+    "categoryId": "higiene",
+    "type": "word"
+  },
+  {
+    "id": "higiene_cortar_unas",
+    "text": "Cortar uñas",
+    "imagePath": "assets/images/higiene/cortar_unas.png",
+    "categoryId": "higiene",
+    "type": "word"
+  },
+  {
+    "id": "higiene_papel_higienico",
+    "text": "Papel higiénico",
+    "imagePath": "assets/images/higiene/papel_higienico.png",
+    "categoryId": "higiene",
+    "type": "word"
+  },
+  {
+    "id": "higiene_toalla",
+    "text": "Toalla",
+    "imagePath": "assets/images/higiene/toalla.png",
+    "categoryId": "higiene",
+    "type": "word"
+  },
+  {
+    "id": "higiene_jabon",
+    "text": "Jabón",
+    "imagePath": "assets/images/higiene/jabon.png",
+    "categoryId": "higiene",
+    "type": "word"
+  },
+  {
+    "id": "higiene_champu",
+    "text": "Champú",
+    "imagePath": "assets/images/higiene/champu.png",
+    "categoryId": "higiene",
+    "type": "word"
+  },
+  {
+    "id": "higiene_gel",
+    "text": "Gel",
+    "imagePath": "assets/images/higiene/gel.png",
+    "categoryId": "higiene",
+    "type": "word"
+  },
+  {
+    "id": "higiene_crema",
+    "text": "Crema",
+    "imagePath": "assets/images/higiene/crema.png",
+    "categoryId": "higiene",
+    "type": "word"
+  },
+  {
+    "id": "higiene_vater",
+    "text": "Váter",
+    "imagePath": "assets/images/higiene/vater.png",
+    "categoryId": "higiene",
+    "type": "word"
+  },
+  {
+    "id": "higiene_tengo_pis",
+    "text": "Tengo pis",
+    "imagePath": "assets/images/higiene/tengo_pis.png",
+    "categoryId": "higiene",
+    "type": "word"
+  },
+  {
+    "id": "higiene_tengo_caca",
+    "text": "Tengo caca",
+    "imagePath": "assets/images/higiene/tengo_caca.png",
+    "categoryId": "higiene",
+    "type": "word"
+  },
+  {
+    "id": "higiene_quiero_ir_al_bano",
+    "text": "Quiero ir al baño",
+    "imagePath": "assets/images/higiene/quiero_ir_al_bano.png",
+    "categoryId": "higiene",
+    "type": "word"
+  },
+  {
+    "id": "higiene_necesito_ayuda_en_el_bano",
+    "text": "Necesito ayuda en el baño",
+    "imagePath": "assets/images/higiene/necesito_ayuda_en_el_bano.png",
+    "categoryId": "higiene",
     "type": "word"
   }
 ]

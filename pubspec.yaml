@@ -81,6 +81,12 @@ flutter:
     - assets/images/trabajo/
     - assets/images/alfabeto/
     - assets/images/sensorial/
+    - assets/images/ropa/
+    - assets/images/higiene/
+    - assets/images/clima/
+    - assets/images/colores/
+    - assets/images/posicion/
+    - assets/images/tamanos/
     - assets/audio/
 
   # To add assets to your application, add an assets section, like this:
