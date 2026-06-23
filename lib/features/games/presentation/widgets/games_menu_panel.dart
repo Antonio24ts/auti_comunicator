@@ -34,9 +34,9 @@ class GamesMenuPanel extends StatelessWidget {
           Text(
             'Juegos',
             style: TextStyle(
-              fontSize: 34,
-              fontWeight: FontWeight.w900,
-              color: Colors.indigo.shade900,
+              fontSize: 13,
+              fontWeight: FontWeight.w800,
+              color: Colors.indigo.shade600,
             ),
           ),
           const SizedBox(height: 18),
@@ -181,15 +181,23 @@ class _GameButtonState extends State<_GameButton> {
                           ),
                         ),
                         const SizedBox(height: 10),
-                        Text(
-                          widget.subtitle,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            fontSize: 18,
-                            height: 1.1,
-                            fontWeight: FontWeight.w700,
-                            color: Colors.blueGrey.shade700,
+                        SizedBox(
+                          width: double.infinity,
+                          child: FittedBox(
+                            fit: BoxFit.scaleDown,
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              widget.subtitle,
+                              maxLines: 1,
+                              softWrap: false,
+                              overflow: TextOverflow.visible,
+                              style: TextStyle(
+                                fontSize: 18,
+                                height: 1.1,
+                                fontWeight: FontWeight.w700,
+                                color: Colors.blueGrey.shade700,
+                              ),
+                            ),
                           ),
                         ),
                       ],

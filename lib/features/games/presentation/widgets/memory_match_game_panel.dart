@@ -8,12 +8,14 @@ import '../../../../data/models/pictogram.dart';
 import '../../../../data/repositories/pictogram_repository.dart';
 import '../../../../services/speech_services.dart';
 import '../../domain/game_progress.dart';
+import '../../../../services/sound_effects_service.dart';
 
 enum _MemoryFinishedAction { repeat, next, backToGames }
 
 class MemoryMatchGamePanel extends StatefulWidget {
   final PictogramRepository repository;
   final SpeechService speechService;
+  final SoundEffectsService soundEffectsService;
   final CardSize cardSize;
   final VoidCallback onBackToGames;
   final GameProgressChanged onProgressChanged;
@@ -22,6 +24,7 @@ class MemoryMatchGamePanel extends StatefulWidget {
     super.key,
     required this.repository,
     required this.speechService,
+    required this.soundEffectsService,
     required this.cardSize,
     required this.onBackToGames,
     required this.onProgressChanged,
@@ -332,12 +335,14 @@ class _MemoryMatchGamePanelState extends State<MemoryMatchGamePanel> {
     _MemoryCardItem firstCard,
     _MemoryCardItem secondCard,
   ) async {
+    widget.soundEffectsService.playError();
+
     setState(() {
       _streak = 0;
       _message = 'No son iguales';
     });
 
-    await Future.delayed(const Duration(milliseconds: 700));
+    await Future.delayed(const Duration(milliseconds: 600));
 
     if (!mounted) {
       return;

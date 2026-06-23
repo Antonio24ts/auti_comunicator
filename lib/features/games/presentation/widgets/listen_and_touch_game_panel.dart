@@ -9,10 +9,12 @@ import '../../../../data/repositories/pictogram_repository.dart';
 import '../../../../services/speech_services.dart';
 import '../../../board/presentation/widgets/pictogram_card.dart';
 import '../../domain/game_progress.dart';
+import '../../../../services/sound_effects_service.dart';
 
 class ListenAndTouchGamePanel extends StatefulWidget {
   final PictogramRepository repository;
   final SpeechService speechService;
+  final SoundEffectsService soundEffectsService;
   final CardSize cardSize;
   final GameProgressChanged onProgressChanged;
 
@@ -20,6 +22,7 @@ class ListenAndTouchGamePanel extends StatefulWidget {
     super.key,
     required this.repository,
     required this.speechService,
+    required this.soundEffectsService,
     required this.cardSize,
     required this.onProgressChanged,
   });
@@ -313,7 +316,7 @@ class _ListenAndTouchGamePanelState extends State<ListenAndTouchGamePanel> {
       _message = 'Inténtalo otra vez';
     });
 
-    await widget.speechService.speakPhrase('Inténtalo otra vez');
+    widget.soundEffectsService.playError();
 
     await Future.delayed(const Duration(milliseconds: 500));
 

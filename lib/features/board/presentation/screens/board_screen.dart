@@ -21,6 +21,7 @@ import '../../../games/presentation/widgets/listen_and_touch_game_panel.dart';
 import '../../../games/presentation/widgets/memory_match_game_panel.dart';
 import '../../../games/domain/game_progress.dart';
 import '../../../games/domain/game_progress_services.dart';
+import '../../../../services/sound_effects_service.dart';
 
 import '../widgets/zone_panel.dart';
 
@@ -53,6 +54,7 @@ class _BoardScreenState extends State<BoardScreen> {
   final AmbientMusicService _ambientMusicService = AmbientMusicService();
 
   final GameProgressService _gameProgressService = GameProgressService();
+  final SoundEffectsService _soundEffectsService = SoundEffectsService();
 
   GameProgress _listenAndTouchProgress = GameProgress.empty(
     GameIds.listenAndTouch,
@@ -98,6 +100,8 @@ class _BoardScreenState extends State<BoardScreen> {
   @override
   void initState() {
     super.initState();
+
+    unawaited(_soundEffectsService.init());
 
     _loadInitialDataFuture = _loadInitialData();
 
@@ -462,6 +466,7 @@ class _BoardScreenState extends State<BoardScreen> {
 
   @override
   void dispose() {
+    unawaited(_soundEffectsService.dispose());
     _visualTimer?.cancel();
     unawaited(WakelockPlus.disable());
     unawaited(_speechService.stop());
@@ -1078,6 +1083,7 @@ class _BoardScreenState extends State<BoardScreen> {
       return ListenAndTouchGamePanel(
         repository: _repository,
         speechService: _speechService,
+        soundEffectsService: _soundEffectsService,
         cardSize: _getResponsiveCardSize(),
         onProgressChanged: _recordGameProgress,
       );
@@ -1087,6 +1093,7 @@ class _BoardScreenState extends State<BoardScreen> {
       return MemoryMatchGamePanel(
         repository: _repository,
         speechService: _speechService,
+        soundEffectsService: _soundEffectsService,
         cardSize: _getResponsiveCardSize(),
         onBackToGames: _backToGamesMenu,
         onProgressChanged: _recordGameProgress,
