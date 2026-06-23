@@ -50,16 +50,58 @@
     "targetCategoryId": "saludos"
   },
   {
-    "id": "home_estoy",
-    "text": "Estoy",
-    "imagePath": "assets/images/estoy.png",
-    "categoryId": "home_right",
+    "id": "hola",
+    "text": "Hola",
+    "imagePath": "assets/images/saludos/hola.png",
+    "categoryId": "saludos",
     "type": "word"
   },
   {
-    "id": "colegio_no_entiendo",
-    "text": "No entiendo",
-    "imagePath": "assets/images/colegio/noentiendo.png",
+    "id": "adios",
+    "text": "Adiós",
+    "imagePath": "assets/images/saludos/adios.png",
+    "categoryId": "saludos",
+    "type": "word"
+  },
+  {
+    "id": "buenos_dias",
+    "text": "Buenos días",
+    "imagePath": "assets/images/saludos/buenosdias.png",
+    "categoryId": "saludos",
+    "type": "word"
+  },
+  {
+    "id": "buenas_tardes",
+    "text": "Buenas tardes",
+    "imagePath": "assets/images/saludos/buenastardes.png",
+    "categoryId": "saludos",
+    "type": "word"
+  },
+  {
+    "id": "buenas_noches",
+    "text": "Buenas noches",
+    "imagePath": "assets/images/saludos/buenasnoches.png",
+    "categoryId": "saludos",
+    "type": "word"
+  },
+  {
+    "id": "por_favor",
+    "text": "Por favor",
+    "imagePath": "assets/images/saludos/porfavor.png",
+    "categoryId": "saludos",
+    "type": "word"
+  },
+  {
+    "id": "gracias",
+    "text": "Gracias",
+    "imagePath": "assets/images/saludos/gracias.png",
+    "categoryId": "saludos",
+    "type": "word"
+  },
+  {
+    "id": "home_estoy",
+    "text": "Estoy",
+    "imagePath": "assets/images/estoy.png",
     "categoryId": "home_right",
     "type": "word"
   },
@@ -98,6 +140,13 @@
     "type": "category",
     "targetCategoryId": "juegos",
     "categoryOpenMode": "fullBoard"
+  }, 
+  {
+    "id": "colegio_no_entiendo",
+    "text": "No entiendo",
+    "imagePath": "assets/images/colegio/noentiendo.png",
+    "categoryId": "home_main",
+    "type": "word"
   },
   {
     "id": "mas_bano",
@@ -105,14 +154,6 @@
     "imagePath": "assets/images/categories/baño.png",
     "categoryId": "home_main",
     "type": "word"
-  },
-  {
-    "id": "mas_sensorial",
-    "text": "Sensorial",
-    "imagePath": "assets/images/categories/saturado.png",
-    "categoryId": "home_main",
-    "type": "category",
-    "targetCategoryId": "sensorial"
   },
   {
     "id": "mas_personas",
@@ -131,12 +172,36 @@
     "targetCategoryId": "colores"
   },
   {
+    "id": "mas_tiempo",
+    "text": "Tiempo",
+    "imagePath": "assets/images/tiempo/hoy.png",
+    "categoryId": "home_main",
+    "type": "category",
+    "targetCategoryId": "tiempo"
+  },
+  {
+    "id": "mas_cuerpo",
+    "text": "Cuerpo",
+    "imagePath": "assets/images/categories/cuerpo.png",
+    "categoryId": "home_main",
+    "type": "category",
+    "targetCategoryId": "cuerpo"
+  },
+  {
     "id": "mas_verbos",
     "text": "Verbos",
     "imagePath": "",
     "categoryId": "home_main",
     "type": "category",
     "targetCategoryId": "verbos"
+  },
+  {
+    "id": "mas_sensorial",
+    "text": "Sensorial",
+    "imagePath": "assets/images/categories/saturado.png",
+    "categoryId": "home_main",
+    "type": "category",
+    "targetCategoryId": "sensorial"
   },
   {
     "id": "mas_preguntas",
@@ -153,30 +218,6 @@
     "categoryId": "home_main",
     "type": "category",
     "targetCategoryId": "emociones"
-  },
-  {
-    "id": "mas_casa",
-    "text": "Casa",
-    "imagePath": "assets/images/categories/casa.png",
-    "categoryId": "home_main",
-    "type": "category",
-    "targetCategoryId": "casa"
-  },
-  {
-    "id": "mas_colegio",
-    "text": "Colegio",
-    "imagePath": "assets/images/categories/colegio1.png",
-    "categoryId": "home_main",
-    "type": "category",
-    "targetCategoryId": "colegio"
-  },
-  {
-    "id": "mas_cuerpo",
-    "text": "Cuerpo",
-    "imagePath": "assets/images/categories/cuerpo.png",
-    "categoryId": "home_main",
-    "type": "category",
-    "targetCategoryId": "cuerpo"
   },
   {
     "id": "mas_objetos",
@@ -234,6 +275,22 @@
     "categoryId": "mas_categorias",
     "type": "category",
     "targetCategoryId": "lugares"
+  },
+  {
+    "id": "mas_casa",
+    "text": "Casa",
+    "imagePath": "assets/images/categories/casa.png",
+    "categoryId": "mas_categorias",
+    "type": "category",
+    "targetCategoryId": "casa"
+  },
+  {
+    "id": "mas_colegio",
+    "text": "Colegio",
+    "imagePath": "assets/images/categories/colegio1.png",
+    "categoryId": "mas_categorias",
+    "type": "category",
+    "targetCategoryId": "colegio"
   },
   {
     "id": "mas_trabajo",
@@ -310,57 +367,6 @@
     "categoryId": "personas",
     "type": "word"
   },
-
-  {
-    "id": "hola",
-    "text": "Hola",
-    "imagePath": "assets/images/saludos/hola.png",
-    "categoryId": "saludos",
-    "type": "word"
-  },
-  {
-    "id": "adios",
-    "text": "Adiós",
-    "imagePath": "assets/images/saludos/adios.png",
-    "categoryId": "saludos",
-    "type": "word"
-  },
-  {
-    "id": "buenos_dias",
-    "text": "Buenos días",
-    "imagePath": "assets/images/saludos/buenosdias.png",
-    "categoryId": "saludos",
-    "type": "word"
-  },
-  {
-    "id": "buenas_tardes",
-    "text": "Buenas tardes",
-    "imagePath": "assets/images/saludos/buenastardes.png",
-    "categoryId": "saludos",
-    "type": "word"
-  },
-  {
-    "id": "buenas_noches",
-    "text": "Buenas noches",
-    "imagePath": "assets/images/saludos/buenasnoches.png",
-    "categoryId": "saludos",
-    "type": "word"
-  },
-  {
-    "id": "por_favor",
-    "text": "Por favor",
-    "imagePath": "assets/images/saludos/porfavor.png",
-    "categoryId": "saludos",
-    "type": "word"
-  },
-  {
-    "id": "gracias",
-    "text": "Gracias",
-    "imagePath": "assets/images/saludos/gracias.png",
-    "categoryId": "saludos",
-    "type": "word"
-  },
-
   {
     "id": "quiero",
     "text": "Quiero",
