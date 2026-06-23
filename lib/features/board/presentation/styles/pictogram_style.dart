@@ -177,12 +177,6 @@ PictogramStyle _categoryStyle(String categoryId) {
         borderColor: Colors.blueGrey.shade200,
         accentColor: Colors.blueGrey.shade600,
       );
-    case 'frases_rapidas':
-      return PictogramStyle(
-        backgroundColor: Colors.lightGreen.shade50,
-        borderColor: Colors.lightGreen.shade300,
-        accentColor: Colors.green.shade600,
-      );
     case 'calculadora':
       return PictogramStyle(
         backgroundColor: Colors.blue.shade50,

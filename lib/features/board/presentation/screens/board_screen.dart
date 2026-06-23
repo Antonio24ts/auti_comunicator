@@ -1122,10 +1122,6 @@ class _BoardScreenState extends State<BoardScreen> {
       return 4;
     }
 
-    if (categoryId == 'frases_rapidas') {
-      return 2;
-    }
-
     return 2;
   }
 
@@ -1136,10 +1132,6 @@ class _BoardScreenState extends State<BoardScreen> {
 
     if (categoryId == 'alfabeto') {
       return 1.05;
-    }
-
-    if (categoryId == 'frases_rapidas') {
-      return 1.25;
     }
 
     return 0.95;
