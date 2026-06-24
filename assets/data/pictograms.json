@@ -34,10 +34,31 @@
     "categoryId": "home_right",
     "type": "word"
   },
-   {
+  {
     "id": "home_yo",
     "text": "Yo",
     "imagePath": "assets/images/personas/yo.png",
+    "categoryId": "home_right",
+    "type": "word"
+  },
+  {
+    "id": "home_me",
+    "text": "Me",
+    "imagePath": "assets/images/me.png",
+    "categoryId": "home_right",
+    "type": "word"
+  },
+  {
+    "id": "home_estoy",
+    "text": "Estoy",
+    "imagePath": "assets/images/estoy.png",
+    "categoryId": "home_right",
+    "type": "word"
+  },
+  {
+    "id": "home_tengo",
+    "text": "Tengo",
+    "imagePath": "assets/images/tengo.png",
     "categoryId": "home_right",
     "type": "word"
   },
@@ -96,20 +117,6 @@
     "text": "Gracias",
     "imagePath": "assets/images/saludos/gracias.png",
     "categoryId": "saludos",
-    "type": "word"
-  },
-  {
-    "id": "home_estoy",
-    "text": "Estoy",
-    "imagePath": "assets/images/estoy.png",
-    "categoryId": "home_right",
-    "type": "word"
-  },
-  {
-    "id": "home_tengo",
-    "text": "Tengo",
-    "imagePath": "assets/images/tengo.png",
-    "categoryId": "home_right",
     "type": "word"
   },
   {
@@ -329,8 +336,7 @@
     "imagePath": "assets/images/ropa/camiseta.png",
     "categoryId": "mas_categorias",
     "type": "category",
-    "targetCategoryId": "ropa",
-    "categoryOpenMode": "fullBoard"
+    "targetCategoryId": "ropa"
   },
   {
     "id": "yo",
@@ -1672,42 +1678,35 @@
   },
   {
     "id": "ropa_me_quiero_vestir",
-    "text": "Me quiero vestir",
+    "text": "Vestir",
     "imagePath": "assets/images/ropa/me_quiero_vestir.png",
     "categoryId": "ropa",
     "type": "word"
   },
   {
     "id": "ropa_me_quiero_quitar_la_ropa",
-    "text": "Me quiero quitar la ropa",
+    "text": "Quitarme",
     "imagePath": "assets/images/ropa/me_quiero_quitar_la_ropa.png",
     "categoryId": "ropa",
     "type": "word"
   },
   {
     "id": "ropa_necesito_cambiarme",
-    "text": "Necesito cambiarme",
+    "text": "Cambiarme",
     "imagePath": "assets/images/ropa/necesito_cambiarme.png",
     "categoryId": "ropa",
     "type": "word"
   },
   {
-    "id": "ropa_me_molesta",
-    "text": "Me molesta",
-    "imagePath": "assets/images/ropa/me_molesta.png",
-    "categoryId": "ropa",
-    "type": "word"
-  },
-  {
     "id": "ropa_me_aprieta",
-    "text": "Me aprieta",
+    "text": "Aprieta",
     "imagePath": "assets/images/ropa/me_aprieta.png",
     "categoryId": "ropa",
     "type": "word"
   },
   {
     "id": "ropa_me_pica",
-    "text": "Me pica",
+    "text": "Pica",
     "imagePath": "assets/images/ropa/me_pica.png",
     "categoryId": "ropa",
     "type": "word"
@@ -1715,14 +1714,14 @@
   {
     "id": "ropa_tengo_frio",
     "text": "Tengo frío",
-    "imagePath": "assets/images/ropa/tengo_frio.png",
+    "imagePath": "assets/images/tiempo/frio.png",
     "categoryId": "ropa",
     "type": "word"
   },
   {
     "id": "ropa_tengo_calor",
     "text": "Tengo calor",
-    "imagePath": "assets/images/ropa/tengo_calor.png",
+    "imagePath": "assets/images/tiempo/calor.png",
     "categoryId": "ropa",
     "type": "word"
   },
@@ -1876,7 +1875,7 @@
   {
     "id": "ropa_mochila",
     "text": "Mochila",
-    "imagePath": "assets/images/ropa/mochila.png",
+    "imagePath": "assets/images/colegio/mochila.png",
     "categoryId": "ropa",
     "type": "word"
   },

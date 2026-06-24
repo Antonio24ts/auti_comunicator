@@ -49,6 +49,12 @@ class _ListenAndTouchGamePanelState extends State<ListenAndTouchGamePanel> {
     'sensorial',
     'verbos',
     'trabajo',
+    'animales',
+    'tiempo',
+    'posicion',
+    'tamanos',
+    'higiene',
+    'ropa',
   };
 
   static const List<int> _optionsByLevel = [

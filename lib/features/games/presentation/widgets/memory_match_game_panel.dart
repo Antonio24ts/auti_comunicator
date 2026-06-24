@@ -51,6 +51,12 @@ class _MemoryMatchGamePanelState extends State<MemoryMatchGamePanel> {
     'sensorial',
     'verbos',
     'trabajo',
+    'animales',
+    'tiempo',
+    'posicion',
+    'tamanos',
+    'higiene',
+    'ropa',
   };
 
   static const List<int> _pairsByLevel = [2, 3, 4, 5, 6, 8, 10, 12, 15, 18, 20];
