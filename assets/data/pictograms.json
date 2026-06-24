@@ -66,9 +66,18 @@
     "id": "home_favoritos",
     "text": "Favoritos",
     "imagePath": "assets/images/categories/favorito.png",
-    "categoryId": "home_center",
+    "categoryId": "home_main",
     "type": "category",
     "targetCategoryId": "favoritos",
+    "categoryOpenMode": "fullBoard"
+  },
+  {
+    "id": "home_frases_recientes",
+    "text": "Frases recientes",
+    "imagePath": "assets/images/categories/frase.png",
+    "categoryId": "home_main",
+    "type": "category",
+    "targetCategoryId": "frases_recientes",
     "categoryOpenMode": "fullBoard"
   },
   {
@@ -203,15 +212,6 @@
     "targetCategoryId": "tiempo"
   },
   {
-    "id": "mas_animales",
-    "text": "Animales",
-    "imagePath": "assets/images/animales/perro.png",
-    "categoryId": "home_main",
-    "type": "category",
-    "targetCategoryId": "animales",
-    "categoryOpenMode": "fullBoard"
-  },
-  {
     "id": "mas_cuerpo",
     "text": "Cuerpo",
     "imagePath": "assets/images/categories/cuerpo.png",
@@ -260,20 +260,21 @@
     "targetCategoryId": "objetos"
   },
   {
-    "id": "mas_posicion",
-    "text": "Posición",
-    "imagePath": "assets/images/posicion/aqui.png",
-    "categoryId": "home_main",
-    "type": "category",
-    "targetCategoryId": "posicion"
-  },
-  {
     "id": "home_mas",
     "text": "Más",
     "imagePath": "assets/images/categories/Mas.png",
     "categoryId": "home_main",
     "type": "category",
     "targetCategoryId": "mas_categorias"
+  },
+  {
+    "id": "mas_animales",
+    "text": "Animales",
+    "imagePath": "assets/images/animales/perro.png",
+    "categoryId": "mas_categorias",
+    "type": "category",
+    "targetCategoryId": "animales",
+    "categoryOpenMode": "fullBoard"
   },
   {
     "id": "mas_comida",
@@ -346,6 +347,14 @@
     "categoryId": "mas_categorias",
     "type": "category",
     "targetCategoryId": "ropa"
+  },
+  {
+    "id": "mas_posicion",
+    "text": "Posición",
+    "imagePath": "assets/images/posicion/aqui.png",
+    "categoryId": "mas_categorias",
+    "type": "category",
+    "targetCategoryId": "posicion"
   },
   {
     "id": "yo",

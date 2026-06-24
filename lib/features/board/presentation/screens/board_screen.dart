@@ -26,6 +26,9 @@ import '../../../games/presentation/widgets/sentence_builder_game_panel.dart';
 import '../../../games/presentation/widgets/animal_sound_game_panel.dart';
 import '../../../favorites/data/favorite_pictograms_service.dart';
 import '../../../favorites/presentation/widgets/favorites_panel.dart';
+import '../../../recent_phrases/data/recent_phrases_service.dart';
+import '../../../recent_phrases/domain/recent_phrase.dart';
+import '../../../recent_phrases/presentation/widgets/recent_phrases_panel.dart';
 
 import '../widgets/zone_panel.dart';
 
@@ -64,6 +67,11 @@ class _BoardScreenState extends State<BoardScreen> {
       FavoritePictogramsService();
 
   List<String> _favoritePictogramIds = [];
+
+  final RecentPhrasesService _recentPhrasesService = RecentPhrasesService();
+
+  List<RecentPhrase> _recentPhrases = [];
+  String? _editingRecentPhraseId;
 
   GameProgress _listenAndTouchProgress = GameProgress.empty(
     GameIds.listenAndTouch,
@@ -143,6 +151,7 @@ class _BoardScreenState extends State<BoardScreen> {
     _settings = loadedSettings;
 
     await _reloadFavoritesForCurrentChild();
+    await _reloadRecentPhrasesForCurrentChild();
 
     _listenAndTouchProgress = await _gameProgressService.load(
       childName: _settings.childName,
@@ -699,7 +708,106 @@ class _BoardScreenState extends State<BoardScreen> {
     if (hasChangedChildName) {
       await _reloadGameProgressForCurrentChild();
       await _reloadFavoritesForCurrentChild();
+      await _reloadRecentPhrasesForCurrentChild();
+
+      _editingRecentPhraseId = null;
     }
+  }
+
+  Future<void> _reloadRecentPhrasesForCurrentChild() async {
+    final recentPhrases = await _recentPhrasesService.loadRecentPhrases(
+      childName: _settings.childName,
+    );
+
+    if (!mounted) {
+      return;
+    }
+
+    setState(() {
+      _recentPhrases = recentPhrases;
+    });
+  }
+
+  Future<void> _saveCurrentPhraseAsRecent() async {
+    if (_phraseItems.isEmpty) {
+      return;
+    }
+
+    await _recentPhrasesService.addRecentPhrase(
+      childName: _settings.childName,
+      items: _phraseItems,
+    );
+
+    await _reloadRecentPhrasesForCurrentChild();
+  }
+
+  Future<void> _speakRecentPhrase(RecentPhrase recentPhrase) async {
+    final phraseText = recentPhrase.text.trim();
+
+    if (phraseText.isEmpty) {
+      return;
+    }
+
+    await _speechService.speakPhrase(phraseText);
+  }
+
+  void _loadRecentPhraseForEditing(RecentPhrase recentPhrase) {
+    setState(() {
+      _phraseItems
+        ..clear()
+        ..addAll(
+          recentPhrase.items.map(
+            (item) => PhraseItem(
+              text: item.text,
+              imagePath: item.imagePath,
+              isTypedText: item.isTypedText,
+            ),
+          ),
+        );
+
+      _editingRecentPhraseId = recentPhrase.id;
+    });
+
+    _showRecentPhraseMessage('Frase cargada arriba para editar');
+  }
+
+  Future<void> _removeEditingRecentPhraseAfterClear() async {
+    final recentPhraseId = _editingRecentPhraseId;
+
+    if (recentPhraseId == null) {
+      return;
+    }
+
+    _editingRecentPhraseId = null;
+
+    await _recentPhrasesService.removeRecentPhrase(
+      childName: _settings.childName,
+      recentPhraseId: recentPhraseId,
+    );
+
+    await _reloadRecentPhrasesForCurrentChild();
+
+    if (!mounted) {
+      return;
+    }
+
+    _showRecentPhraseMessage('Frase eliminada de recientes');
+  }
+
+  void _showRecentPhraseMessage(String message) {
+    if (!mounted) {
+      return;
+    }
+
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(
+        SnackBar(
+          content: Text(message),
+          duration: const Duration(milliseconds: 1300),
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
   }
 
   Future<void> _reloadGameProgressForCurrentChild() async {
@@ -814,6 +922,8 @@ class _BoardScreenState extends State<BoardScreen> {
     if (letterToAdd.isEmpty) {
       return;
     }
+
+    _editingRecentPhraseId = null;
 
     setState(() {
       if (_phraseItems.isEmpty || !_phraseItems.last.isTypedText) {
@@ -1043,6 +1153,8 @@ class _BoardScreenState extends State<BoardScreen> {
       return;
     }
 
+    _editingRecentPhraseId = null;
+
     setState(() {
       _phraseItems.add(
         PhraseItem(text: cleanText, imagePath: pictogram.imagePath),
@@ -1079,9 +1191,15 @@ class _BoardScreenState extends State<BoardScreen> {
       return;
     }
 
+    final shouldRemoveEditingRecentPhrase = _editingRecentPhraseId != null;
+
     setState(() {
       _phraseItems.clear();
     });
+
+    if (shouldRemoveEditingRecentPhrase) {
+      unawaited(_removeEditingRecentPhraseAfterClear());
+    }
   }
 
   Future<void> _speakPhrase() async {
@@ -1090,6 +1208,10 @@ class _BoardScreenState extends State<BoardScreen> {
     if (phrase.isEmpty) {
       return;
     }
+
+    await _saveCurrentPhraseAsRecent();
+
+    _editingRecentPhraseId = null;
 
     await _speechService.speakPhrase(phrase);
   }
@@ -1301,6 +1423,17 @@ class _BoardScreenState extends State<BoardScreen> {
         favorites: _getFavoritePictograms(),
         onPictogramTap: _handleFavoritePictogramTap,
         onRemoveFavorite: _removeFavoritePictogram,
+      );
+    }
+
+    if (categoryId == 'frases_recientes') {
+      return RecentPhrasesPanel(
+        childName: _settings.childName,
+        recentPhrases: _recentPhrases,
+        onSpeakRecentPhrase: (recentPhrase) {
+          unawaited(_speakRecentPhrase(recentPhrase));
+        },
+        onLoadRecentPhrase: _loadRecentPhraseForEditing,
       );
     }
 

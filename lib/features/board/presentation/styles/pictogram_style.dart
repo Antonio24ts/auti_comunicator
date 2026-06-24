@@ -237,6 +237,20 @@ PictogramStyle _categoryStyle(String categoryId) {
         accentColor: Colors.teal.shade700,
       );
 
+    case 'frases_recientes':
+      return PictogramStyle(
+        backgroundColor: Colors.teal.shade50,
+        borderColor: const Color.fromARGB(255, 6, 100, 91),
+        accentColor: const Color.fromARGB(255, 37, 109, 100),
+      );
+
+    case 'favoritos':
+      return PictogramStyle(
+        backgroundColor: Colors.teal.shade50,
+        borderColor: const Color.fromARGB(255, 6, 100, 91),
+        accentColor: const Color.fromARGB(255, 37, 109, 100),
+      );
+
     default:
       return PictogramStyle(
         backgroundColor: Colors.white,
