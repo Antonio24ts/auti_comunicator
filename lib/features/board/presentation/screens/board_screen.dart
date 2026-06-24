@@ -23,6 +23,7 @@ import '../../../games/domain/game_progress.dart';
 import '../../../games/domain/game_progress_services.dart';
 import '../../../../services/sound_effects_service.dart';
 import '../../../games/presentation/widgets/sentence_builder_game_panel.dart';
+import '../../../games/presentation/widgets/animal_sound_game_panel.dart';
 
 import '../widgets/zone_panel.dart';
 
@@ -66,6 +67,8 @@ class _BoardScreenState extends State<BoardScreen> {
   GameProgress _sentenceBuilderProgress = GameProgress.empty(
     GameIds.sentenceBuilder,
   );
+
+  GameProgress _animalSoundsProgress = GameProgress.empty(GameIds.animalSounds);
 
   bool _hasShownStartupNameDialog = false;
 
@@ -112,6 +115,16 @@ class _BoardScreenState extends State<BoardScreen> {
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       unawaited(_showChildNameDialogOnStartup());
+    });
+  }
+
+  void _openAnimalSoundsGame() {
+    setState(() {
+      if (_fullBoardCategoryId != null) {
+        _fullBoardHistory.add(_fullBoardCategoryId!);
+      }
+
+      _fullBoardCategoryId = 'juego_sonidos_animales';
     });
   }
 
@@ -165,7 +178,8 @@ class _BoardScreenState extends State<BoardScreen> {
         (categoryId) =>
             categoryId == 'juego_emparejar' ||
             categoryId == 'juego_escucha_toca' ||
-            categoryId == 'juego_construye_frase',
+            categoryId == 'juego_construye_frase' ||
+            categoryId == 'juego_sonidos_animales',
       );
     });
   }
@@ -540,6 +554,11 @@ class _BoardScreenState extends State<BoardScreen> {
       gameId: GameIds.sentenceBuilder,
     );
 
+    _animalSoundsProgress = await _gameProgressService.load(
+      childName: _settings.childName,
+      gameId: GameIds.animalSounds,
+    );
+
     await _ambientMusicService.init(_settings);
 
     await _speechService.init(
@@ -598,6 +617,11 @@ class _BoardScreenState extends State<BoardScreen> {
       gameId: GameIds.sentenceBuilder,
     );
 
+    final animalSoundsProgress = await _gameProgressService.load(
+      childName: _settings.childName,
+      gameId: GameIds.animalSounds,
+    );
+
     if (!mounted) {
       return;
     }
@@ -606,6 +630,7 @@ class _BoardScreenState extends State<BoardScreen> {
       _listenAndTouchProgress = listenProgress;
       _memoryMatchProgress = memoryProgress;
       _sentenceBuilderProgress = sentenceBuilderProgress;
+      _animalSoundsProgress = animalSoundsProgress;
     });
   }
 
@@ -632,6 +657,11 @@ class _BoardScreenState extends State<BoardScreen> {
 
       if (update.gameId == GameIds.sentenceBuilder) {
         _sentenceBuilderProgress = newProgress;
+        return;
+      }
+
+      if (update.gameId == GameIds.animalSounds) {
+        _animalSoundsProgress = newProgress;
         return;
       }
     });
@@ -1112,6 +1142,8 @@ class _BoardScreenState extends State<BoardScreen> {
         listenAndTouchProgress: _listenAndTouchProgress,
         memoryMatchProgress: _memoryMatchProgress,
         sentenceBuilderProgress: _sentenceBuilderProgress,
+        onOpenAnimalSounds: _openAnimalSoundsGame,
+        animalSoundsProgress: _animalSoundsProgress,
       );
     }
 
@@ -1138,6 +1170,16 @@ class _BoardScreenState extends State<BoardScreen> {
 
     if (categoryId == 'juego_construye_frase') {
       return SentenceBuilderGamePanel(
+        repository: _repository,
+        speechService: _speechService,
+        soundEffectsService: _soundEffectsService,
+        onBackToGames: _backToGamesMenu,
+        onProgressChanged: _recordGameProgress,
+      );
+    }
+
+    if (categoryId == 'juego_sonidos_animales') {
+      return AnimalSoundGamePanel(
         repository: _repository,
         speechService: _speechService,
         soundEffectsService: _soundEffectsService,

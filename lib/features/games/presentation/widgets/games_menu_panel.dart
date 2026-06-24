@@ -9,6 +9,8 @@ class GamesMenuPanel extends StatelessWidget {
   final GameProgress listenAndTouchProgress;
   final GameProgress memoryMatchProgress;
   final GameProgress sentenceBuilderProgress;
+  final VoidCallback onOpenAnimalSounds;
+  final GameProgress animalSoundsProgress;
 
   const GamesMenuPanel({
     super.key,
@@ -18,6 +20,8 @@ class GamesMenuPanel extends StatelessWidget {
     required this.listenAndTouchProgress,
     required this.memoryMatchProgress,
     required this.sentenceBuilderProgress,
+    required this.onOpenAnimalSounds,
+    required this.animalSoundsProgress,
   });
 
   String _buildProgressText(GameProgress progress) {
@@ -47,6 +51,12 @@ class GamesMenuPanel extends StatelessWidget {
         icon: Icons.account_tree_rounded,
         onTap: onOpenSentenceBuilder,
       ),
+      _GameMenuItem(
+        title: 'Sonidos de animales',
+        subtitle: _buildProgressText(animalSoundsProgress),
+        icon: Icons.pets_rounded,
+        onTap: onOpenAnimalSounds,
+      ),
     ];
 
     return Container(
@@ -69,13 +79,13 @@ class GamesMenuPanel extends StatelessWidget {
           Expanded(
             child: Center(
               child: ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 920),
+                constraints: const BoxConstraints(maxWidth: 860),
                 child: GridView.builder(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: games.length,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3,
+                    crossAxisCount: 2,
                     crossAxisSpacing: 18,
                     mainAxisSpacing: 18,
                     childAspectRatio: 1.55,
