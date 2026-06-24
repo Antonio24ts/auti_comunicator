@@ -45,7 +45,7 @@
     "id": "saludos",
     "text": "Saludos",
     "imagePath": "assets/images/categories/saludo.png",
-    "categoryId": "home_right",
+    "categoryId": "home_main",
     "type": "category",
     "targetCategoryId": "saludos"
   },
@@ -102,6 +102,13 @@
     "id": "home_estoy",
     "text": "Estoy",
     "imagePath": "assets/images/estoy.png",
+    "categoryId": "home_right",
+    "type": "word"
+  },
+  {
+    "id": "home_tengo",
+    "text": "Tengo",
+    "imagePath": "assets/images/tengo.png",
     "categoryId": "home_right",
     "type": "word"
   },
@@ -178,6 +185,15 @@
     "categoryId": "home_main",
     "type": "category",
     "targetCategoryId": "tiempo"
+  },
+  {
+    "id": "mas_animales",
+    "text": "Animales",
+    "imagePath": "assets/images/animales/perro.png",
+    "categoryId": "home_main",
+    "type": "category",
+    "targetCategoryId": "animales",
+    "categoryOpenMode": "fullBoard"
   },
   {
     "id": "mas_cuerpo",
@@ -2506,6 +2522,223 @@
     "text": "Necesito ayuda en el baño",
     "imagePath": "assets/images/higiene/necesito_ayuda_en_el_bano.png",
     "categoryId": "higiene",
+    "type": "word"
+  },
+  {
+    "id": "animal_perro",
+    "text": "Perro",
+    "imagePath": "assets/images/animales/perro.png",
+    "categoryId": "animales",
+    "type": "word"
+  },
+  {
+    "id": "animal_gato",
+    "text": "Gato",
+    "imagePath": "assets/images/animales/gato.png",
+    "categoryId": "animales",
+    "type": "word"
+  },
+  {
+    "id": "animal_pajaro",
+    "text": "Pájaro",
+    "imagePath": "assets/images/animales/pajaro.png",
+    "categoryId": "animales",
+    "type": "word"
+  },
+  {
+    "id": "animal_pez",
+    "text": "Pez",
+    "imagePath": "assets/images/animales/pez.png",
+    "categoryId": "animales",
+    "type": "word"
+  },
+  {
+    "id": "animal_conejo",
+    "text": "Conejo",
+    "imagePath": "assets/images/animales/conejo.png",
+    "categoryId": "animales",
+    "type": "word"
+  },
+  {
+    "id": "animal_caballo",
+    "text": "Caballo",
+    "imagePath": "assets/images/animales/caballo.png",
+    "categoryId": "animales",
+    "type": "word"
+  },
+  {
+    "id": "animal_vaca",
+    "text": "Vaca",
+    "imagePath": "assets/images/animales/vaca.png",
+    "categoryId": "animales",
+    "type": "word"
+  },
+  {
+    "id": "animal_cerdo",
+    "text": "Cerdo",
+    "imagePath": "assets/images/animales/cerdo.png",
+    "categoryId": "animales",
+    "type": "word"
+  },
+  {
+    "id": "animal_oveja",
+    "text": "Oveja",
+    "imagePath": "assets/images/animales/oveja.png",
+    "categoryId": "animales",
+    "type": "word"
+  },
+  {
+    "id": "animal_gallina",
+    "text": "Gallina",
+    "imagePath": "assets/images/animales/gallina.png",
+    "categoryId": "animales",
+    "type": "word"
+  },
+  {
+    "id": "animal_pato",
+    "text": "Pato",
+    "imagePath": "assets/images/animales/pato.png",
+    "categoryId": "animales",
+    "type": "word"
+  },
+  {
+    "id": "animal_tortuga",
+    "text": "Tortuga",
+    "imagePath": "assets/images/animales/tortuga.png",
+    "categoryId": "animales",
+    "type": "word"
+  },
+  {
+    "id": "animal_rana",
+    "text": "Rana",
+    "imagePath": "assets/images/animales/rana.png",
+    "categoryId": "animales",
+    "type": "word"
+  },
+  {
+    "id": "animal_mariposa",
+    "text": "Mariposa",
+    "imagePath": "assets/images/animales/mariposa.png",
+    "categoryId": "animales",
+    "type": "word"
+  },
+  {
+    "id": "animal_leon",
+    "text": "León",
+    "imagePath": "assets/images/animales/leon.png",
+    "categoryId": "animales",
+    "type": "word"
+  },
+  {
+    "id": "animal_tigre",
+    "text": "Tigre",
+    "imagePath": "assets/images/animales/tigre.png",
+    "categoryId": "animales",
+    "type": "word"
+  },
+  {
+    "id": "animal_elefante",
+    "text": "Elefante",
+    "imagePath": "assets/images/animales/elefante.png",
+    "categoryId": "animales",
+    "type": "word"
+  },
+  {
+    "id": "animal_mono",
+    "text": "Mono",
+    "imagePath": "assets/images/animales/mono.png",
+    "categoryId": "animales",
+    "type": "word"
+  },
+  {
+    "id": "animal_jirafa",
+    "text": "Jirafa",
+    "imagePath": "assets/images/animales/jirafa.png",
+    "categoryId": "animales",
+    "type": "word"
+  },
+  {
+    "id": "animal_oso",
+    "text": "Oso",
+    "imagePath": "assets/images/animales/oso.png",
+    "categoryId": "animales",
+    "type": "word"
+  },
+  {
+    "id": "animal_raton",
+    "text": "Ratón",
+    "imagePath": "assets/images/animales/raton.png",
+    "categoryId": "animales",
+    "type": "word"
+  },
+  {
+    "id": "animal_burro",
+    "text": "Burro",
+    "imagePath": "assets/images/animales/burro.png",
+    "categoryId": "animales",
+    "type": "word"
+  },
+  {
+    "id": "animal_cabra",
+    "text": "Cabra",
+    "imagePath": "assets/images/animales/cabra.png",
+    "categoryId": "animales",
+    "type": "word"
+  },
+  {
+    "id": "animal_delfin",
+    "text": "Delfín",
+    "imagePath": "assets/images/animales/delfin.png",
+    "categoryId": "animales",
+    "type": "word"
+  },
+  {
+    "id": "animal_ballena",
+    "text": "Ballena",
+    "imagePath": "assets/images/animales/ballena.png",
+    "categoryId": "animales",
+    "type": "word"
+  },
+  {
+    "id": "animal_serpiente",
+    "text": "Serpiente",
+    "imagePath": "assets/images/animales/serpiente.png",
+    "categoryId": "animales",
+    "type": "word"
+  },
+  {
+    "id": "animal_cocodrilo",
+    "text": "Cocodrilo",
+    "imagePath": "assets/images/animales/cocodrilo.png",
+    "categoryId": "animales",
+    "type": "word"
+  },
+  {
+    "id": "animal_pinguino",
+    "text": "Pingüino",
+    "imagePath": "assets/images/animales/pinguino.png",
+    "categoryId": "animales",
+    "type": "word"
+  },
+  {
+    "id": "animal_abeja",
+    "text": "Abeja",
+    "imagePath": "assets/images/animales/abeja.png",
+    "categoryId": "animales",
+    "type": "word"
+  },
+  {
+    "id": "animal_mosca",
+    "text": "Mosca",
+    "imagePath": "assets/images/animales/mosca.png",
+    "categoryId": "animales",
+    "type": "word"
+  },
+  {
+    "id": "animal_avispa",
+    "text": "Avispa",
+    "imagePath": "assets/images/animales/avispa.png",
+    "categoryId": "animales",
     "type": "word"
   }
 ]

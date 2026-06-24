@@ -209,6 +209,13 @@ PictogramStyle _categoryStyle(String categoryId) {
         accentColor: Colors.cyan.shade700,
       );
 
+    case 'animales':
+      return PictogramStyle(
+        backgroundColor: Colors.lightGreen.shade50,
+        borderColor: Colors.lightGreen.shade300,
+        accentColor: Colors.lightGreen.shade700,
+      );
+
     case 'colores':
       return PictogramStyle(
         backgroundColor: Colors.amber.shade50,
