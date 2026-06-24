@@ -55,7 +55,7 @@ class RecentPhrasesPanel extends StatelessWidget {
           Align(
             alignment: Alignment.centerLeft,
             child: Text(
-              'Pulsa para hablar. Mantén pulsado para cargar arriba y editar.',
+              'Pulsa para hablar. Mantén pulsado para cargar arriba y editar. Para borrar frase una vez cargada arriba pulsar Limpiar',
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w700,
