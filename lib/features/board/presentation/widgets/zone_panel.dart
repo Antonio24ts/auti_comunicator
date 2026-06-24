@@ -10,6 +10,7 @@ class ZonePanel extends StatelessWidget {
   final double childAspectRatio;
   final CardSize cardSize;
   final ValueChanged<Pictogram> onPictogramTap;
+  final ValueChanged<Pictogram>? onPictogramLongPress;
 
   const ZonePanel({
     super.key,
@@ -18,6 +19,7 @@ class ZonePanel extends StatelessWidget {
     required this.childAspectRatio,
     required this.cardSize,
     required this.onPictogramTap,
+    this.onPictogramLongPress,
   });
 
   @override
@@ -37,6 +39,9 @@ class ZonePanel extends StatelessWidget {
         return PictogramCard(
           pictogram: pictogram,
           onTap: () => onPictogramTap(pictogram),
+          onLongPress: onPictogramLongPress == null
+              ? null
+              : () => onPictogramLongPress!(pictogram),
           cardSize: cardSize,
         );
       },

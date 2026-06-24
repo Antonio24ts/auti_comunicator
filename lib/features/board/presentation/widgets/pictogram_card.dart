@@ -8,12 +8,14 @@ class PictogramCard extends StatefulWidget {
   final Pictogram pictogram;
   final VoidCallback onTap;
   final CardSize cardSize;
+  final VoidCallback? onLongPress;
 
   const PictogramCard({
     super.key,
     required this.pictogram,
     required this.onTap,
     required this.cardSize,
+    this.onLongPress,
   });
 
   @override
@@ -76,6 +78,7 @@ class _PictogramCardState extends State<PictogramCard> {
 
                 widget.onTap();
               },
+              onLongPress: widget.onLongPress,
               borderRadius: BorderRadius.circular(16),
               splashColor: style.accentColor.withValues(alpha: 0.12),
               highlightColor: style.accentColor.withValues(alpha: 0.08),

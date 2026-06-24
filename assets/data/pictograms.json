@@ -63,6 +63,15 @@
     "type": "word"
   },
   {
+    "id": "home_favoritos",
+    "text": "Favoritos",
+    "imagePath": "assets/images/categories/favorito.png",
+    "categoryId": "home_center",
+    "type": "category",
+    "targetCategoryId": "favoritos",
+    "categoryOpenMode": "fullBoard"
+  },
+  {
     "id": "saludos",
     "text": "Saludos",
     "imagePath": "assets/images/categories/saludo.png",

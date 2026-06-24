@@ -24,6 +24,8 @@ import '../../../games/domain/game_progress_services.dart';
 import '../../../../services/sound_effects_service.dart';
 import '../../../games/presentation/widgets/sentence_builder_game_panel.dart';
 import '../../../games/presentation/widgets/animal_sound_game_panel.dart';
+import '../../../favorites/data/favorite_pictograms_service.dart';
+import '../../../favorites/presentation/widgets/favorites_panel.dart';
 
 import '../widgets/zone_panel.dart';
 
@@ -57,6 +59,11 @@ class _BoardScreenState extends State<BoardScreen> {
 
   final GameProgressService _gameProgressService = GameProgressService();
   final SoundEffectsService _soundEffectsService = SoundEffectsService();
+
+  final FavoritePictogramsService _favoritePictogramsService =
+      FavoritePictogramsService();
+
+  List<String> _favoritePictogramIds = [];
 
   GameProgress _listenAndTouchProgress = GameProgress.empty(
     GameIds.listenAndTouch,
@@ -118,26 +125,147 @@ class _BoardScreenState extends State<BoardScreen> {
     });
   }
 
-  void _openAnimalSoundsGame() {
-    setState(() {
-      if (_fullBoardCategoryId != null) {
-        _fullBoardHistory.add(_fullBoardCategoryId!);
-      }
-
-      _fullBoardCategoryId = 'juego_sonidos_animales';
-    });
+  @override
+  void dispose() {
+    unawaited(_soundEffectsService.dispose());
+    _visualTimer?.cancel();
+    unawaited(WakelockPlus.disable());
+    unawaited(_speechService.stop());
+    unawaited(_ambientMusicService.dispose());
+    super.dispose();
   }
 
-  void _selectTimerDuration(int seconds) {
-    if (_isTimerRunning) {
+  Future<void> _loadInitialData() async {
+    await _repository.load();
+
+    final loadedSettings = await _settingsService.load();
+
+    _settings = loadedSettings;
+
+    await _reloadFavoritesForCurrentChild();
+
+    _listenAndTouchProgress = await _gameProgressService.load(
+      childName: _settings.childName,
+      gameId: GameIds.listenAndTouch,
+    );
+
+    _memoryMatchProgress = await _gameProgressService.load(
+      childName: _settings.childName,
+      gameId: GameIds.memoryMatch,
+    );
+
+    _sentenceBuilderProgress = await _gameProgressService.load(
+      childName: _settings.childName,
+      gameId: GameIds.sentenceBuilder,
+    );
+
+    _animalSoundsProgress = await _gameProgressService.load(
+      childName: _settings.childName,
+      gameId: GameIds.animalSounds,
+    );
+
+    await _ambientMusicService.init(_settings);
+
+    await _speechService.init(
+      speechRate: _settings.speechRate,
+      onSpeechStart: () {
+        unawaited(_ambientMusicService.pauseForSpeech());
+      },
+      onSpeechEnd: () {
+        unawaited(_ambientMusicService.resumeAfterSpeech(_settings));
+      },
+    );
+  }
+
+  Future<void> _reloadFavoritesForCurrentChild() async {
+    final favoriteIds = await _favoritePictogramsService.loadFavoriteIds(
+      childName: _settings.childName,
+    );
+
+    if (!mounted) {
       return;
     }
 
     setState(() {
-      _selectedTimerSeconds = seconds;
-      _remainingTimerSeconds = seconds;
-      _isTimerPaused = false;
+      _favoritePictogramIds = favoriteIds;
     });
+  }
+
+  List<Pictogram> _getFavoritePictograms() {
+    return _favoritePictogramIds
+        .map((id) => _repository.getPictogramById(id))
+        .whereType<Pictogram>()
+        .toList();
+  }
+
+  Future<void> _addFavoritePictogram(Pictogram pictogram) async {
+    if (!pictogram.isWord && !pictogram.isLetter) {
+      _showFavoriteMessage('Solo puedes añadir pictogramas a favoritos.');
+      return;
+    }
+
+    final favoriteIds = await _favoritePictogramsService.loadFavoriteIds(
+      childName: _settings.childName,
+    );
+
+    if (favoriteIds.contains(pictogram.id)) {
+      _showFavoriteMessage('${pictogram.text} ya está en Favoritos');
+      return;
+    }
+
+    await _favoritePictogramsService.addFavorite(
+      childName: _settings.childName,
+      pictogramId: pictogram.id,
+    );
+
+    await _reloadFavoritesForCurrentChild();
+
+    if (!mounted) {
+      return;
+    }
+
+    final childName = _settings.childName.trim();
+
+    _showFavoriteMessage(
+      childName.isEmpty
+          ? '${pictogram.text} añadido a Favoritos'
+          : '${pictogram.text} añadido a Favoritos de $childName',
+    );
+  }
+
+  Future<void> _removeFavoritePictogram(Pictogram pictogram) async {
+    await _favoritePictogramsService.removeFavorite(
+      childName: _settings.childName,
+      pictogramId: pictogram.id,
+    );
+
+    await _reloadFavoritesForCurrentChild();
+
+    if (!mounted) {
+      return;
+    }
+
+    _showFavoriteMessage('${pictogram.text} eliminado de Favoritos');
+  }
+
+  void _handleFavoritePictogramTap(Pictogram pictogram) {
+    _handlePictogramTap(pictogram, _lastActiveZone);
+  }
+
+  void _showFavoriteMessage(String message) {
+    if (!mounted) {
+      return;
+    }
+
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(
+        SnackBar(
+          content: Text(message),
+          duration: const Duration(milliseconds: 1300),
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
   }
 
   void _openListenAndTouchGame() {
@@ -170,6 +298,16 @@ class _BoardScreenState extends State<BoardScreen> {
     });
   }
 
+  void _openAnimalSoundsGame() {
+    setState(() {
+      if (_fullBoardCategoryId != null) {
+        _fullBoardHistory.add(_fullBoardCategoryId!);
+      }
+
+      _fullBoardCategoryId = 'juego_sonidos_animales';
+    });
+  }
+
   void _backToGamesMenu() {
     setState(() {
       _fullBoardCategoryId = 'juegos';
@@ -181,6 +319,18 @@ class _BoardScreenState extends State<BoardScreen> {
             categoryId == 'juego_construye_frase' ||
             categoryId == 'juego_sonidos_animales',
       );
+    });
+  }
+
+  void _selectTimerDuration(int seconds) {
+    if (_isTimerRunning) {
+      return;
+    }
+
+    setState(() {
+      _selectedTimerSeconds = seconds;
+      _remainingTimerSeconds = seconds;
+      _isTimerPaused = false;
     });
   }
 
@@ -496,16 +646,6 @@ class _BoardScreenState extends State<BoardScreen> {
     await _applySettings(newSettings);
   }
 
-  @override
-  void dispose() {
-    unawaited(_soundEffectsService.dispose());
-    _visualTimer?.cancel();
-    unawaited(WakelockPlus.disable());
-    unawaited(_speechService.stop());
-    unawaited(_ambientMusicService.dispose());
-    super.dispose();
-  }
-
   double _getChildAspectRatio() {
     switch (_settings.cardSize) {
       case CardSize.small:
@@ -530,46 +670,6 @@ class _BoardScreenState extends State<BoardScreen> {
       case CardSize.large:
         return 1.25;
     }
-  }
-
-  Future<void> _loadInitialData() async {
-    await _repository.load();
-
-    final loadedSettings = await _settingsService.load();
-
-    _settings = loadedSettings;
-
-    _listenAndTouchProgress = await _gameProgressService.load(
-      childName: _settings.childName,
-      gameId: GameIds.listenAndTouch,
-    );
-
-    _memoryMatchProgress = await _gameProgressService.load(
-      childName: _settings.childName,
-      gameId: GameIds.memoryMatch,
-    );
-
-    _sentenceBuilderProgress = await _gameProgressService.load(
-      childName: _settings.childName,
-      gameId: GameIds.sentenceBuilder,
-    );
-
-    _animalSoundsProgress = await _gameProgressService.load(
-      childName: _settings.childName,
-      gameId: GameIds.animalSounds,
-    );
-
-    await _ambientMusicService.init(_settings);
-
-    await _speechService.init(
-      speechRate: _settings.speechRate,
-      onSpeechStart: () {
-        unawaited(_ambientMusicService.pauseForSpeech());
-      },
-      onSpeechEnd: () {
-        unawaited(_ambientMusicService.resumeAfterSpeech(_settings));
-      },
-    );
   }
 
   List<Pictogram> _getPictogramsForZone(BoardZone zone) {
@@ -598,6 +698,7 @@ class _BoardScreenState extends State<BoardScreen> {
 
     if (hasChangedChildName) {
       await _reloadGameProgressForCurrentChild();
+      await _reloadFavoritesForCurrentChild();
     }
   }
 
@@ -1032,6 +1133,7 @@ class _BoardScreenState extends State<BoardScreen> {
             onPictogramTap: (pictogram) {
               _handlePictogramTap(pictogram, BoardZone.main);
             },
+            onPictogramLongPress: _addFavoritePictogram,
           ),
         ),
         const SizedBox(width: 8),
@@ -1045,6 +1147,7 @@ class _BoardScreenState extends State<BoardScreen> {
             onPictogramTap: (pictogram) {
               _handlePictogramTap(pictogram, BoardZone.center);
             },
+            onPictogramLongPress: _addFavoritePictogram,
           ),
         ),
         const SizedBox(width: 8),
@@ -1058,6 +1161,7 @@ class _BoardScreenState extends State<BoardScreen> {
             onPictogramTap: (pictogram) {
               _handlePictogramTap(pictogram, BoardZone.right);
             },
+            onPictogramLongPress: _addFavoritePictogram,
           ),
         ),
       ],
@@ -1084,6 +1188,9 @@ class _BoardScreenState extends State<BoardScreen> {
           cardSize: _getResponsiveCardSize(),
           onTap: () {
             _handlePictogramTap(entry.pictogram, entry.zone);
+          },
+          onLongPress: () {
+            unawaited(_addFavoritePictogram(entry.pictogram));
           },
         );
       },
@@ -1139,10 +1246,10 @@ class _BoardScreenState extends State<BoardScreen> {
         onOpenListenAndTouch: _openListenAndTouchGame,
         onOpenMemoryMatch: _openMemoryMatchGame,
         onOpenSentenceBuilder: _openSentenceBuilderGame,
+        onOpenAnimalSounds: _openAnimalSoundsGame,
         listenAndTouchProgress: _listenAndTouchProgress,
         memoryMatchProgress: _memoryMatchProgress,
         sentenceBuilderProgress: _sentenceBuilderProgress,
-        onOpenAnimalSounds: _openAnimalSoundsGame,
         animalSoundsProgress: _animalSoundsProgress,
       );
     }
@@ -1188,6 +1295,15 @@ class _BoardScreenState extends State<BoardScreen> {
       );
     }
 
+    if (categoryId == 'favoritos') {
+      return FavoritesPanel(
+        childName: _settings.childName,
+        favorites: _getFavoritePictograms(),
+        onPictogramTap: _handleFavoritePictogramTap,
+        onRemoveFavorite: _removeFavoritePictogram,
+      );
+    }
+
     final pictograms = _repository.getPictogramsByCategory(categoryId);
 
     return ZonePanel(
@@ -1198,6 +1314,7 @@ class _BoardScreenState extends State<BoardScreen> {
       onPictogramTap: (pictogram) {
         _handlePictogramTap(pictogram, _lastActiveZone);
       },
+      onPictogramLongPress: _addFavoritePictogram,
     );
   }
 
