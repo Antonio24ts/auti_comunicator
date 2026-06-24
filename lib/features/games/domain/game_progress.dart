@@ -1,6 +1,7 @@
 class GameIds {
   static const String listenAndTouch = 'listen_and_touch';
   static const String memoryMatch = 'memory_match';
+  static const String sentenceBuilder = 'sentence_builder';
 
   const GameIds._();
 }

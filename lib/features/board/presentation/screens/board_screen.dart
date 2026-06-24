@@ -22,6 +22,7 @@ import '../../../games/presentation/widgets/memory_match_game_panel.dart';
 import '../../../games/domain/game_progress.dart';
 import '../../../games/domain/game_progress_services.dart';
 import '../../../../services/sound_effects_service.dart';
+import '../../../games/presentation/widgets/sentence_builder_game_panel.dart';
 
 import '../widgets/zone_panel.dart';
 
@@ -61,6 +62,10 @@ class _BoardScreenState extends State<BoardScreen> {
   );
 
   GameProgress _memoryMatchProgress = GameProgress.empty(GameIds.memoryMatch);
+
+  GameProgress _sentenceBuilderProgress = GameProgress.empty(
+    GameIds.sentenceBuilder,
+  );
 
   bool _hasShownStartupNameDialog = false;
 
@@ -142,12 +147,25 @@ class _BoardScreenState extends State<BoardScreen> {
     });
   }
 
+  void _openSentenceBuilderGame() {
+    setState(() {
+      if (_fullBoardCategoryId != null) {
+        _fullBoardHistory.add(_fullBoardCategoryId!);
+      }
+
+      _fullBoardCategoryId = 'juego_construye_frase';
+    });
+  }
+
   void _backToGamesMenu() {
     setState(() {
       _fullBoardCategoryId = 'juegos';
 
       _fullBoardHistory.removeWhere(
-        (categoryId) => categoryId == 'juego_emparejar',
+        (categoryId) =>
+            categoryId == 'juego_emparejar' ||
+            categoryId == 'juego_escucha_toca' ||
+            categoryId == 'juego_construye_frase',
       );
     });
   }
@@ -517,6 +535,11 @@ class _BoardScreenState extends State<BoardScreen> {
       gameId: GameIds.memoryMatch,
     );
 
+    _sentenceBuilderProgress = await _gameProgressService.load(
+      childName: _settings.childName,
+      gameId: GameIds.sentenceBuilder,
+    );
+
     await _ambientMusicService.init(_settings);
 
     await _speechService.init(
@@ -570,6 +593,11 @@ class _BoardScreenState extends State<BoardScreen> {
       gameId: GameIds.memoryMatch,
     );
 
+    final sentenceBuilderProgress = await _gameProgressService.load(
+      childName: _settings.childName,
+      gameId: GameIds.sentenceBuilder,
+    );
+
     if (!mounted) {
       return;
     }
@@ -577,6 +605,7 @@ class _BoardScreenState extends State<BoardScreen> {
     setState(() {
       _listenAndTouchProgress = listenProgress;
       _memoryMatchProgress = memoryProgress;
+      _sentenceBuilderProgress = sentenceBuilderProgress;
     });
   }
 
@@ -598,6 +627,11 @@ class _BoardScreenState extends State<BoardScreen> {
 
       if (update.gameId == GameIds.memoryMatch) {
         _memoryMatchProgress = newProgress;
+        return;
+      }
+
+      if (update.gameId == GameIds.sentenceBuilder) {
+        _sentenceBuilderProgress = newProgress;
         return;
       }
     });
@@ -1074,8 +1108,10 @@ class _BoardScreenState extends State<BoardScreen> {
       return GamesMenuPanel(
         onOpenListenAndTouch: _openListenAndTouchGame,
         onOpenMemoryMatch: _openMemoryMatchGame,
+        onOpenSentenceBuilder: _openSentenceBuilderGame,
         listenAndTouchProgress: _listenAndTouchProgress,
         memoryMatchProgress: _memoryMatchProgress,
+        sentenceBuilderProgress: _sentenceBuilderProgress,
       );
     }
 
@@ -1095,6 +1131,16 @@ class _BoardScreenState extends State<BoardScreen> {
         speechService: _speechService,
         soundEffectsService: _soundEffectsService,
         cardSize: _getResponsiveCardSize(),
+        onBackToGames: _backToGamesMenu,
+        onProgressChanged: _recordGameProgress,
+      );
+    }
+
+    if (categoryId == 'juego_construye_frase') {
+      return SentenceBuilderGamePanel(
+        repository: _repository,
+        speechService: _speechService,
+        soundEffectsService: _soundEffectsService,
         onBackToGames: _backToGamesMenu,
         onProgressChanged: _recordGameProgress,
       );

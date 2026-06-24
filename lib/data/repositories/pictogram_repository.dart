@@ -33,6 +33,22 @@ class PictogramRepository {
     _isLoaded = true;
   }
 
+  Pictogram? getPictogramById(String id) {
+    if (!_isLoaded) {
+      throw StateError(
+        'PictogramRepository debe cargarse con load() antes de usarse.',
+      );
+    }
+
+    for (final pictogram in _pictograms) {
+      if (pictogram.id == id) {
+        return pictogram;
+      }
+    }
+
+    return null;
+  }
+
   List<Pictogram> getPictogramsByCategory(String categoryId) {
     if (!_isLoaded) {
       throw StateError(

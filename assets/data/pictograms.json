@@ -14,7 +14,7 @@
     "type": "word"
   },
   {
-    "id": "home_quiero",
+    "id": "quiero",
     "text": "Quiero",
     "imagePath": "assets/images/Quiero.png",
     "categoryId": "home_right",
@@ -149,7 +149,7 @@
     "type": "word"
   },
   {
-    "id": "mas_bano",
+    "id": "bano",
     "text": "Baño",
     "imagePath": "assets/images/categories/baño.png",
     "categoryId": "home_main",
@@ -356,48 +356,6 @@
     "text": "Amigo",
     "imagePath": "assets/images/personas/amigo.png",
     "categoryId": "personas",
-    "type": "word"
-  },
-  {
-    "id": "quiero",
-    "text": "Quiero",
-    "imagePath": "assets/images/necesidades/quiero.png",
-    "categoryId": "necesidades",
-    "type": "word"
-  },
-  {
-    "id": "agua",
-    "text": "Agua",
-    "imagePath": "assets/images/bebida/agua.png",
-    "categoryId": "necesidades",
-    "type": "word"
-  },
-  {
-    "id": "comer",
-    "text": "Comer",
-    "imagePath": "assets/images/comida/comer.png",
-    "categoryId": "necesidades",
-    "type": "word"
-  },
-  {
-    "id": "bano",
-    "text": "Baño",
-    "imagePath": "assets/images/necesidades/baño.png",
-    "categoryId": "necesidades",
-    "type": "word"
-  },
-  {
-    "id": "dormir",
-    "text": "Dormir",
-    "imagePath": "assets/images/necesidades/dormir.png",
-    "categoryId": "necesidades",
-    "type": "word"
-  },
-  {
-    "id": "descansar",
-    "text": "Descansar",
-    "imagePath": "assets/images/necesidades/descansar.png",
-    "categoryId": "necesidades",
     "type": "word"
   },
   {
@@ -920,9 +878,16 @@
     "type": "word"
   },
   {
-    "id": "emocion_quiero_descansar",
-    "text": "Quiero descansar",
+    "id": "descansar",
+    "text": "Descansar",
     "imagePath": "assets/images/emociones/descansar.png",
+    "categoryId": "emociones",
+    "type": "word"
+  },
+  {
+    "id": "dormir",
+    "text": "Dormir",
+    "imagePath": "assets/images/emociones/dormir.png",
     "categoryId": "emociones",
     "type": "word"
   },
@@ -934,7 +899,7 @@
     "type": "word"
   },
   {
-    "id": "comida_comer",
+    "id": "comer",
     "text": "Comer",
     "imagePath": "assets/images/comida/comer.png",
     "categoryId": "comida",
@@ -1011,7 +976,7 @@
     "type": "word"
   },
   {
-    "id": "bebida_agua",
+    "id": "agua",
     "text": "Agua",
     "imagePath": "assets/images/bebida/agua.png",
     "categoryId": "bebida",

@@ -1,28 +1,54 @@
 import 'package:flutter/material.dart';
+
 import '../../domain/game_progress.dart';
 
 class GamesMenuPanel extends StatelessWidget {
   final VoidCallback onOpenListenAndTouch;
   final VoidCallback onOpenMemoryMatch;
+  final VoidCallback onOpenSentenceBuilder;
   final GameProgress listenAndTouchProgress;
   final GameProgress memoryMatchProgress;
+  final GameProgress sentenceBuilderProgress;
 
   const GamesMenuPanel({
     super.key,
     required this.onOpenListenAndTouch,
     required this.onOpenMemoryMatch,
+    required this.onOpenSentenceBuilder,
     required this.listenAndTouchProgress,
     required this.memoryMatchProgress,
+    required this.sentenceBuilderProgress,
   });
 
   String _buildProgressText(GameProgress progress) {
-    return 'Nivel: ${progress.bestLevel} · '
-        'Racha: ${progress.bestStreak} · '
-        'Aciertos: ${progress.totalCorrectAnswers}';
+    return 'Nv ${progress.bestLevel} · '
+        'Racha ${progress.bestStreak} · '
+        'Aciertos ${progress.totalCorrectAnswers}';
   }
 
   @override
   Widget build(BuildContext context) {
+    final games = [
+      _GameMenuItem(
+        title: 'Toca lo que escuchas',
+        subtitle: _buildProgressText(listenAndTouchProgress),
+        icon: Icons.hearing_rounded,
+        onTap: onOpenListenAndTouch,
+      ),
+      _GameMenuItem(
+        title: 'Emparejar',
+        subtitle: _buildProgressText(memoryMatchProgress),
+        icon: Icons.grid_view_rounded,
+        onTap: onOpenMemoryMatch,
+      ),
+      _GameMenuItem(
+        title: 'Construye la frase',
+        subtitle: _buildProgressText(sentenceBuilderProgress),
+        icon: Icons.account_tree_rounded,
+        onTap: onOpenSentenceBuilder,
+      ),
+    ];
+
     return Container(
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
@@ -42,31 +68,29 @@ class GamesMenuPanel extends StatelessWidget {
           const SizedBox(height: 18),
           Expanded(
             child: Center(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    width: 420,
-                    height: 170,
-                    child: _GameButton(
-                      title: 'Toca lo que escuchas',
-                      subtitle: _buildProgressText(listenAndTouchProgress),
-                      icon: Icons.hearing_rounded,
-                      onTap: onOpenListenAndTouch,
-                    ),
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 920),
+                child: GridView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: games.length,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3,
+                    crossAxisSpacing: 18,
+                    mainAxisSpacing: 18,
+                    childAspectRatio: 1.55,
                   ),
-                  const SizedBox(width: 22),
-                  SizedBox(
-                    width: 420,
-                    height: 170,
-                    child: _GameButton(
-                      title: 'Emparejar',
-                      subtitle: _buildProgressText(memoryMatchProgress),
-                      icon: Icons.grid_view_rounded,
-                      onTap: onOpenMemoryMatch,
-                    ),
-                  ),
-                ],
+                  itemBuilder: (context, index) {
+                    final game = games[index];
+
+                    return _GameButton(
+                      title: game.title,
+                      subtitle: game.subtitle,
+                      icon: game.icon,
+                      onTap: game.onTap,
+                    );
+                  },
+                ),
               ),
             ),
           ),
@@ -74,6 +98,20 @@ class GamesMenuPanel extends StatelessWidget {
       ),
     );
   }
+}
+
+class _GameMenuItem {
+  final String title;
+  final String subtitle;
+  final IconData icon;
+  final VoidCallback onTap;
+
+  const _GameMenuItem({
+    required this.title,
+    required this.subtitle,
+    required this.icon,
+    required this.onTap,
+  });
 }
 
 class _GameButton extends StatefulWidget {
@@ -131,7 +169,7 @@ class _GameButtonState extends State<_GameButton> {
             },
             borderRadius: BorderRadius.circular(22),
             child: Container(
-              padding: const EdgeInsets.all(18),
+              padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(22),
                 border: Border.all(
@@ -148,59 +186,54 @@ class _GameButtonState extends State<_GameButton> {
                   ),
                 ],
               ),
-              child: Row(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    width: 86,
-                    height: 86,
+                    width: 62,
+                    height: 62,
                     decoration: BoxDecoration(
                       color: Colors.indigo.shade50,
                       borderRadius: BorderRadius.circular(18),
                     ),
                     child: Icon(
                       widget.icon,
-                      size: 48,
+                      size: 38,
                       color: Colors.indigo.shade700,
                     ),
                   ),
-                  const SizedBox(width: 18),
-                  Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          widget.title,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(
-                            fontSize: 28,
-                            height: 1.05,
-                            fontWeight: FontWeight.w900,
-                            color: Colors.black87,
-                          ),
+                  const SizedBox(height: 10),
+                  Text(
+                    widget.title,
+                    maxLines: 2,
+                    textAlign: TextAlign.center,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      fontSize: 21,
+                      height: 1.05,
+                      fontWeight: FontWeight.w900,
+                      color: Colors.black87,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  SizedBox(
+                    width: double.infinity,
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      alignment: Alignment.center,
+                      child: Text(
+                        widget.subtitle,
+                        maxLines: 1,
+                        softWrap: false,
+                        overflow: TextOverflow.visible,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 14,
+                          height: 1.1,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.blueGrey.shade700,
                         ),
-                        const SizedBox(height: 10),
-                        SizedBox(
-                          width: double.infinity,
-                          child: FittedBox(
-                            fit: BoxFit.scaleDown,
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              widget.subtitle,
-                              maxLines: 1,
-                              softWrap: false,
-                              overflow: TextOverflow.visible,
-                              style: TextStyle(
-                                fontSize: 18,
-                                height: 1.1,
-                                fontWeight: FontWeight.w700,
-                                color: Colors.blueGrey.shade700,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
                   ),
                 ],
