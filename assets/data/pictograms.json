@@ -63,6 +63,15 @@
     "type": "word"
   },
   {
+    "id": "mas_conectores",
+    "text": "Conectores",
+    "imagePath": "assets/images/conectores/con.png",
+    "categoryId": "home_right",
+    "type": "category",
+    "targetCategoryId": "conectores",
+    "categoryOpenMode": "fullBoard"
+  },
+  {
     "id": "home_favoritos",
     "text": "Favoritos",
     "imagePath": "assets/images/categories/favorito.png",
@@ -2756,6 +2765,216 @@
     "text": "Avispa",
     "imagePath": "assets/images/animales/avispa.png",
     "categoryId": "animales",
+    "type": "word"
+  },
+  {
+    "id": "conector_el",
+    "text": "El",
+    "imagePath": "assets/images/conectores/el.png",
+    "categoryId": "conectores",
+    "type": "word"
+  },
+  {
+    "id": "conector_la",
+    "text": "La",
+    "imagePath": "assets/images/conectores/la.png",
+    "categoryId": "conectores",
+    "type": "word"
+  },
+  {
+    "id": "conector_los",
+    "text": "Los",
+    "imagePath": "assets/images/conectores/los.png",
+    "categoryId": "conectores",
+    "type": "word"
+  },
+  {
+    "id": "conector_las",
+    "text": "Las",
+    "imagePath": "assets/images/conectores/las.png",
+    "categoryId": "conectores",
+    "type": "word"
+  },
+  {
+    "id": "conector_un",
+    "text": "Un",
+    "imagePath": "assets/images/conectores/un.png",
+    "categoryId": "conectores",
+    "type": "word"
+  },
+  {
+    "id": "conector_una",
+    "text": "Una",
+    "imagePath": "assets/images/conectores/una.png",
+    "categoryId": "conectores",
+    "type": "word"
+  },
+  {
+    "id": "conector_con",
+    "text": "Con",
+    "imagePath": "assets/images/conectores/con.png",
+    "categoryId": "conectores",
+    "type": "word"
+  },
+  {
+    "id": "conector_sin",
+    "text": "Sin",
+    "imagePath": "assets/images/conectores/sin.png",
+    "categoryId": "conectores",
+    "type": "word"
+  },
+  {
+    "id": "conector_de",
+    "text": "De",
+    "imagePath": "assets/images/conectores/de.png",
+    "categoryId": "conectores",
+    "type": "word"
+  },
+  {
+    "id": "conector_del",
+    "text": "Del",
+    "imagePath": "assets/images/conectores/del.png",
+    "categoryId": "conectores",
+    "type": "word"
+  },
+  {
+    "id": "conector_a",
+    "text": "A",
+    "imagePath": "assets/images/conectores/a.png",
+    "categoryId": "conectores",
+    "type": "word"
+  },
+  {
+    "id": "conector_al",
+    "text": "Al",
+    "imagePath": "assets/images/conectores/al.png",
+    "categoryId": "conectores",
+    "type": "word"
+  },
+  {
+    "id": "conector_en",
+    "text": "En",
+    "imagePath": "assets/images/conectores/en.png",
+    "categoryId": "conectores",
+    "type": "word"
+  },
+  {
+    "id": "conector_y",
+    "text": "Y",
+    "imagePath": "assets/images/conectores/y.png",
+    "categoryId": "conectores",
+    "type": "word"
+  },
+  {
+    "id": "conector_o",
+    "text": "O",
+    "imagePath": "assets/images/conectores/o.png",
+    "categoryId": "conectores",
+    "type": "word"
+  },
+  {
+    "id": "conector_pero",
+    "text": "Pero",
+    "imagePath": "assets/images/conectores/pero.png",
+    "categoryId": "conectores",
+    "type": "word"
+  },
+  {
+    "id": "conector_porque",
+    "text": "Porque",
+    "imagePath": "assets/images/conectores/porque.png",
+    "categoryId": "conectores",
+    "type": "word"
+  },
+  {
+    "id": "conector_para",
+    "text": "Para",
+    "imagePath": "assets/images/conectores/para.png",
+    "categoryId": "conectores",
+    "type": "word"
+  },
+  {
+    "id": "conector_por",
+    "text": "Por",
+    "imagePath": "assets/images/conectores/por.png",
+    "categoryId": "conectores",
+    "type": "word"
+  },
+  {
+    "id": "conector_yo",
+    "text": "Yo",
+    "imagePath": "assets/images/conectores/yo.png",
+    "categoryId": "conectores",
+    "type": "word"
+  },
+  {
+    "id": "conector_tu",
+    "text": "Tú",
+    "imagePath": "assets/images/conectores/tu.png",
+    "categoryId": "conectores",
+    "type": "word"
+  },
+  {
+    "id": "conector_el_pronombre",
+    "text": "Él",
+    "imagePath": "assets/images/conectores/el_pronombre.png",
+    "categoryId": "conectores",
+    "type": "word"
+  },
+  {
+    "id": "conector_ella",
+    "text": "Ella",
+    "imagePath": "assets/images/conectores/ella.png",
+    "categoryId": "conectores",
+    "type": "word"
+  },
+  {
+    "id": "conector_nosotros",
+    "text": "Nosotros",
+    "imagePath": "assets/images/conectores/nosotros.png",
+    "categoryId": "conectores",
+    "type": "word"
+  },
+  {
+    "id": "conector_ellos",
+    "text": "Ellos",
+    "imagePath": "assets/images/conectores/ellos.png",
+    "categoryId": "conectores",
+    "type": "word"
+  },
+  {
+    "id": "conector_mi",
+    "text": "Mi",
+    "imagePath": "assets/images/conectores/mi.png",
+    "categoryId": "conectores",
+    "type": "word"
+  },
+  {
+    "id": "conector_tu_posesivo",
+    "text": "Tu",
+    "imagePath": "assets/images/conectores/tu_posesivo.png",
+    "categoryId": "conectores",
+    "type": "word"
+  },
+  {
+    "id": "conector_su",
+    "text": "Su",
+    "imagePath": "assets/images/conectores/su.png",
+    "categoryId": "conectores",
+    "type": "word"
+  },
+  {
+    "id": "conector_este",
+    "text": "Este",
+    "imagePath": "assets/images/conectores/este.png",
+    "categoryId": "conectores",
+    "type": "word"
+  },
+  {
+    "id": "conector_esta",
+    "text": "Esta",
+    "imagePath": "assets/images/conectores/esta.png",
+    "categoryId": "conectores",
     "type": "word"
   }
 ]

@@ -251,6 +251,13 @@ PictogramStyle _categoryStyle(String categoryId) {
         accentColor: const Color.fromARGB(255, 37, 109, 100),
       );
 
+    case 'conectores':
+      return PictogramStyle(
+        backgroundColor: Colors.deepPurple.shade50,
+        borderColor: Colors.deepPurple.shade300,
+        accentColor: Colors.deepPurple.shade700,
+      );
+
     default:
       return PictogramStyle(
         backgroundColor: Colors.white,
