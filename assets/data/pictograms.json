@@ -146,6 +146,15 @@
     "type": "word"
   },
   {
+    "id": "home_agenda_visual",
+    "text": "Agenda visual",
+    "imagePath": "assets/images/categories/agenda_visual.png",
+    "categoryId": "home_center",
+    "type": "category",
+    "targetCategoryId": "agenda_visual",
+    "categoryOpenMode": "fullBoard"
+  },
+  {
     "id": "alfabeto",
     "text": "Alfabeto",
     "imagePath": "assets/images/categories/alfabeto.png",

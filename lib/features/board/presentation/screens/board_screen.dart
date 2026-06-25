@@ -29,6 +29,7 @@ import '../../../favorites/presentation/widgets/favorites_panel.dart';
 import '../../../recent_phrases/data/recent_phrases_service.dart';
 import '../../../recent_phrases/domain/recent_phrase.dart';
 import '../../../recent_phrases/presentation/widgets/recent_phrases_panel.dart';
+import '../../../visual_agenda/presentation/widgets/visual_agenda_panel.dart';
 
 import '../widgets/zone_panel.dart';
 
@@ -1458,6 +1459,14 @@ class _BoardScreenState extends State<BoardScreen> {
           unawaited(_speakRecentPhrase(recentPhrase));
         },
         onLoadRecentPhrase: _loadRecentPhraseForEditing,
+      );
+    }
+
+    if (categoryId == 'agenda_visual') {
+      return VisualAgendaPanel(
+        childName: _settings.childName,
+        repository: _repository,
+        speechService: _speechService,
       );
     }
 
