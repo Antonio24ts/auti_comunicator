@@ -14,27 +14,6 @@
     "type": "word"
   },
   {
-    "id": "quiero",
-    "text": "Quiero",
-    "imagePath": "assets/images/Quiero.png",
-    "categoryId": "home_right",
-    "type": "word"
-  },
-  {
-    "id": "home_necesito",
-    "text": "Necesito",
-    "imagePath": "assets/images/Necesito.png",
-    "categoryId": "home_right",
-    "type": "word"
-  },
-  {
-    "id": "home_y",
-    "text": "Y",
-    "imagePath": "assets/images/y.png",
-    "categoryId": "home_right",
-    "type": "word"
-  },
-  {
     "id": "home_yo",
     "text": "Yo",
     "imagePath": "assets/images/personas/yo.png",
@@ -45,6 +24,20 @@
     "id": "home_me",
     "text": "Me",
     "imagePath": "assets/images/me.png",
+    "categoryId": "home_right",
+    "type": "word"
+  },
+  {
+    "id": "quiero",
+    "text": "Quiero",
+    "imagePath": "assets/images/Quiero.png",
+    "categoryId": "home_right",
+    "type": "word"
+  },
+  {
+    "id": "home_necesito",
+    "text": "Necesito",
+    "imagePath": "assets/images/Necesito.png",
     "categoryId": "home_right",
     "type": "word"
   },
@@ -63,13 +56,19 @@
     "type": "word"
   },
   {
+    "id": "home_y",
+    "text": "Y",
+    "imagePath": "assets/images/conectores/y.png",
+    "categoryId": "home_right",
+    "type": "word"
+  },
+  {
     "id": "mas_conectores",
     "text": "Conectores",
-    "imagePath": "assets/images/conectores/con.png",
+    "imagePath": "assets/images/conectores/_con.png",
     "categoryId": "home_right",
     "type": "category",
-    "targetCategoryId": "conectores",
-    "categoryOpenMode": "fullBoard"
+    "targetCategoryId": "conectores"
   },
   {
     "id": "home_favoritos",
@@ -2805,14 +2804,14 @@
   {
     "id": "conector_una",
     "text": "Una",
-    "imagePath": "assets/images/conectores/una.png",
+    "imagePath": "assets/images/conectores/un.png",
     "categoryId": "conectores",
     "type": "word"
   },
   {
     "id": "conector_con",
     "text": "Con",
-    "imagePath": "assets/images/conectores/con.png",
+    "imagePath": "assets/images/conectores/_con.png",
     "categoryId": "conectores",
     "type": "word"
   },
@@ -2901,20 +2900,6 @@
     "type": "word"
   },
   {
-    "id": "conector_yo",
-    "text": "Yo",
-    "imagePath": "assets/images/conectores/yo.png",
-    "categoryId": "conectores",
-    "type": "word"
-  },
-  {
-    "id": "conector_tu",
-    "text": "Tú",
-    "imagePath": "assets/images/conectores/tu.png",
-    "categoryId": "conectores",
-    "type": "word"
-  },
-  {
     "id": "conector_el_pronombre",
     "text": "Él",
     "imagePath": "assets/images/conectores/el_pronombre.png",
@@ -2973,7 +2958,7 @@
   {
     "id": "conector_esta",
     "text": "Esta",
-    "imagePath": "assets/images/conectores/esta.png",
+    "imagePath": "assets/images/conectores/este.png",
     "categoryId": "conectores",
     "type": "word"
   }

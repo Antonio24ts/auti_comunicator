@@ -1038,17 +1038,41 @@ class _BoardScreenState extends State<BoardScreen> {
       return;
     }
 
-    final currentCategoryId = _currentCategoryByZone[zone];
+    final targetZone = _getTargetZoneForCategory(
+      targetCategoryId: targetCategoryId,
+      currentZone: zone,
+    );
+
+    final currentCategoryId = _currentCategoryByZone[targetZone];
 
     if (currentCategoryId == null) {
       return;
     }
 
+    if (currentCategoryId == targetCategoryId) {
+      setState(() {
+        _lastActiveZone = targetZone;
+      });
+
+      return;
+    }
+
     setState(() {
-      _categoryHistoryByZone[zone]?.add(currentCategoryId);
-      _currentCategoryByZone[zone] = targetCategoryId;
-      _lastActiveZone = zone;
+      _categoryHistoryByZone[targetZone]?.add(currentCategoryId);
+      _currentCategoryByZone[targetZone] = targetCategoryId;
+      _lastActiveZone = targetZone;
     });
+  }
+
+  BoardZone _getTargetZoneForCategory({
+    required String targetCategoryId,
+    required BoardZone currentZone,
+  }) {
+    if (targetCategoryId == 'conectores') {
+      return BoardZone.main;
+    }
+
+    return currentZone;
   }
 
   void _goHome() {
