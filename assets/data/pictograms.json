@@ -147,8 +147,8 @@
   },
   {
     "id": "home_agenda_visual",
-    "text": "Agenda visual",
-    "imagePath": "assets/images/categories/agenda_visual.png",
+    "text": "Agenda",
+    "imagePath": "assets/images/categories/agenda.png",
     "categoryId": "home_center",
     "type": "category",
     "targetCategoryId": "agenda_visual",
@@ -235,6 +235,15 @@
     "categoryId": "home_main",
     "type": "category",
     "targetCategoryId": "cuerpo"
+  },
+  {
+    "id": "home_rutinas",
+    "text": "Rutinas",
+    "imagePath": "assets/images/rutinas/rutina.png",
+    "categoryId": "home_main",
+    "type": "category",
+    "targetCategoryId": "rutinas",
+    "categoryOpenMode": "fullBoard"
   },
   {
     "id": "mas_verbos",
@@ -2969,6 +2978,244 @@
     "text": "Esta",
     "imagePath": "assets/images/conectores/este.png",
     "categoryId": "conectores",
+    "type": "word"
+  },
+  {
+    "id": "rutina_despertar",
+    "text": "Despertar",
+    "imagePath": "assets/images/rutinas/despertar.png",
+    "categoryId": "rutinas",
+    "type": "word"
+  },
+  {
+    "id": "rutina_levantarse",
+    "text": "Levantarse",
+    "imagePath": "assets/images/rutinas/levantarse.png",
+    "categoryId": "rutinas",
+    "type": "word"
+  },
+  {
+    "id": "rutina_bano",
+    "text": "Baño",
+    "imagePath": "assets/images/categories/baño.png",
+    "categoryId": "rutinas",
+    "type": "word"
+  },
+  {
+    "id": "rutina_lavarse_manos",
+    "text": "Lavarse las manos",
+    "imagePath": "assets/images/higiene/lavarse_manos.png",
+    "categoryId": "rutinas",
+    "type": "word"
+  },
+  {
+    "id": "rutina_lavarse_cara",
+    "text": "Lavarse la cara",
+    "imagePath": "assets/images/higiene/lavar_la_cara.png",
+    "categoryId": "rutinas",
+    "type": "word"
+  },
+  {
+    "id": "rutina_cepillarse_dientes",
+    "text": "Cepillarse los dientes",
+    "imagePath": "assets/images/higiene/lavarse_dientes.png",
+    "categoryId": "rutinas",
+    "type": "word"
+  },
+  {
+    "id": "rutina_poner_la_mesa",
+    "text": "Poner la mesa",
+    "imagePath": "assets/images/rutina/poner_la_mesa.png",
+    "categoryId": "rutinas",
+    "type": "word"
+  },
+   {
+    "id": "rutina_quitar_la_mesa",
+    "text": "Quitar la mesa",
+    "imagePath": "assets/images/rutina/quitar_la_mesa.png",
+    "categoryId": "rutinas",
+    "type": "word"
+  },
+  {
+    "id": "rutina_ducha",
+    "text": "Ducha",
+    "imagePath": "assets/images/casa/ducha.png",
+    "categoryId": "rutinas",
+    "type": "word"
+  },
+  {
+    "id": "rutina_vestirse",
+    "text": "Vestirse",
+    "imagePath": "assets/images/ropa/me_quiero_vestir.png",
+    "categoryId": "rutinas",
+    "type": "word"
+  },
+  {
+    "id": "rutina_pijama",
+    "text": "Pijama",
+    "imagePath": "assets/images/ropa/pijama.png",
+    "categoryId": "rutinas",
+    "type": "word"
+  },
+  {
+    "id": "rutina_desayunar",
+    "text": "Desayunar",
+    "imagePath": "assets/images/rutinas/desayunar.png",
+    "categoryId": "rutinas",
+    "type": "word"
+  },
+  {
+    "id": "rutina_merendar",
+    "text": "Merendar",
+    "imagePath": "assets/images/rutinas/merendar.png",
+    "categoryId": "rutinas",
+    "type": "word"
+  },
+  {
+    "id": "rutina_comer",
+    "text": "Comer",
+    "imagePath": "assets/images/comida/comer.png",
+    "categoryId": "rutinas",
+    "type": "word"
+  },
+  {
+    "id": "rutina_cenar",
+    "text": "Cenar",
+    "imagePath": "assets/images/rutinas/cenar.png",
+    "categoryId": "rutinas",
+    "type": "word"
+  },
+  {
+    "id": "rutina_beber_agua",
+    "text": "Beber agua",
+    "imagePath": "assets/images/bebida/beber.png",
+    "categoryId": "rutinas",
+    "type": "word"
+  },
+  {
+    "id": "rutina_colegio",
+    "text": "Colegio",
+    "imagePath": "assets/images/categories/colegio1.png",
+    "categoryId": "rutinas",
+    "type": "word"
+  },
+  {
+    "id": "rutina_clase",
+    "text": "Clase",
+    "imagePath": "assets/images/colegio/clase.png",
+    "categoryId": "rutinas",
+    "type": "word"
+  },
+  {
+    "id": "rutina_recreo",
+    "text": "Recreo",
+    "imagePath": "assets/images/rutinas/recreo.png",
+    "categoryId": "rutinas",
+    "type": "word"
+  },
+  {
+    "id": "rutina_deberes",
+    "text": "Deberes",
+    "imagePath": "assets/images/rutinas/deberes.png",
+    "categoryId": "rutinas",
+    "type": "word"
+  },
+  {
+    "id": "rutina_leer",
+    "text": "Leer",
+    "imagePath": "assets/images/rutinas/leer.png",
+    "categoryId": "rutinas",
+    "type": "word"
+  },
+  {
+    "id": "rutina_jugar",
+    "text": "Jugar",
+    "imagePath": "assets/images/rutinas/jugar.png",
+    "categoryId": "rutinas",
+    "type": "word"
+  },
+  {
+    "id": "rutina_tablet",
+    "text": "Tablet",
+    "imagePath": "assets/images/objetos/tablet.png",
+    "categoryId": "rutinas",
+    "type": "word"
+  },
+  {
+    "id": "rutina_television",
+    "text": "Televisión",
+    "imagePath": "assets/images/rutinas/television.png",
+    "categoryId": "rutinas",
+    "type": "word"
+  },
+  {
+    "id": "rutina_descansar",
+    "text": "Descansar",
+    "imagePath": "assets/images/emociones/descansar.png",
+    "categoryId": "rutinas",
+    "type": "word"
+  },
+  {
+    "id": "rutina_parque",
+    "text": "Parque",
+    "imagePath": "assets/images/lugares/parque.png",
+    "categoryId": "rutinas",
+    "type": "word"
+  },
+  {
+    "id": "rutina_casa",
+    "text": "Casa",
+    "imagePath": "assets/images/lugares/casa.png",
+    "categoryId": "rutinas",
+    "type": "word"
+  },
+  {
+    "id": "rutina_coche",
+    "text": "Coche",
+    "imagePath": "assets/images/rutinas/coche.png",
+    "categoryId": "rutinas",
+    "type": "word"
+  },
+  {
+    "id": "rutina_pasear",
+    "text": "Pasear",
+    "imagePath": "assets/images/rutinas/pasear.png",
+    "categoryId": "rutinas",
+    "type": "word"
+  },
+  {
+    "id": "rutina_comprar",
+    "text": "Comprar",
+    "imagePath": "assets/images/rutinas/comprar.png",
+    "categoryId": "rutinas",
+    "type": "word"
+  },
+  {
+    "id": "rutina_medico",
+    "text": "Médico",
+    "imagePath": "assets/images/cuerpo/medico.png",
+    "categoryId": "rutinas",
+    "type": "word"
+  },
+  {
+    "id": "rutina_recoger",
+    "text": "Recoger",
+    "imagePath": "assets/images/rutinas/recoger.png",
+    "categoryId": "rutinas",
+    "type": "word"
+  },
+  {
+    "id": "rutina_dormir",
+    "text": "Dormir",
+    "imagePath": "assets/images/rutinas/dormir.png",
+    "categoryId": "rutinas",
+    "type": "word"
+  },
+  {
+    "id": "rutina_acostarse",
+    "text": "Acostarse",
+    "imagePath": "assets/images/rutinas/acostar.png",
+    "categoryId": "rutinas",
     "type": "word"
   }
 ]

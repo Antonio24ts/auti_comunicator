@@ -89,6 +89,7 @@ flutter:
     - assets/images/tamanos/
     - assets/images/animales/
     - assets/images/conectores/
+    - assets/images/rutinas/
     - assets/audio/
     - assets/audio/animales/
 
