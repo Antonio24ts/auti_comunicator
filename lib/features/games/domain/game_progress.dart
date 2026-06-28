@@ -3,6 +3,7 @@ class GameIds {
   static const String memoryMatch = 'memory_match';
   static const String sentenceBuilder = 'sentence_builder';
   static const String animalSounds = 'animal_sounds';
+  static const String syllableWords = 'syllable_words';
 
   const GameIds._();
 }

@@ -30,6 +30,7 @@ import '../../../recent_phrases/data/recent_phrases_service.dart';
 import '../../../recent_phrases/domain/recent_phrase.dart';
 import '../../../recent_phrases/presentation/widgets/recent_phrases_panel.dart';
 import '../../../visual_agenda/presentation/widgets/visual_agenda_panel.dart';
+import '../../../games/presentation/widgets/syllable_word_game_panel.dart';
 
 import '../widgets/zone_panel.dart';
 
@@ -85,6 +86,10 @@ class _BoardScreenState extends State<BoardScreen> {
   );
 
   GameProgress _animalSoundsProgress = GameProgress.empty(GameIds.animalSounds);
+
+  GameProgress _syllableWordsProgress = GameProgress.empty(
+    GameIds.syllableWords,
+  );
 
   bool _hasShownStartupNameDialog = false;
 
@@ -172,6 +177,11 @@ class _BoardScreenState extends State<BoardScreen> {
     _animalSoundsProgress = await _gameProgressService.load(
       childName: _settings.childName,
       gameId: GameIds.animalSounds,
+    );
+
+    _syllableWordsProgress = await _gameProgressService.load(
+      childName: _settings.childName,
+      gameId: GameIds.syllableWords,
     );
 
     await _ambientMusicService.init(_settings);
@@ -278,6 +288,16 @@ class _BoardScreenState extends State<BoardScreen> {
       );
   }
 
+  void _openSyllableWordsGame() {
+    setState(() {
+      if (_fullBoardCategoryId != null) {
+        _fullBoardHistory.add(_fullBoardCategoryId!);
+      }
+
+      _fullBoardCategoryId = 'juego_ordenar_silabas';
+    });
+  }
+
   void _openListenAndTouchGame() {
     setState(() {
       if (_fullBoardCategoryId != null) {
@@ -327,7 +347,8 @@ class _BoardScreenState extends State<BoardScreen> {
             categoryId == 'juego_emparejar' ||
             categoryId == 'juego_escucha_toca' ||
             categoryId == 'juego_construye_frase' ||
-            categoryId == 'juego_sonidos_animales',
+            categoryId == 'juego_sonidos_animales' ||
+            categoryId == 'juego_ordenar_silabas',
       );
     });
   }
@@ -832,6 +853,11 @@ class _BoardScreenState extends State<BoardScreen> {
       gameId: GameIds.animalSounds,
     );
 
+    final syllableWordsProgress = await _gameProgressService.load(
+      childName: _settings.childName,
+      gameId: GameIds.syllableWords,
+    );
+
     if (!mounted) {
       return;
     }
@@ -841,6 +867,7 @@ class _BoardScreenState extends State<BoardScreen> {
       _memoryMatchProgress = memoryProgress;
       _sentenceBuilderProgress = sentenceBuilderProgress;
       _animalSoundsProgress = animalSoundsProgress;
+      _syllableWordsProgress = syllableWordsProgress;
     });
   }
 
@@ -872,6 +899,11 @@ class _BoardScreenState extends State<BoardScreen> {
 
       if (update.gameId == GameIds.animalSounds) {
         _animalSoundsProgress = newProgress;
+        return;
+      }
+
+      if (update.gameId == GameIds.syllableWords) {
+        _syllableWordsProgress = newProgress;
         return;
       }
     });
@@ -1398,6 +1430,8 @@ class _BoardScreenState extends State<BoardScreen> {
         memoryMatchProgress: _memoryMatchProgress,
         sentenceBuilderProgress: _sentenceBuilderProgress,
         animalSoundsProgress: _animalSoundsProgress,
+        onOpenSyllableWords: _openSyllableWordsGame,
+        syllableWordsProgress: _syllableWordsProgress,
       );
     }
 
@@ -1434,6 +1468,16 @@ class _BoardScreenState extends State<BoardScreen> {
 
     if (categoryId == 'juego_sonidos_animales') {
       return AnimalSoundGamePanel(
+        repository: _repository,
+        speechService: _speechService,
+        soundEffectsService: _soundEffectsService,
+        onBackToGames: _backToGamesMenu,
+        onProgressChanged: _recordGameProgress,
+      );
+    }
+
+    if (categoryId == 'juego_ordenar_silabas') {
+      return SyllableWordGamePanel(
         repository: _repository,
         speechService: _speechService,
         soundEffectsService: _soundEffectsService,

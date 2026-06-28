@@ -58,7 +58,7 @@ class _SentenceBuilderGamePanelState extends State<SentenceBuilderGamePanel> {
   @override
   void initState() {
     super.initState();
-    _startLevel(level: 6, speak: true);
+    _startLevel(level: 1, speak: true);
   }
 
   void _startLevel({required int level, required bool speak}) {
