@@ -31,6 +31,7 @@ import '../../../recent_phrases/domain/recent_phrase.dart';
 import '../../../recent_phrases/presentation/widgets/recent_phrases_panel.dart';
 import '../../../visual_agenda/presentation/widgets/visual_agenda_panel.dart';
 import '../../../games/presentation/widgets/syllable_word_game_panel.dart';
+import '../../../calm/presentation/widgets/calm_panel.dart';
 
 import '../widgets/zone_panel.dart';
 
@@ -147,6 +148,21 @@ class _BoardScreenState extends State<BoardScreen> {
     unawaited(_speechService.stop());
     unawaited(_ambientMusicService.dispose());
     super.dispose();
+  }
+
+  void _addCalmPhraseToPhraseBar({
+    required String text,
+    required String imagePath,
+  }) {
+    final cleanText = text.trim();
+
+    if (cleanText.isEmpty) {
+      return;
+    }
+
+    setState(() {
+      _phraseItems.add(PhraseItem(text: cleanText, imagePath: imagePath));
+    });
   }
 
   Future<void> _loadInitialData() async {
@@ -1396,6 +1412,13 @@ class _BoardScreenState extends State<BoardScreen> {
 
     if (categoryId == null) {
       return const SizedBox.shrink();
+    }
+
+    if (categoryId == 'calma') {
+      return CalmPanel(
+        speechService: _speechService,
+        onAddToPhrase: _addCalmPhraseToPhraseBar,
+      );
     }
 
     if (categoryId == 'calculadora') {

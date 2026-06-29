@@ -56,6 +56,15 @@
     "type": "word"
   },
   {
+    "id": "home_calma",
+    "text": "Calma",
+    "imagePath": "assets/images/emociones/calma.png",
+    "categoryId": "home_right",
+    "type": "category",
+    "targetCategoryId": "calma",
+    "categoryOpenMode": "fullBoard"
+  },
+  {
     "id": "home_y",
     "text": "Y",
     "imagePath": "assets/images/conectores/y.png",
@@ -3025,14 +3034,14 @@
   {
     "id": "rutina_poner_la_mesa",
     "text": "Poner la mesa",
-    "imagePath": "assets/images/rutina/poner_la_mesa.png",
+    "imagePath": "assets/images/rutinas/poner_la_mesa.png",
     "categoryId": "rutinas",
     "type": "word"
   },
    {
     "id": "rutina_quitar_la_mesa",
     "text": "Quitar la mesa",
-    "imagePath": "assets/images/rutina/quitar_la_mesa.png",
+    "imagePath": "assets/images/rutinas/quitar_la_mesa.png",
     "categoryId": "rutinas",
     "type": "word"
   },
